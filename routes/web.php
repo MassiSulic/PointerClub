@@ -3,9 +3,20 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Definición de todas las vistas que responden al metodo get + Rutas con nombre (Aveces el codigo esta bien aunque diga que no. Guardar y recargar)
+Route::view('/', 'Inicio')->name('Inicio');
+Route::view('elPointer', 'elPointer')->name('elPointer');
+Route::view('Club', 'Club')->name('Club');
+Route::view('Concursos', 'Concursos')->name('Concursos');
+Route::view('Inscripciones', 'Inscripciones')->name('Inscripciones');
+Route::view('Resultados', 'Resultados')->name('Resultados');
+Route::view('Socios', 'Socios')->name('Socios');
+Route::view('Actualidad', 'Actualidad')->name('Actualidad');
+Route::view('Contacto', 'Contacto')->name('Contacto');
+Route::view('Privacidad', 'Privacidad')->name('Privacidad');
+Route::view('Cookies', 'Cookies')->name('Cookies');
+Route::view('Envios', 'Envios')->name('Envios');
+Route::view('Legal', 'Legal')->name('Legal');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
