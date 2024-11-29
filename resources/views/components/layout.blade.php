@@ -15,6 +15,8 @@
 <body>
     @include('partials.navigation')
     {{ $slot }}
+
+    @vite('resources/js/app.js')
 </body>
 
 </html>
