@@ -1,3 +1,3 @@
 <x-layout>
-    <h1>Pointer Club Español Home | Inicio</h1>
+    <h1 class=" text-4xl ">Pointer Club Español | Inicio</h1>
 </x-layout>
