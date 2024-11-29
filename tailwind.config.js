@@ -5,14 +5,19 @@ import forms from '@tailwindcss/forms';
 export default {
     content: [
         "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
+        "./resources/**/*.js"
       ],    
 
     theme: {
         extend: {
+            colors: {
+                AzulPrimario: '#032D39',
+                MarronSecundario: '#7C6A52',
+                BlancoTerciario: '#F5F4EA'
+            },
+
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Montserrat', ...defaultTheme.fontFamily.sans],
             },
         },
     },
