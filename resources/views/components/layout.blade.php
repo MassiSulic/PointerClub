@@ -12,12 +12,14 @@
 </head>
 <!-- Ver de cambiar la navegación de la carpeta partials (Que yo cree) a la carpeta layouts que ya la trae laravel por defecto -->
 
-<body>
+<body class="min-h-screen flex flex-col bg-BlancoTerciario">
     @include('partials.navigation')
-    {{ $slot }}
+    <main class=" flex-grow ">
+        {{ $slot }}
+    </main>
 
-    @vite('resources/js/app.js')
     @include('partials.footer')
+    @vite('resources/js/app.js')
 </body>
 
 </html>

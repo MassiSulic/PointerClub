@@ -10,23 +10,26 @@
         <div class=" absolute inset-y-0 right-0 flex items-center mr-20 w-52 gap-4 ">
 
             <a href="">
-                <img src="{{ asset('svg/navbar/Instagram.svg') }}" alt="Banderas Navbar" class=" w-8 ">
+                <img src="{{ asset('svg/navbar/Instagram.svg') }}" alt="Instagram" class=" w-8 ">
             </a>
             <a href="">
-                <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Banderas Navbar" class=" w-8 ">
+                <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Facebook" class=" w-8 ">
             </a>
             <a href="">
-                <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Banderas Navbar" class=" w-8 ">
+                <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class=" w-8 ">
             </a>
             <a href="">
-                <img src="{{ asset('svg/navbar/Buscar.svg') }}" alt="Banderas Navbar" class=" w-8 ">
+                <img src="{{ asset('svg/navbar/Buscar.svg') }}" alt="Buscar" class=" w-8 ">
             </a>
         </div>
 
     </div>
 
     <div class="w-full flex justify-center bg-AzulPrimario relative h-12">
-        <img src="{{ asset('svg/navbar/Logo.svg') }}" alt="Logo del sitio" class="w-28 absolute left-52 top-1/2 -translate-y-1/2">
+        <a href="{{ route('Inicio') }}">
+            <img src="{{ asset('svg/navbar/Logo.svg') }}" alt="Logo del sitio" class="w-28 absolute left-52 top-1/2 -translate-y-1/2">
+        </a>
+
         <ul class="flex items-center gap-4 text-white">
             <li><a href="{{ route('elPointer') }}">El Pointer</a></li>
             <li><a href="{{ route('Club') }}">Club</a></li>
@@ -38,5 +41,5 @@
             <li><a href="{{ route('Contacto') }}">Contacto</a></li>
         </ul>
     </div>
-    
+
 </nav>

@@ -13,7 +13,7 @@ export default {
             colors: {
                 AzulPrimario: '#032D39',
                 MarronSecundario: '#7C6A52',
-                BlancoTerciario: '#F5F4EA'
+                BlancoTerciario: '#F4F4E9'
             },
 
             fontFamily: {
