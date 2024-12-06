@@ -12,9 +12,9 @@
 </head>
 <!-- Ver de cambiar la navegación de la carpeta partials (Que yo cree) a la carpeta layouts que ya la trae laravel por defecto -->
 
-<body class="min-h-screen flex flex-col bg-BlancoTerciario">
+<body class="min-h-screen flex flex-col bg-BlancoTerciario overflow-x-hidden">
     @include('partials.navigation')
-    <main class=" flex-grow ">
+    <main class="flex-grow overflow-auto">
         {{ $slot }}
     </main>
 
