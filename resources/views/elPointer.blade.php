@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex flex-col items-center justify-center h-auto gap-8 my-60">
+    <div class="flex flex-col items-center justify-center h-auto gap-8 my-52">
         <div class="w-full max-w-4xl">
             <h3 class=" px-4 py-2 text-2xl border-b-4 border-MarronSecundario">Estándar</h3>
             <div class=" px-4 mt-2">

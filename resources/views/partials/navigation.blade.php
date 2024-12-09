@@ -16,7 +16,21 @@
     <div id="mobile-menu" class="hidden bg-AzulPrimario text-white p-4">
         <ul class="space-y-2 text-sm">
             <li><a href="{{ route('elPointer') }}" class="block">El Pointer</a></li>
-            <li><a href="{{ route('Club') }}" class="block">Club</a></li>
+            <li class="relative">
+                <button id="club-mobile-button" class="flex items-center justify-between w-full">
+                    Club
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <!-- Submenú -->
+                <ul id="club-mobile-menu" class="hidden bg-AzulPrimario text-white pl-4 mt-2 space-y-1">
+                    <li><a href="{{ route('JuntaDirectiva') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Junta Directiva</a></li>
+                    <li><a href="{{ route('Delegaciones') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Delegaciones</a></li>
+                    <li><a href="{{ route('Criaderos') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Criaderos</a></li>
+                    <li><a href="{{ route('Galeria') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Galeria</a></li>
+                </ul>
+            </li>
             <li><a href="{{ route('Concursos') }}" class="block">Concursos</a></li>
             <li><a href="{{ route('Inscripciones') }}" class="block">Inscripciones</a></li>
             <li><a href="{{ route('Resultados') }}" class="block">Resultados</a></li>
@@ -58,7 +72,21 @@
 
         <ul class="flex items-center gap-4 text-white">
             <li><a href="{{ route('elPointer') }}">El Pointer</a></li>
-            <li><a href="{{ route('Club') }}">Club</a></li>
+            <li class="relative group">
+                <a class="flex items-center hover:underline">
+                    Club
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </a>
+                <!-- Submenú -->
+                <ul class="hidden group-hover:flex absolute bg-AzulPrimario text-white flex-col left-0 top-full py-2">
+                    <li><a href="{{ route('JuntaDirectiva') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Junta Directiva</a></li>
+                    <li><a href="{{ route('Delegaciones') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Delegaciones</a></li>
+                    <li><a href="{{ route('Criaderos') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Criaderos</a></li>
+                    <li><a href="{{ route('Galeria') }}" class="px-4 py-2 whitespace-nowrap hover:bg-opacity-80">Galeria</a></li>
+                </ul>
+            </li>
             <li><a href="{{ route('Concursos') }}">Concursos</a></li>
             <li><a href="{{ route('Inscripciones') }}">Inscripciones</a></li>
             <li><a href="{{ route('Resultados') }}">Resultados</a></li>
@@ -73,9 +101,15 @@
     document.addEventListener('DOMContentLoaded', () => {
         const menuButton = document.getElementById('menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const clubMobileButton = document.getElementById('club-mobile-button');
+        const clubMobileMenu = document.getElementById('club-mobile-menu');
 
         menuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+
+        clubMobileButton.addEventListener('click', () => {
+            clubMobileMenu.classList.toggle('hidden');
         });
     });
 </script>

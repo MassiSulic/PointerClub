@@ -4,10 +4,9 @@
         <!-- Logo y Menú (Mayor tamaño) -->
         <div class="col-span-2 flex items-center space-x-8">
             <img src="{{ asset('svg/footer/Mesa de trabajo 39.svg') }}" alt="Pointer Club" class="h-32">
-            <nav class="flex text-xl">
+            <nav class="flex text-xl gap-8">
                 <div>
                     <a href="{{ route('elPointer') }}" class="hover:underline">El&nbsp;Pointer </a>
-                    <a href="{{ route('Club') }}" class="hover:underline">Club</a>
                 </div>
                 <div>
                     <a href="{{ route('Concursos') }}" class="hover:underline">Concursos</a>
@@ -66,8 +65,6 @@
             <nav class="text-xl flex flex-col items-center gap-8">
                 <div class="text-center">
                     <a href="{{ route('elPointer') }}" class="hover:underline">El&nbsp;Pointer</a>
-                    <br>
-                    <a href="{{ route('Club') }}" class="hover:underline">Club</a>
                 </div>
                 <div class="text-center">
                     <a href="{{ route('Concursos') }}" class="hover:underline">Concursos</a>
