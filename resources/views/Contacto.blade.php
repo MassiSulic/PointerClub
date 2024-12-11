@@ -21,22 +21,53 @@
                         <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
                         <input type="text" name="Nombre" id="nombre" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li>
-                        <label for="telefono" class="block text-lg font-semibold text-gray-700">TEL:</label>
-                        <input type="tel" name="Telefono" id="telefono" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                    <li class=" flex flex-row items-center gap-4">
+                        <label for="telefono" class="block text-lg font-semibold text-white">TEL:</label>
+                        <input type="tel" name="Telefono" id="telefono" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li>
-                        <label for="email" class="block text-lg font-semibold text-gray-700">CORREO:</label>
-                        <input type="email" name="Email" id="email" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500">
+                    <li class=" flex flex-row items-center gap-4">
+                        <label for="email" class="block text-lg font-semibold text-white">CORREO:</label>
+                        <input type="email" name="Email" id="email" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li>
-                        <label for="mensaje" class="block text-lg font-semibold text-gray-700">MENSAJE:</label>
-                        <textarea name="Mensale" id="mensaje" cols="30" rows="10" class="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-indigo-500"></textarea>
+                    <li class="flex flex-row items-start gap-4">
+                        <label for="mensaje" class="block text-lg font-semibold text-white">MENSAJE:</label>
+                        <textarea 
+                            name="Mensaje" 
+                            id="mensaje" 
+                            cols="30" 
+                            rows="5" 
+                            class="w-full border-2 border-white bg-transparent text-white focus:border-b-blue-500 focus:outline-none resize-none"
+                        ></textarea>
                     </li>
                 </ul>
-                <button class="mt-4 px-6 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] border-2 border-black rounded-lg transition-all duration-300" type="submit">Enviar</button>
+                <div class="flex justify-end">
+                    <button class=" w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
+                </div>
             </form>
-            
         </div>
+
+        
+    </div>
+
+    <div class="text-center p-3 bg-[#E8E6D9] text-MarronSecundario flex lg:flex-row justify-center flex-col items-center lg:gap-2 gap-4 mb-24">
+        <p>
+            info@pointerclubespana.es // secretariapointerclub@gmail.com
+        </p>
+
+        <div class=" flex flex-row gap-4">
+            <a href="">
+                <img src="{{ asset('svg/contacto/Recurso 23.svg') }}" alt="Instagram" class="w-7">
+            </a>
+            <a href="">
+                <img src="{{ asset('svg/contacto/Recurso 22.svg') }}" alt="Facebook" class="w-7">
+            </a>
+            <a href="{{ route('login') }}">
+                <img src="{{ asset('svg/contacto/Recurso 24.svg') }}" alt="Usuario" class="w-7">
+            </a>
+        </div>
+
+        <p>
+            +34 689 293 753
+        </p>
     </div>
 </x-layout>
