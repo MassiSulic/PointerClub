@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PerroController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ConductorController;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\PropietarioController;
 
 // Definición de todas las vistas que responden al metodo get + Rutas con nombre (Aveces el codigo esta bien aunque diga que no. Guardar y recargar)
 Route::view('/', 'Inicio')->name('Inicio');
@@ -26,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('propietarios', PropietarioController::class);
 });
+
+
 
 require __DIR__.'/auth.php';
