@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="w-full bg-neutral-100">
+    <div class="w-full bg-neutral-100 overflow-hidden">
         <!-- Sección Superior con Imagen y Texto -->
         <div class="relative h-screen bg-cover bg-center flex justify-end items-center"
             style="background-image: url({{ asset('image/home/escritorio-2.jpg') }});">
@@ -122,7 +122,7 @@
             </div>
 
             <!-- Patrocinadores -->
-            <div class="flex justify-center items-center space-x-4 bg-AzulPrimario p-8 gap-24 pl-20">
+            <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 pl-20">
                 <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7">
                 <img src="{{ asset('svg/home/Mesa de trabajo 36.svg') }}" alt="icono-5" class="h-14">
                 <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14">

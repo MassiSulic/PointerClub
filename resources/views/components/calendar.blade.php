@@ -1,4 +1,4 @@
-<div class="bg-[#F8F4E5] p-4 rounded-lg">
+<div class="bg-[#F8F4E5] p-4 rounded-lg ">
     <div class="bg-[#8E6E53] text-white text-center py-2">
         <h2 class="text-xl font-bold">CALENDARIO</h2>
     </div>
