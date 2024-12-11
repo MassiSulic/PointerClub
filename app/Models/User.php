@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends Authenticatable
 {
@@ -18,9 +19,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+         // Atributos estándar
+         'name',
+         'email',
+         'password',
+ 
+         // Atributos personalizados
+         'identificacion',
+         'numero_socio',
+         'direccion',
+         'region',
+         'pais',
+         'telefono',
     ];
 
     /**
@@ -38,11 +48,18 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    
+     protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    protected function name(): Attribute
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return Attribute::make(
+            get: fn ($value) => ucwords(strtolower($value)),
+            set: fn ($value) => ucfirst($value)
+        );
     }
+    
 }

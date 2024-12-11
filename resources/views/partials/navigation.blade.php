@@ -55,7 +55,7 @@
             <a href="">
                 <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Facebook" class="w-8">
             </a>
-            <a href="">
+            <a href="{{ route('login') }}">
                 <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class="w-8">
             </a>
             <a href="">

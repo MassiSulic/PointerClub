@@ -38,6 +38,27 @@ class ProfileController extends Controller
     }
 
     /**
+ * Update the additional fields of the user's profile.
+ */
+    public function updateAdditionalFields(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'identificacion' => 'required|string|max:12',
+            'numero_socio' => 'nullable|string|max:10',
+            'direccion' => 'required|string|max:255',
+            'region' => 'required|string|max:100',
+            'pais' => 'required|string|max:100',
+            'telefono' => 'required|string|max:20',
+        ]);
+
+        $user = $request->user();
+        $user->update($validated);
+
+        return Redirect::route('profile.edit')->with('status', 'profile-additional-updated');
+    }
+
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

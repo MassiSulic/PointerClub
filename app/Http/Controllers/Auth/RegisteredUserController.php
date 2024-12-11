@@ -31,20 +31,32 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'identificacion' => ['required', 'string', 'max:12', 'unique:users'],
+            'numero_socio' => ['nullable', 'string', 'max:10'],
+            'direccion' => ['required', 'string', 'max:50'],
+            'region' => ['required', 'string', 'max:20'],
+            'pais' => ['required', 'string', 'max:20'],
+            'telefono' => ['required', 'string', 'max:20'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'identificacion' => $request->identificacion,
+            'numero_socio' => $request->numero_socio,
+            'direccion' => $request->direccion,
+            'region' => $request->region,
+            'pais' => $request->pais,
+            'telefono' => $request->telefono,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('dashboard');
     }
 }
