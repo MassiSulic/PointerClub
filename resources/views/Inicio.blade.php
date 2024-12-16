@@ -129,7 +129,7 @@
             </div>
         </div>
 
-        <div class="bg-BlancoTerciario h-screen">
+        <div class="bg-BlancoTerciario">
             <x-calendar :events="[
                 1 => [1 => 'Evento de Año Nuevo', 3 => 'Reunión General'],
                 2 => [1 => 'Taller de Capacitación', 5 => 'Aniversario Empresa'],
@@ -138,6 +138,21 @@
                 6 => [2 => 'Presentación Trimestral'],
                 12 => [5 => 'Fiesta de Fin de Año']
             ]" />
+
+            <div class=" flex flex-col items-center space-y-12 p-20 ">
+                <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" alt="">
+                    <img src="{{ asset('svg/home/icons-partners/pointerdeca.svg') }}" alt="">
+                    <img src="{{ asset('svg/home/icons-partners/pointerdogtra.svg') }}" alt="">
+                    <img src="{{ asset('svg/home/icons-partners/pointereskal.svg') }}" alt="">
+                </div>
+                <div class=" gap-12 grid grid-cols-1 md:grid-cols-3 md:w-2/3 place-items-center ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerfilson.svg') }}" alt="" class=" w-48 md:place-self-end ">
+                    <img src="{{ asset('svg/home/icons-partners/pointergarmin.svg') }}" alt="" class=" w-48 ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt="" class=" w-48 md:place-self-start ">
+                </div>
+            </div>
+            
         </div>
     </div>
 
