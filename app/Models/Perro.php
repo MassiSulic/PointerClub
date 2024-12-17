@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\User;
 
 class Perro extends Model
 {
@@ -13,16 +14,15 @@ class Perro extends Model
     protected $table = 'perros';
 
     protected $fillable = [
-        'propietario_id',
-        'conductor_id',
-        'chip',
-        'loe',
+        'user_id',
+        'conductor',
+        'chip', //hacer obligatorio
+        'loe', //hacer obligatorio
         'cartilla',
         'nombre_perro',
         'raza',
         'sexo',
         'pais',
-        'numero_socio_propietario',
     ];
 
     /**
@@ -30,16 +30,9 @@ class Perro extends Model
      */
     public function propietario()
     {
-        return $this->belongsTo(Propietario::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    /**
-     * Relación con Conductor (Un Perro pertenece a un Conductor).
-     */
-    public function conductor()
-    {
-        return $this->belongsTo(Conductor::class);
-    }
 
     /**
      * Relación con Pruebas (Un Perro puede estar en muchas Pruebas).

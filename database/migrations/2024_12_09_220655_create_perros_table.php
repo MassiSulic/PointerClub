@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('perros', function (Blueprint $table) {
             $table->id(); // ID único auto incrementable (clave primaria)
-            $table->unsignedBigInteger('propietario_id'); // Relación con la tabla propietario
-            $table->unsignedBigInteger('conductor_id'); // Relación con la tabla conductores
+            $table->unsignedBigInteger('user_id'); // Relación con la tabla users
+            $table->string('conductor', 50); // Nombre del conductor
+            
             
             // Campos numéricos
             $table->unsignedBigInteger('chip')->unique(); // N° de chip/microchip, entero positivo único
@@ -23,7 +24,7 @@ return new class extends Migration
             
             // Otros campos
             $table->string('nombre_perro', 50);
-            $table->enum('raza', ['Pointer', 'Setter Inglés', 'Setter Gordon']);
+            $table->enum('raza', ['Pointer', 'Setter Inglés', 'Setter Gordon', 'Setter Irlandés']);
             $table->enum('sexo', ['Macho', 'Hembra']);
             $table->string('pais', 20);
             $table->string('numero_socio_propietario', 10)->nullable();
@@ -32,8 +33,8 @@ return new class extends Migration
             $table->softDeletes(); // Soft delete
         
             // Claves foráneas
-            $table->foreign('conductor_id')->references('id')->on('conductores')->onDelete('cascade');
-            $table->foreign('propietario_id')->references('id')->on('propietarios')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            
         });
         
     }

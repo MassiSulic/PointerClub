@@ -88,7 +88,7 @@
                 </ul>
             </li>
             <li><a href="{{ route('Concursos') }}">Concursos</a></li>
-            <li><a href="{{ route('Inscripciones') }}">Inscripciones</a></li>
+            <li><a href="{{ route('login') }}">Inscripciones</a></li>
             <li><a href="{{ route('Resultados') }}">Resultados</a></li>
             <li><a href="{{ route('Socios') }}">Socios</a></li>
             <li><a href="{{ route('Actualidad') }}">Actualidad</a></li>
