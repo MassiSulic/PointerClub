@@ -2,29 +2,29 @@
 <footer class="bg-AzulPrimario text-white py-8 flex justify-center flex-col lg:block hidden">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 px-20">
         <!-- Logo y Menú (Mayor tamaño) -->
-        <div class="col-span-2 flex items-center space-x-8">
+        <div class="col-span-2 flex items-center space-x-10 pr-8">
             <img src="{{ asset('svg/footer/Mesa de trabajo 39.svg') }}" alt="Pointer Club" class="h-32">
-            <nav class="flex text-xl gap-8">
+            <nav class="flex text-xl ">
                 <div>
                     <a href="{{ route('elPointer') }}" class="hover:underline">El&nbsp;Pointer </a>
-                </div>
-                <div>
                     <a href="{{ route('Concursos') }}" class="hover:underline">Concursos</a>
+                </div>
+                <div>
                     <a href="{{ route('Inscripciones') }}" class="hover:underline">Inscripciones</a>
-                </div>
-                <div>
                     <a href="{{ route('Resultados') }}" class="hover:underline">Resultados</a>
-                    <a href="{{ route('Socios') }}" class="hover:underline">Socios</a>
                 </div>
                 <div>
+                    <a href="{{ route('Socios') }}" class="hover:underline">Socios</a>
                     <a href="{{ route('Actualidad') }}" class="hover:underline">Actualidad</a>
+                </div>
+                <div>
                     <a href="{{ route('Contacto') }}" class="hover:underline">Contacto</a>
                 </div>
             </nav>
         </div>
 
         <!-- Redes Sociales e Iconos (Menor tamaño) -->
-        <div class="flex items-center space-x-6 justify-between">
+        <div class="flex items-center justify-between ml-4">
             <div class="flex flex-row gap-4">
                 <a href=""><img src="{{ asset('svg/footer/Mesa de trabajo 43.svg') }}" alt="WhatsApp" class="h-6"></a>
                 <a href="#"><img src="{{ asset('svg/footer/Mesa de trabajo 43_1.svg') }}" alt="Instagram" class="h-6"></a>
