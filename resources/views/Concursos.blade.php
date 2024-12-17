@@ -73,8 +73,11 @@
                     </div>
     
                     <label for="perro" class="block text-sm font-medium text-gray-700 mt-4">Perro</label>
-                    <select id="perro" name="perro" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                        <!-- Aquí se llenarán las opciones de la tabla perros -->
+                    <select id="perro" name="perro" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                        <option value="">Selecciona un perro</option>
+                        @foreach($perros as $perro)
+                            <option value="{{ $perro->id }}">{{ $perro->nombre_perro }} - Chip: {{ $perro->chip }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
