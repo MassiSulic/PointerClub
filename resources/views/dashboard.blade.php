@@ -1,41 +1,40 @@
 @include('partials.navigation')
-
-<br><br><br><br><br>
-
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold mb-4">Gestión de Perros</h3>
-
-                    <!-- Botón para añadir un perro -->
-                    <button id="add-perro-btn" 
-                    class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-6">
-                    Añadir Perro +
-                    </button>
-
-
-
-                    <!-- Incluir la vista perros -->
-                    @include('partials.perros')
-
-                    <!-- Paginación -->
-                    {{ $perros->links() }}
+    <x-app-layout class=" text-gray-900 mt-48">
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
+    
+        <div class="py-12 h-full">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <h3 class="text-lg font-bold mb-4">Gestión de Perros</h3>
+    
+                        <!-- Botón para añadir un perro -->
+                        <button id="add-perro-btn" 
+                        class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-6">
+                        Añadir Perro +
+                        </button>
+    
+    
+    
+                        <!-- Incluir la vista perros -->
+                        @include('partials.perros')
+    
+                        <!-- Paginación -->
+                        {{ $perros->links() }}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </x-app-layout>
+    @include('partials.footer')
 
 
-@include('partials.footer')
+
+
 
 
 <!-- Modal para Crear/Editar -->
