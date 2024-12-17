@@ -72,22 +72,48 @@ class PerroController extends Controller
     }
 
 
-    public function update(Request $request, Perro $perro)
-    {
-        $request->validate([
-            'chip' => 'required|numeric',
-            'loe' => 'required|numeric',
-            'nombre_perro' => 'required|string|max:50',
-            'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon','Setter Irlandés',
-            'sexo' => 'required|in:Macho,Hembra',
-            'pais' => 'required|string|max:20',
-            'conductor' => 'required|string|max:50',
-        ]);
+    // public function update(Request $request, Perro $perro)
+    // {
+    //     $request->validate([
+    //         'chip' => 'required|numeric',
+    //         'loe' => 'required|numeric',
+    //         'nombre_perro' => 'required|string|max:50',
+    //         'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon','Setter Irlandés',
+    //         'sexo' => 'required|in:Macho,Hembra',
+    //         'pais' => 'required|string|max:20',
+    //         'conductor' => 'required|string|max:50',
+    //     ]);
 
-        $perro->update($request->all());
+    //     $perro->update($request->all());
 
-        return redirect()->route('perros.index')->with('success', 'Perro actualizado con éxito.');
+    //     return redirect()->route('perros.index')->with('success', 'Perro actualizado con éxito.');
+    // }
+
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'chip' => 'required|numeric',
+        'loe' => 'required|numeric',
+        'nombre_perro' => 'required|string|max:50',
+        'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon,Setter Irlandés',
+        'sexo' => 'required|in:Macho,Hembra',
+        'pais' => 'required|string|max:20',
+        'conductor' => 'required|string|max:50',
+    ]);
+
+    // Encontrar el perro y validar pertenencia
+    $perro = Perro::findOrFail($id);
+
+    if ($perro->user_id !== Auth::id()) {
+        return response()->json(['error' => 'No autorizado.'], 403);
     }
+
+    // Actualizar los datos
+    $perro->update($request->all());
+
+    return redirect()->route('perros.index')->with('success', 'Perro actualizado con éxito.');
+}
+
 
     public function destroy(Perro $perro)
     {

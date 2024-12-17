@@ -12,33 +12,33 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('perros', function (Blueprint $table) {
-            $table->id(); // ID único auto incrementable (clave primaria)
-            $table->unsignedBigInteger('user_id'); // Relación con la tabla users
-            $table->string('conductor', 50); // Nombre del conductor
-            
-            
-            // Campos numéricos
-            $table->unsignedBigInteger('chip')->unique(); // N° de chip/microchip, entero positivo único
-            $table->unsignedInteger('loe')->unique(); // LOE, entero positivo único
-            $table->unsignedSmallInteger('cartilla')->nullable(); // Cartilla, entero pequeño, no obligatorio
-            
-            // Otros campos
-            $table->string('nombre_perro', 50);
+            $table->id(); // bigint(20) UNSIGNED AUTO_INCREMENT (clave primaria)
+
+            // Relación con la tabla users
+            $table->unsignedBigInteger('user_id')->index(); // Índice
+
+            // Información del perro
+            $table->string('conductor', 255); // varchar(255)
+            $table->unsignedBigInteger('chip')->index(); // bigint(20) UNSIGNED con índice
+            $table->unsignedInteger('loe')->index(); // int(10) UNSIGNED con índice
+            $table->unsignedInteger('cartilla')->nullable(); // int(10) UNSIGNED NULL
+            $table->string('nombre_perro', 50); // varchar(50)
+
+            // Enumeraciones
             $table->enum('raza', ['Pointer', 'Setter Inglés', 'Setter Gordon', 'Setter Irlandés']);
             $table->enum('sexo', ['Macho', 'Hembra']);
-            $table->string('pais', 20);
-            $table->string('numero_socio_propietario', 10)->nullable();
-        
+
+            // Otros campos
+            $table->string('pais', 20); // varchar(20)
+
+            // Timestamps
             $table->timestamps(); // created_at y updated_at
-            $table->softDeletes(); // Soft delete
-        
+            $table->softDeletes(); // deleted_at NULL
+
             // Claves foráneas
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
         });
-        
     }
-
 
     /**
      * Reverse the migrations.

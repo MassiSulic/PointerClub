@@ -149,55 +149,70 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Abrir el modal para añadir un nuevo perro
-        document.getElementById('add-perro-btn').addEventListener('click', function () {
-            console.log('Botón "Añadir Perro" presionado');
-            document.getElementById('perro-form').action = "{{ route('perros.store') }}";
-            document.getElementById('perro-id').value = '';
-            document.getElementById('modal-title').innerText = 'Añadir Perro';
-            document.getElementById('nombre_perro').value = '';
-            document.getElementById('raza').value = '';
-            document.getElementById('sexo').value = '';
-            document.getElementById('chip').value = '';
-            document.getElementById('loe').value = '';
-            document.getElementById('cartilla').value = '';
-            document.getElementById('pais').value = '';
-            document.getElementById('perro-modal').classList.remove('hidden');
-        });
+            // Abrir el modal para añadir un nuevo perro
+            document.getElementById('add-perro-btn').addEventListener('click', function () {
+        console.log('Botón "Añadir Perro" presionado');
+        const form = document.getElementById('perro-form');
+
+        // Limpiar el formulario y eliminar el campo _method si existe
+        form.reset();
+        const existingMethod = form.querySelector('input[name="_method"]');
+        if (existingMethod) existingMethod.remove(); // Eliminar el campo PUT dinámico
+
+        // Configurar la acción del formulario para "store"
+        form.action = "{{ route('perros.store') }}";
+
+        // Restablecer valores del modal
+        document.getElementById('perro-id').value = '';
+        document.getElementById('modal-title').innerText = 'Añadir Perro';
+        document.getElementById('nombre_perro').value = '';
+        document.getElementById('raza').value = '';
+        document.getElementById('sexo').value = '';
+        document.getElementById('chip').value = '';
+        document.getElementById('loe').value = '';
+        document.getElementById('cartilla').value = '';
+        document.getElementById('pais').value = '';
+
+        // Mostrar el modal
+        document.getElementById('perro-modal').classList.remove('hidden');
+    });
+
     
         // Abrir el modal para editar un perro existente
         document.querySelectorAll('.edit-perro-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                const id = this.dataset.id;
-                console.log(`Botón "Editar" presionado para el perro con ID: ${id}`);
-                fetch(`/perros/${id}/edit`)
-                    .then(response => {
-                        console.log(`Respuesta de la solicitud fetch para el perro con ID: ${id}`, response);
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Datos recibidos del servidor:', data);
-                        document.getElementById('perro-form').action = `/perros/${id}`;
-                        document.getElementById('perro-id').value = id;
-                        document.getElementById('modal-title').innerText = 'Editar Perro';
-                        document.getElementById('nombre_perro').value = data.nombre_perro;
-                        document.getElementById('conductor').value = data.conductor;
-                        document.getElementById('raza').value = data.raza;
-                        document.getElementById('sexo').value = data.sexo;
-                        document.getElementById('chip').value = data.chip;
-                        document.getElementById('loe').value = data.loe;
-                        document.getElementById('cartilla').value = data.cartilla;
-                        document.getElementById('pais').value = data.pais;
-                        document.getElementById('perro-modal').classList.remove('hidden');
-                    })
-                    .catch(error => {
-                        console.error('Error fetching perro data:', error);
-                    });
-            });
-        });
+    button.addEventListener('click', function () {
+        const id = this.dataset.id;
+
+        // Limpiar el formulario y campo _method
+        const form = document.getElementById('perro-form');
+        form.reset(); // Limpiar los campos existentes
+        const existingMethod = form.querySelector('input[name="_method"]');
+        if (existingMethod) existingMethod.remove(); // Eliminar el campo si ya existe
+
+        fetch(`/perros/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                form.action = `/perros/${id}`;
+                form.insertAdjacentHTML('beforeend', 
+                    '<input type="hidden" name="_method" value="PUT">');
+
+                document.getElementById('perro-id').value = id;
+                document.getElementById('nombre_perro').value = data.nombre_perro;
+                document.getElementById('conductor').value = data.conductor;
+                document.getElementById('raza').value = data.raza;
+                document.getElementById('sexo').value = data.sexo;
+                document.getElementById('chip').value = data.chip;
+                document.getElementById('loe').value = data.loe;
+                document.getElementById('cartilla').value = data.cartilla;
+                document.getElementById('pais').value = data.pais;
+
+                document.getElementById('modal-title').innerText = 'Editar Perro';
+                document.getElementById('perro-modal').classList.remove('hidden');
+            })
+            .catch(error => console.error('Error fetching perro data:', error));
+    });
+});
+
     
         // Cerrar el modal
         document.getElementById('modal-cancel-btn').addEventListener('click', function () {

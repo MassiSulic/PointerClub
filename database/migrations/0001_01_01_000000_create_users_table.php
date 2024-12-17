@@ -12,21 +12,35 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->id(); // bigint(20) UNSIGNED AUTO_INCREMENT
+
+            // Nuevas columnas de la tabla real
+            $table->string('identificacion', 12)->index(); // varchar(12)
+            $table->string('numero_socio', 10)->nullable(); // varchar(10) NULL
+            $table->string('direccion', 50); // varchar(50)
+            $table->string('region', 20); // varchar(20)
+            $table->string('pais', 20); // varchar(20)
+            $table->string('telefono', 20); // varchar(20)
+
+            // Columnas existentes en la tabla original
+            $table->string('name'); // varchar(255)
+            $table->string('email')->unique()->index(); // varchar(255) + Índice único
+            $table->timestamp('email_verified_at')->nullable(); // timestamp NULL
+            $table->string('password'); // varchar(255)
+            $table->string('remember_token', 100)->nullable(); // varchar(100) NULL
+
+            // Columnas de timestamps
+            $table->timestamps(); // created_at y updated_at
         });
 
+        // Tabla de restablecimiento de contraseñas
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
 
+        // Tabla de sesiones
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Rutas para el recurso 'perros'
     Route::resource('perros', PerroController::class);
-    Route::get('/perros/{perro}/edit', [PerroController::class, 'edit'])->name('perros.edit');
+    //Route::get('/perros/{perro}/edit', [PerroController::class, 'edit'])->name('perros.edit');
 });
 
 require __DIR__.'/auth.php';
