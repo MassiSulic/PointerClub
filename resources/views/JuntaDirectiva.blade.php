@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mt-48 mb-24 px-4 sm:px-6 lg:px-8">
+    <div class="mt-48 mb-24 px-4 sm:px-6 lg:px-8 text-[#123240]">
         <div class="flex flex-col space-y-6 lg:mx-72 sm:mx-24">
             <h1 class="text-left text-2xl font-bold py-4 px-12 border-b-4 border-MarronSecundario ">Junta Directiva</h1>
             <!-- Contenedor 1 -->

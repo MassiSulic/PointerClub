@@ -1,4 +1,5 @@
 <!-- Footer 1: Visible en escritorio -->
+
 <footer class="bg-AzulPrimario text-white py-8 flex justify-center flex-col lg:block hidden">
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 px-20">
         <!-- Logo y Menú (Mayor tamaño) -->
@@ -116,5 +117,11 @@
                 <a href="{{ route('Envios') }}" class="hover:underline">Política de envíos</a>
             </p>
         </div>
+    </div>
+
+    <div>
+        <a href="" class=" w-28">
+            <img src="{{ asset('svg/footer/pointerwhastapp.svg') }}" alt="WhatsApp">
+        </a>
     </div>
 </footer>

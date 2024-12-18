@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="w-full bg-neutral-100 overflow-hidden">
+    <div class="w-full bg-neutral-100 overflow-hidden text-[#123240]">
         <!-- Sección Superior con Imagen y Texto -->
         <div class="relative h-screen bg-cover bg-center flex justify-end items-center"
             style="background-image: url({{ asset('image/home/escritorio-2.jpg') }});">
@@ -36,7 +36,7 @@
                 <div class="flex flex-col items-center text-center">
                     <img src="{{ asset('svg/home/Trofeo.svg') }}" alt="Icono 3" class="w-28 h-28">
                     <h3 class="mt-4 text-lg w-60 ">Próximo CONCURSO. <span
-                            class=" bg-MarronSecundario px-2 rounded-full text-white">TOLEDO 2024</span></h3>
+                            class=" bg-MarronSecundario px-2 rounded-full text-white">AZUAGA 2024</span></h3>
                     <button class="mt-4 px-2 py-1 bg-[#C7CBC6] text-black hover:bg-[#616261] border-black border-2">
                         MÁS INFO
                     </button>
@@ -47,10 +47,10 @@
         <div class="bg-AzulPrimario flex flex-col md:flex-row h-auto ">
             <div class="w-full md:w-1/2 flex flex-col justify-center items-start p-6 text-BlancoTerciario text-left">
                 <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-                    Campeonato EUROPEO DE MONTAÑA<br> DE POINTER Y SETTER INGLES.
+                    JORNADA DE CAZA. Reunión<br> de aficionados al pointer.
                 </h1>
                 <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4">
-                    A celebrarse en Val Bredretto (Suiza), entre el 29<br> de septiembre y el 1 de octubre de 2024.
+                    30 de Noviembre 2024 en Badajoz.
                 </p>
                 <button
                     class="mt-4 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-MarronSecundario border-2">
@@ -59,7 +59,7 @@
             </div>
             <div class="w-full md:w-1/2 h-64 md:h-full">
                 <div class="bg-cover bg-right h-full"
-                    style="background-image: url({{ asset('image/home/escritorio-3.jpg') }}); min-height: 600px;"></div>
+                    style="background-image: url({{ asset('image/home/Recurso-8.jpg') }}); min-height: 600px;"></div>
             </div>
         </div>
 
@@ -75,32 +75,33 @@
                 <div class="space-y-4 pb-8">
                     <h1 class="text-3xl font-bold text-white bg-AzulPrimario p-8 pl-20">Próximo CONCURSO.</h1>
                     <!-- Logos de clubes -->
-                    <div class="flex items-center space-x-4 justify-center gap-8">
-                        <img src="{{ asset('svg/home/Mesa de trabajo 29.svg') }}" alt="icono-1" class="h-32">
-                        <img src="{{ asset('svg/home/Mesa de trabajo 34.svg') }}" alt="icono-2" class="h-40 mb-9">
-                        <img src="{{ asset('svg/home/pointerFCI concurso.svg') }}" alt="icono-3" class="h-44">
+                    <div class="flex items-center justify-center gap-4 py-8">
+                        <img src="{{ asset('svg/home/Mesa de trabajo 29.svg') }}" alt="icono-1" class="h-24">
+                        <img src="{{ asset('svg/home/arion.psd@150x.png') }}" alt="icono-2" class="h-16">
+                        <img src="{{ asset('svg/home/inMRvu.tif@150x.png') }}" alt="icono-3" class="h-20">
+                        <img src="{{ asset('svg/home/Recurso 4@150x.png') }}" alt="icono-3" class="h-20">
+                        <img src="{{ asset('svg/home/Recurso 6@150x.png') }}" alt="icono-3" class="h-20">
                     </div>
 
-                    <h2 class=" text-xl font-semibold pl-20">PRUEBAS SELECTIVAS CAZA PRÁCTICA <strong>(CACIT)</strong>
+                    <h2 class=" text-xl font-semibold pl-20">CAMPEONATO SOBRE PERDIZ<br>
+                        SALVAJE DE MONTAÑA
                     </h2>
                     <span
-                        class="text-2xl font-semibold text-BlancoTerciario bg-AzulPrimario px-5 rounded-full ml-20 ">TOLEDO
-                        2024</span>
+                        class="text-2xl font-semibold text-BlancoTerciario bg-AzulPrimario px-5 rounded-full ml-20 ">SIERRA DE AZUAGA 2024</span>
 
                     <!-- Fechas y ubicación -->
                     <div class="flex justify-start pl-20 gap-8 py-4">
                         <div class="flex items-start space-x-2">
                             <img src="{{ asset('svg/home/pointerhorario.svg') }}" alt="icono-4" class=" h-12">
                             <p>
-                                <span class="font-bold">28 y 29 SEP.</span><br>
-                                SEP. 2024 16.00 H.
+                                <span class="font-bold">11 y 12 ENE.</span>
                             </p>
                         </div>
                         <div class="flex items-start space-x-2">
                             <img src="{{ asset('svg/home/pointerubicacion.svg') }}" alt="icono-5" class="h-12">
                             <p>
-                                <span class="font-bold">Terrenos del Coto de Portillo y Fuensalida</span><br>
-                                Toledo
+                                <span class="font-bold">2700 HECTAREAS,</span><br>
+                                Sierra de Azuaga.
                             </p>
                         </div>
                     </div>
@@ -108,10 +109,10 @@
                     <!-- Concentración y contacto -->
                     <div class=" pl-20">
                         <h3 class="text-lg font-bold text-AzulPrimario">CONCENTRACIÓN</h3>
-                        <p>08.00 H, Rooster Café, C/Maestro Guerrero, 20, <br> 45510 Fuensalida, Toledo.</p>
+                        <p>08.30 H, "Bar El Cazador".</p>
                     </div>
 
-                    <h3 class="text-lg pl-20 text-AzulPrimario"><strong>670064948</strong> (Javier Núñez)</h3>
+                    <h3 class="text-lg pl-20 text-AzulPrimario"><strong>699 939241</strong> (Rafael Fuentes)</h3>
 
                     <!-- Botón -->
                     <button
@@ -129,15 +130,29 @@
             </div>
         </div>
 
-        <div class="bg-BlancoTerciario">
-            <x-calendar :events="[
-                1 => [1 => 'Evento de Año Nuevo', 3 => 'Reunión General'],
-                2 => [1 => 'Taller de Capacitación', 5 => 'Aniversario Empresa'],
-                3 => [2 => 'Evento Especial'],
-                4 => [4 => 'Vacaciones Semana Santa'],
-                6 => [2 => 'Presentación Trimestral'],
-                12 => [5 => 'Fiesta de Fin de Año']
-            ]" />
+        <div class="bg-BlancoTerciario pt-12">
+            <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-96">
+                <x-calendar :events="[
+    2 => [ // Febrero
+        2 => ['Semana Andalucía GB, 02/02, Marchena.', 'Semana Andalucía BC, 02/02, Marchena.'],
+        3 => ['Semana Andalucía GB, 03/02, Marchena.', 'Semana Andalucía BC, 03/02, Marchena.'],
+        4 => ['Semana Andalucía GB, 04/02, Jerez.', 'Semana Andalucía BC, 04/02, Jerez.'],
+        5 => ['Semana Andalucía GB, 05/02, Jerez.', 'Semana Andalucía BC, 05/02, Jerez.'],
+        6 => ['Semana Andalucía GB, 06/02, Jerez.', 'Semana Andalucía BC, 06/02, Jerez.'],
+        8 => ['Copa Europa, 08/02, Jerez.'],
+        9 => ['Copa Europa, 09/02, Jerez.'],
+        11 => ['Campeonatos Europa BC Pointer, 11/02, Jerez.'],
+        12 => ['Campeonatos Europa BC Pointer, 12/02, Jerez.'],
+        13 => ['Campeonatos Europa GB Pointer, 13/02, Jerez.'],
+        14 => ['Campeonatos Europa GB Pointer, 14/02, Jerez.'],
+    ]
+]" />
+
+
+
+
+            </div>
+            
 
             <div class=" flex flex-col items-center space-y-12 p-20 ">
                 <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
@@ -147,12 +162,14 @@
                     <img src="{{ asset('svg/home/icons-partners/pointereskal.svg') }}" alt="">
                 </div>
                 <div class=" gap-12 grid grid-cols-1 md:grid-cols-3 md:w-2/3 place-items-center ">
-                    <img src="{{ asset('svg/home/icons-partners/pointerfilson.svg') }}" alt="" class=" w-48 md:place-self-end ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerfilson.svg') }}" alt=""
+                        class=" w-48 md:place-self-end ">
                     <img src="{{ asset('svg/home/icons-partners/pointergarmin.svg') }}" alt="" class=" w-48 ">
-                    <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt="" class=" w-48 md:place-self-start ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt=""
+                        class=" w-48 md:place-self-start ">
                 </div>
             </div>
-            
+
         </div>
     </div>
 

@@ -1,35 +1,35 @@
 <x-layout>
-    <div class="flex flex-col items-center justify-center h-auto gap-8 my-52">
+    <div class="flex flex-col items-center justify-center h-auto gap-8 my-52 text-[#123240]">
         <div class="w-full max-w-4xl">
-            <h3 class=" px-4 py-2 text-2xl border-b-4 border-MarronSecundario">Estándar</h3>
+            <h3 class=" px-4 py-2 text-3xl border-b-4 border-MarronSecundario">Estándar</h3>
             <div class=" px-4 mt-2">
                 <x-faq-item question="ESTÁNDAR MORFOLÓGICO"
-                    answer="Para registrarte, haz clic en el botón de registro y sigue las instrucciones." />
+                    answer="  <embed src='{{ asset('storage/ESTANDAR_MORFOLOGICO_POINTER_FCI.pdf') }}' type='application/pdf' width='100%' height='600px'> " />
                 <x-faq-item question="ESTÁNDAR DE TRABAJO"
-                    answer="Aceptamos tarjetas de crédito, débito y pagos por transferencia." />
+                    answer=" <embed src='{{ asset('storage/ESTANDAR_TRABAJO_POINTER_RSCE.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
             </div>
         </div>
 
         <div class="w-full bg-[#E8E6D9]">
             <div class="max-w-4xl mx-auto py-4">
                 <div class="w-full max-w-4xl ">
-                    <h3 class=" px-4 py-2 text-2xl border-b-4 border-MarronSecundario">Reglamentos</h3>
+                    <h3 class=" px-4 py-2 text-3xl border-b-4 border-MarronSecundario">Reglamentos</h3>
                     <div class=" px-4 mt-2">
                         <x-faq-item question="REGLAMENTOS DE TRABAJO. "
-                            answer="Para registrarte, haz clic en el botón de registro y sigue las instrucciones." />
+                            answer="<embed src='{{ asset('storage/Reglamento_Perros_Muestra-Retrievers-1.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                         <x-faq-item question="REGLAMENTO DE LA COPA EUROPA DE CAZA PRÁCTICA"
-                            answer="Aceptamos tarjetas de crédito, débito y pagos por transferencia." />
+                            answer="<embed src='{{ asset('storage/REGLAMENTO_COPA_ESPANA_CAZA_PRACTICA_INTERCLUBES.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                         <x-faq-item question="REGLAMENTO DE JUECES DE PRUEBAS Y EXPOSICIONES"
-                            answer="Aceptamos tarjetas de crédito, débito y pagos por transferencia." />
+                            answer="<embed src='{{ asset('storage/REGLAMENTO_JUECES_MAYO_2024.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="w-full max-w-4xl">
-            <h3 class=" px-4 py-2 text-2xl border-b-4 border-MarronSecundario">Enfermedades</h3>
+            <h3 class=" px-4 py-2 text-3xl border-b-4 border-MarronSecundario">Enfermedades</h3>
             <div class=" px-4 mt-2">
-                <x-faq-item question="Babesiosis"
+                <x-faq-item question="BABESIOSIS"
                     answer="La babesiosis es una enfermedad que se transmite a través de un organismo vector, generalmente la garrapata (Ixodes dammini); de hecho, este ácaro es el mismo que transmite la enfermedad de Lyme y, a menudo, ambas van asociadas.  Las garrapatas son unas inquilinas realmente indeseables para nuestro perro. Su presencia en el can debe prevenirse desde el primer momento, ya que transmiten dolencias de carácter grave a través de los microorganismos que portan en su saliva, llevando a la sangre de nuestra mascota un peligro que, cuando la infestación es abundante, resulta letal. En este sentido, la babesiosis es una de las enfermedades más características atribuida a estos conocidos arácnidos. 
 
 Está producida por un protozoo trasmitido por las garrapatas del género Ixodes. Igualmente, se han dado casos de infección a través de la transfusión de sangre y placentaria, esto es, de las perras a sus camadas.El parásito recibe el nombre de Babesia canis si bien, hasta hace poco, también se consideraba a la Babesia gibsoni un pariente próximo, pero en la actualidad se ha cambiado el nombre por el de Theileria annae gracias a varios estudios de ADN, lo que explica que los animales infectados por este parásito  no respondieron al tratamiento habitual y tuvieran un pronóstico desfavorable. La forma de transmisión más común, a través de la saliva, tiene lugar mientras  la garrapata se alimenta de la sangre del animal. 
@@ -55,7 +55,7 @@ En el tratamiento veterinario de la babesiosis normalmente no se emplean antibi�
 
 PREVENCIÓN: COLLARES O PIPETAS REPELENTES DE LAS GARRAPATAS.
 " />
-                <x-faq-item question="Leptospirosis"
+                <x-faq-item question="LEPTOSPIROSIS"
                     answer="La Leptospirosis Canina es una enfermedad infecciosa y contagiosa bastante frecuente en los perros que viven en la ciudad o en el campo. Es causada por una bacteria llamada Leptospira Canícola. Afecta a muchos animales y es una zoonosis; o sea que se puede transmitir de los animales al hombre.Existen varios serotipos de Leptospira patógenos para el perro capaces 
 
 de producir Leptospirosis Canina.Las puertas de entrada de estas bacterias son las mucosas conjuntivales y de la boca, así como la piel. Allí producen una irritación local y una rápida multiplicación pasando luego a la sangre y por medio de ésta a los diferentes órganos que afecta principalmente hígado y riñón. Hay 4 formas en las que se presenta la Leptospirosis Canina: Sub-clínica, septicémica aguda, infección ambulatoria y crónica. Los detalles de cada uno de estos tipos son bastantes diferentes aunque no son el motivo de éste articulo; donde quiero enfocarme en la parte netamente práctica y en lo que tu puedes hacer para prevenirla.
@@ -104,7 +104,7 @@ El tratamiento necesario es el siguiente:
 
 Es necesario plantearse con sensatez si conviene tener un perro portador de la enfermedad en un hogar en el que no es posible mantener una higiene adecuada.
 " />
-                <x-faq-item question="Hepatitis"
+                <x-faq-item question="HEPATITIS"
                     answer="Hepatitis vírica canina La hepatitis vírica canina es una enfermedad que afecta únicamente a los perros y no guarda relación alguna con la hepatitis humana. La enfermedad es hoy mucho menos frecuente gracias a la eficacia de las vacunas. Sin embargo, esta enfermedad extremadamente contagiosa y en ocasiones mortal todavía se puede observar en la consulta veterinaria, sobre todo en cachorros que no han sido vacunados
 
 CAUSAS

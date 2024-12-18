@@ -7,6 +7,6 @@
         <img src="{{asset('svg/FAQs/+.svg')}}" alt="icono desplegable" class=" h-3">
     </button>
     <div class="p-4 hidden h-auto max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
-        <p>{{ $answer }}</p>
+        <p>{!! $answer !!}</p>
     </div>
 </div>
