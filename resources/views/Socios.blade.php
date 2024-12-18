@@ -8,35 +8,57 @@
             </p>
 
             <div class=" w-full ">
-                <form action="" class="flex flex-col space-y-6 p-4 mx-auto bg-MarronSecundario">
-                    <ul class="space-y-4">
-                        <li class=" flex flex-row items-center gap-4">
+                <form action="" class="flex flex-col p-6 pt-0 mx-auto bg-MarronSecundario">
+                    <ul class="">
+                        <li class=" flex flex-row items-end">
                             <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
-                            <input type="text" name="Nombre" id="nombre" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            <input type="text" name="Nombre" id="nombre"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>
-                        <li class=" flex flex-row items-center gap-4">
-                            <label for="telefono" class="block text-lg font-semibold text-white">TEL:</label>
-                            <input type="tel" name="Telefono" id="telefono" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <li class=" flex flex-row items-end">
+                            <label for="nombre" class="text-lg font-semibold text-white">APELLIDOS/s:</label>
+                            <input type="text" name="Nombre" id="nombre"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>
-                        <li class=" flex flex-row items-center gap-4">
-                            <label for="email" class="block text-lg font-semibold text-white">CORREO:</label>
-                            <input type="email" name="Email" id="email" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <div class=" flex flex-row">
+                            <li class=" flex flex-row items-end w-full">
+                                <label for="nombre" class="text-lg font-semibold text-white">PAÍS:</label>
+                                <input type="text" name="Nombre" id="nombre"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            </li>
+                            <li class=" flex flex-row items-end w-full">
+                                <label for="nombre" class="text-lg font-semibold text-white">PROVINCIA:</label>
+                                <input type="text" name="Nombre" id="nombre"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            </li>
+                        </div>
+                        <li class=" flex flex-row items-end">
+                            <label for="nombre" class="text-lg font-semibold text-white">CIUDAD:</label>
+                            <input type="text" name="Nombre" id="nombre"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>
-                        <li class="flex flex-row items-start gap-4">
-                            <label for="mensaje" class="block text-lg font-semibold text-white">MENSAJE:</label>
-                            <textarea 
-                                name="Mensaje" 
-                                id="mensaje" 
-                                cols="30" 
-                                rows="5" 
-                                class="w-full border-2 border-white bg-transparent text-white focus:border-b-blue-500 focus:outline-none resize-none"
-                            ></textarea>
+                        <div class=" flex flex-row">
+                            <li class=" flex flex-row items-end w-full">
+                                <label for="nombre" class="text-lg font-semibold text-white">CP:</label>
+                                <input type="text" name="Nombre" id="nombre"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            </li>
+                            <li class=" flex flex-row items-end w-full">
+                                <label for="nombre" class="text-lg font-semibold text-white">TEL:</label>
+                                <input type="text" name="Nombre" id="nombre"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            </li>
+                        </div>
+                        <li class=" flex flex-row items-end">
+                            <label for="nombre" class="text-lg font-semibold text-white">CORREO:</label>
+                            <input type="text" name="Nombre" id="nombre"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>
                     </ul>
-                    
+
                 </form>
                 <div class="flex justify-end">
-                    <button class=" w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
+                    <button class=" w-30 mt-4 px-8 py-1 bg-[#C7CBC6] text-[#123240] font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
                 </div>
             </div>
         </div>

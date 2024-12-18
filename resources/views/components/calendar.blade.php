@@ -27,8 +27,12 @@
                     @foreach(range(1, 12) as $month)
                         <td class="border border-[#23383E]">
                             @if(isset($events[$month][$week]))
-                                <div class="bg-[#23383E] text-white p-1 rounded">
-                                    {{ $events[$month][$week] }}
+                                <div class="flex flex-wrap gap-1 justify-center">
+                                    @foreach($events[$month][$week] as $event)
+                                        <div class="bg-[#23383E] text-white p-1 rounded w-52">
+                                            {{ $event }}
+                                        </div>
+                                    @endforeach
                                 </div>
                             @endif
                         </td>

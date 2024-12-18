@@ -49,10 +49,10 @@
         </div>
 
         <div class="absolute inset-y-0 right-0 flex items-center mr-28 w-48 gap-4">
-            <a href="">
+            <a href="https://www.instagram.com/pointerclubespana/">
                 <img src="{{ asset('svg/navbar/Instagram.svg') }}" alt="Instagram" class="w-7">
             </a>
-            <a href="">
+            <a href="https://www.facebook.com/pointerclubspain/">
                 <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Facebook" class="w-7">
             </a>
             <a href="{{ route('login') }}">
@@ -66,10 +66,11 @@
 
     <!-- Menú de navegación en escritorio -->
     <div class="w-full flex justify-center bg-AzulPrimario relative h-12">
-        <a href="{{ route('Inicio') }}">
-            <img src="{{ asset('svg/navbar/Logo.svg') }}" alt="Logo del sitio" class="w-28 absolute left-52 top-1/2 -translate-y-1/2">
-        </a>
-
+        <div class="">
+            <a href="{{ route('Inicio') }}">
+                <img src="{{ asset('svg/navbar/Logo.svg') }}" alt="Logo del sitio" class=" absolute w-28 left-32 top-1/2 -translate-y-1/2">
+            </a>
+        </div>
         <ul class="flex items-center gap-4 text-white">
             <li><a href="{{ route('elPointer') }}" class=" hover:underline ">El Pointer</a></li>
             <li class="relative group">

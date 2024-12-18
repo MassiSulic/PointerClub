@@ -11,7 +11,7 @@ Route::view('elPointer', 'elPointer')->name('elPointer');
 
 
 Route::get('Concursos', [PruebaController::class, 'index'])->name('Concursos');
-Route::post('Concursos', [PruebaController::class, 'inscribir'])->name('Concursos');
+Route::post('Concursos', [PruebaController::class, 'inscribir'])->name('inscribir.concursos');
 
 
 Route::view('Inscripciones', 'Inscripciones')->name('Inscripciones');

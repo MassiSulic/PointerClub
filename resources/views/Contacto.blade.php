@@ -10,34 +10,33 @@
             <img src="{{ asset('svg/home/Tarjeta.svg') }}" alt="Icono 1" class="w-28 h-28">
             <h3 class="mt-4 text-lg w-60 ">HAZTE SOCIO y recibe más beneficios.</h3>
             <button class="mt-4 px-2 py-1 bg-[#C7CBC6] text-black hover:bg-[#616261] border-black border-2">
-                MÁS INFO
+                <a href="{{ route('Socios') }}">MÁS INFO</a>
+                
             </button>
         </div>
 
         <div class=" p-4 bg-MarronSecundario lg:mx-48 sm:mx-20 mx-8">
-            <form action="" class="flex flex-col space-y-6 mx-auto">
-                <ul class="space-y-4">
-                    <li class=" flex flex-row items-center gap-4">
+            <form action="" class="flex flex-col mx-auto">
+                <ul class="">
+                    <li class=" flex flex-row items-end">
                         <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
-                        <input type="text" name="Nombre" id="nombre" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <input type="text" name="Nombre" id="nombre"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li class=" flex flex-row items-center gap-4">
-                        <label for="telefono" class="block text-lg font-semibold text-white">TEL:</label>
-                        <input type="tel" name="Telefono" id="telefono" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                    <li class=" flex flex-row items-end">
+                        <label for="nombre" class="text-lg font-semibold text-white">TEL:</label>
+                        <input type="text" name="Nombre" id="nombre"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li class=" flex flex-row items-center gap-4">
-                        <label for="email" class="block text-lg font-semibold text-white">CORREO:</label>
-                        <input type="email" name="Email" id="email" class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                    <li class=" flex flex-row items-end">
+                        <label for="nombre" class="text-lg font-semibold text-white">CORREO:</label>
+                        <input type="text" name="Nombre" id="nombre"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
-                    <li class="flex flex-row items-start gap-4">
-                        <label for="mensaje" class="block text-lg font-semibold text-white">MENSAJE:</label>
-                        <textarea 
-                            name="Mensaje" 
-                            id="mensaje" 
-                            cols="30" 
-                            rows="5" 
-                            class="w-full border-2 border-white bg-transparent text-white focus:border-b-blue-500 focus:outline-none resize-none"
-                        ></textarea>
+                    <li class=" flex flex-row items-end">
+                        <label for="nombre" class="text-lg font-semibold text-white">MENSAJE:</label>
+                        <input type="text" name="Nombre" id="nombre"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
                 </ul>
                 <div class="flex justify-end">
