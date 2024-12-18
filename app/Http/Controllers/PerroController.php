@@ -6,17 +6,20 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Perro;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PruebaInscripta;
 
 class PerroController extends Controller
 {
     public function index()
     {
         $perros = Perro::with(['propietario'])
-            ->where('user_id', Auth::user()->id) // Filtrar por usuario autenticado
-            ->paginate(10);
+        ->where('user_id', Auth::user()->id) // Filtrar por usuario autenticado
+        ->paginate(10);
 
-        // Cambia la vista al dashboard
-        return view('dashboard', compact('perros'));
+    $inscripciones = PruebaInscripta::where('user_id', Auth::user()->id)->paginate(10);
+
+    // Cambia la vista al dashboard
+    return view('dashboard', compact('perros', 'inscripciones'));
     }
 
 

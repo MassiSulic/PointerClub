@@ -4,12 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerroController;
 use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\InscripcionController;
 
 // Definición de todas las vistas que responden al método GET + Rutas con nombre
 Route::view('/', 'Inicio')->name('Inicio');
 Route::view('elPointer', 'elPointer')->name('elPointer');
-Route::get('Concursos', [PruebaController::class, 'index'])->name('Concursos');
-Route::view('Inscripciones', 'Inscripciones')->name('Inscripciones');
+Route::view('Concursos', 'Concursos')->name('Concursos');
+Route::get('Inscripciones', [PruebaController::class, 'index'])->name('Inscripciones');
 Route::view('Resultados', 'Resultados')->name('Resultados');
 Route::view('Socios', 'Socios')->name('Socios');
 Route::view('Actualidad', 'Actualidad')->name('Actualidad');
@@ -35,7 +36,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     // Rutas para el recurso 'perros'
     Route::resource('perros', PerroController::class);
-    //Route::get('/perros/{perro}/edit', [PerroController::class, 'edit'])->name('perros.edit');
+    
+    // Rutas para inscripciones
+    Route::post('/confirmar', [InscripcionController::class, 'confirmar'])->name('confirmar');
+    Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet');
+    Route::post('/pagar-despues', [InscripcionController::class, 'pagarDespues'])->name('pagar-despues');
+    Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 });
 
 require __DIR__.'/auth.php';
