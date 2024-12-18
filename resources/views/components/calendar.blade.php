@@ -21,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(range(1, 6) as $week)
+            @foreach(range(1, 31) as $week)
                 <tr>
                     <td class="border border-[#23383E] py-2">{{ $week }}</td>
                     @foreach(range(1, 12) as $month)

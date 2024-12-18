@@ -8,7 +8,12 @@ use App\Http\Controllers\PruebaController;
 // Definición de todas las vistas que responden al método GET + Rutas con nombre
 Route::view('/', 'Inicio')->name('Inicio');
 Route::view('elPointer', 'elPointer')->name('elPointer');
+
+
 Route::get('Concursos', [PruebaController::class, 'index'])->name('Concursos');
+Route::post('Concursos', [PruebaController::class, 'inscribir'])->name('Concursos');
+
+
 Route::view('Inscripciones', 'Inscripciones')->name('Inscripciones');
 Route::view('Resultados', 'Resultados')->name('Resultados');
 Route::view('Socios', 'Socios')->name('Socios');
