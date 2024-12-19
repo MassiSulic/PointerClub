@@ -23,7 +23,7 @@ class PruebaController extends Controller
         $perros = Perro::where('user_id', Auth::id())->get();
 
         // Pasar ambas variables a la vista
-        return view('Concursos', compact('pruebas', 'perros'));
+        return view('Inscripciones', compact('pruebas', 'perros'));
     }
 
     /**
@@ -38,7 +38,7 @@ class PruebaController extends Controller
         $perros = Perro::where('user_id', Auth::id())->get();
 
         // Pasar ambas variables a la vista
-        return view('Concursos', compact('pruebas', 'perros'));
+        return view('Inscripciones', compact('pruebas', 'perros'));
     }
 
     /**

@@ -4,24 +4,26 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePruebasInscriptasTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('pruebas_inscriptas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id'); // Agregar esta línea
+            $table->string('prueba');
+            $table->string('fecha', 255); // Columna 'fecha' (varchar(255))
+            $table->string('perro');
+            $table->integer('valor');
             $table->timestamps();
+
+            // Agregar la clave foránea
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('pruebas_inscriptas');
     }
-};
+}
