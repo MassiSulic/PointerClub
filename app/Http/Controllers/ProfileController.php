@@ -46,6 +46,7 @@ class ProfileController extends Controller
             'identificacion' => 'required|string|max:12',
             'numero_socio' => 'nullable|string|max:10',
             'direccion' => 'required|string|max:255',
+            'municipio' => 'required|string|max:100',
             'region' => 'required|string|max:100',
             'pais' => 'required|string|max:100',
             'telefono' => 'required|string|max:20',

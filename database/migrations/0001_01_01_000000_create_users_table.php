@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('identificacion', 12)->index(); // varchar(12)
             $table->string('numero_socio', 10)->nullable(); // varchar(10) NULL
             $table->string('direccion', 50); // varchar(50)
+            $table->string('municipio', 50); // varchar(50)
             $table->string('region', 20); // varchar(20)
             $table->string('pais', 20); // varchar(20)
             $table->string('telefono', 20); // varchar(20)

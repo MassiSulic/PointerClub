@@ -3,6 +3,7 @@
         <thead>
             <tr class="bg-gray-100">
                 <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre del perro</th>
+                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre del propietario</th>
                 <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Nombre del conductor</th>
                 <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Raza</th>
                 <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Sexo</th>
@@ -17,6 +18,7 @@
             @foreach($perros as $perro)
                 <tr>
                     <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $perro->nombre_perro }}</td>
+                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $perro->propietario }}</td>
                     <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $perro->conductor }}</td>
                     <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $perro->raza }}</td>
                     <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $perro->sexo }}</td>

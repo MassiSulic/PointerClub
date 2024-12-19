@@ -15,13 +15,17 @@
                 </thead>
                 <tbody>
                     @foreach($inscripciones as $inscripcion)
-                        <tr>
-                            <td class="px-4 py-2 border-b text-center">{{ $inscripcion['prueba'] }}</td>
-                            <td class="px-4 py-2 border-b text-center">{{ $inscripcion['fecha'] }}</td>
-                            <td class="px-4 py-2 border-b text-center">{{ $inscripcion['perro'] }}</td>
-                            <td class="px-4 py-2 border-b text-center">{{ $inscripcion['valor'] }} euros</td>
-                        </tr>
-                    @endforeach
+                    @php
+                        $partesPrueba = explode(' - ', $inscripcion['prueba']);
+                        $pruebaSinFecha = $partesPrueba[0] . ' - ' . $partesPrueba[1];
+                    @endphp
+                    <tr>
+                        <td class="px-4 py-2 border-b text-center">{{ $pruebaSinFecha }}</td>
+                        <td class="px-4 py-2 border-b text-center">{{ $inscripcion['fecha'] }}</td>
+                        <td class="px-4 py-2 border-b text-center">{{ $inscripcion['perro'] }}</td>
+                        <td class="px-4 py-2 border-b text-center">{{ $inscripcion['valor'] }} euros</td>
+                    </tr>
+                @endforeach
                     <tr>
                         <td colspan="3" class="px-4 py-2 border-b text-right font-bold">Total:</td>
                         <td class="px-4 py-2 border-b text-center font-bold">{{ $total }} euros</td>

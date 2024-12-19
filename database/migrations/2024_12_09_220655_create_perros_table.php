@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index(); // Índice
 
             // Información del perro
+            $table->string('propietario', 255); // varchar(255)
             $table->string('conductor', 255); // varchar(255)
             $table->unsignedBigInteger('chip')->index(); // bigint(20) UNSIGNED con índice
             $table->unsignedInteger('loe')->index(); // int(10) UNSIGNED con índice

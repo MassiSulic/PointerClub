@@ -18,7 +18,7 @@
 
         <!-- Identificación -->
         <div class="mt-4">
-            <x-input-label for="identificacion" :value="__('Identificación')" />
+            <x-input-label for="identificacion" :value="__('DNI / Cedula de identidad / Pasaporte')" />
             <x-text-input id="identificacion" class="block mt-1 w-full" type="text" name="identificacion" :value="old('identificacion')" required />
             <x-input-error :messages="$errors->get('identificacion')" class="mt-2" />
         </div>
@@ -37,9 +37,16 @@
             <x-input-error :messages="$errors->get('direccion')" class="mt-2" />
         </div>
 
+        <!-- Municipio -->
+        <div class="mt-4">
+            <x-input-label for="municipio" :value="__('Municipio')" />
+            <x-text-input id="municipio" class="block mt-1 w-full" type="text" name="municipio" :value="old('municipio')" required />
+            <x-input-error :messages="$errors->get('municipio')" class="mt-2" />
+        </div>
+
         <!-- Región -->
         <div class="mt-4">
-            <x-input-label for="region" :value="__('Región')" />
+            <x-input-label for="region" :value="__('Región / Provincia')" />
             <x-text-input id="region" class="block mt-1 w-full" type="text" name="region" :value="old('region')" required />
             <x-input-error :messages="$errors->get('region')" class="mt-2" />
         </div>

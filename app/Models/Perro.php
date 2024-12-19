@@ -15,6 +15,7 @@ class Perro extends Model
 
     protected $fillable = [
         'user_id',
+        'propietario',
         'conductor',
         'chip', //hacer obligatorio
         'loe', //hacer obligatorio

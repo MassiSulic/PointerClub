@@ -28,6 +28,7 @@ class User extends Authenticatable
          'identificacion',
          'numero_socio',
          'direccion',
+         'municipio',
          'region',
          'pais',
          'telefono',

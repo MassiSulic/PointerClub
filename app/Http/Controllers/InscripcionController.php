@@ -19,7 +19,6 @@ class InscripcionController extends Controller
 
 
 
-
     public function pagarDespues(Request $request)
     {
         $inscripciones = json_decode($request->input('inscripciones'), true);

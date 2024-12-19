@@ -40,6 +40,7 @@ class PerroController extends Controller
             'pais' => 'required|string|max:20',
             'cartilla' => 'nullable|numeric',
             'conductor' => 'required|string|max:50',
+            'propietario' => 'required|string|max:50',
         ], [
             'chip.required' => 'El número de chip es obligatorio.',
             'chip.numeric' => 'El número de chip debe ser numérico.',
@@ -49,6 +50,7 @@ class PerroController extends Controller
             'sexo.required' => 'El sexo del perro es obligatorio.',
             'pais.required' => 'El país es obligatorio.',
             'conductor.required' => 'El nombre del conductor es obligatorio.',
+            'propietario.required' => 'El nombre del conductor es obligatorio.',
         ]);
 
         // Asignar el user_id al usuario autenticado
@@ -75,23 +77,6 @@ class PerroController extends Controller
     }
 
 
-    // public function update(Request $request, Perro $perro)
-    // {
-    //     $request->validate([
-    //         'chip' => 'required|numeric',
-    //         'loe' => 'required|numeric',
-    //         'nombre_perro' => 'required|string|max:50',
-    //         'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon','Setter Irlandés',
-    //         'sexo' => 'required|in:Macho,Hembra',
-    //         'pais' => 'required|string|max:20',
-    //         'conductor' => 'required|string|max:50',
-    //     ]);
-
-    //     $perro->update($request->all());
-
-    //     return redirect()->route('perros.index')->with('success', 'Perro actualizado con éxito.');
-    // }
-
     public function update(Request $request, $id)
 {
     $request->validate([
@@ -102,6 +87,7 @@ class PerroController extends Controller
         'sexo' => 'required|in:Macho,Hembra',
         'pais' => 'required|string|max:20',
         'conductor' => 'required|string|max:50',
+        'propietario' => 'required|string|max:50',
     ]);
 
     // Encontrar el perro y validar pertenencia
