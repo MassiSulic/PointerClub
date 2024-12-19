@@ -1,6 +1,6 @@
 <x-layout>
     <div class="mt-48 px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col space-y-6 lg:mx-72 sm:mx-24">
+        <div class="flex flex-col space-y-6 lg:mx-64 sm:mx-24">
             <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser socio</strong> del club?</h1>
             <p>
                 <strong>Completa el siguiente formulario</strong>; una vez recibida la solicitud el Pointer Club Español iniciará los trámites correspondientes y le comunicará la resolución de
@@ -68,7 +68,7 @@
         <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser socio</strong> del club?</h1>
 
         <p class=" pt-2">
-            <strong>- Descuento en las inscripciones</strong> (entre 10 y 15%).<br>
+            <strong>- Descuento en las inscripciones</strong> (5€).<br>
             <strong>- Informe anual</strong> (digital y gráfico).<br>
             - Tarjetas de <strong>descuento en productos de patrocinadores.</strong>
             (ARION U OTRO, ROPA INDUMENTARIA)<br>

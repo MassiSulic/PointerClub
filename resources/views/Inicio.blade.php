@@ -4,9 +4,9 @@
         <div class="relative h-screen bg-cover bg-center flex justify-end items-center"
             style="background-image: url({{ asset('image/home/escritorio-2.jpg') }});">
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-            <div class="text-BlancoTerciario w-1/4 z-10 mr-36 h-screen flex flex-col">
+            <div class="text-BlancoTerciario z-10 lg:mr-36 lg:text-left mx-auto text-center h-screen flex flex-col">
                 <div class="flex-grow flex items-center">
-                    <h1 class="text-5xl">La naturaleza se inclina ante su arte.</h1>
+                    <h1 class="text-5xl">La naturaleza<br> se inclina<br> ante su arte.</h1>
                 </div>
                 <p class="text-sm mb-4">ph. Milena Oleszczuk</p>
             </div>
@@ -57,25 +57,25 @@
                     MÁS INFO
                 </button>
             </div>
-            <div class="w-full md:w-1/2 h-64 md:h-full">
-                <div class="bg-cover bg-right h-full"
-                    style="background-image: url({{ asset('image/home/Recurso-8.jpg') }}); min-height: 600px;"></div>
+            <div class="w-full md:w-1/2 h-[300px] md:h-[600px]">
+                <div class="h-full bg-cover bg-right" style="background-image: url({{ asset('image/home/Recurso-8.jpg') }});"></div>
             </div>
+            
         </div>
 
-        <div class=" h-96 bg-BlancoTerciario"></div>
+        <div class=" h-24 bg-BlancoTerciario"></div>
 
         <div class=" text-BlancoTerciario">
             <div class="grid grid-cols-1 lg:grid-cols-2 bg-MarronSecundario">
                 <!-- Imagen del perro -->
                 <div class="bg-cover bg-top h-full"
-                    style="background-image: url({{ asset('image/home/escritorio-4.jpg') }}); min-height: 600px;"></div>
+                    style="background-image: url({{ asset('image/home/escritorio-4.jpg') }}); min-height: 300px;"></div>
 
                 <!-- Contenido del evento -->
                 <div class="space-y-4 pb-8">
-                    <h1 class="text-3xl font-bold text-white bg-AzulPrimario p-8 pl-20">Próximo CONCURSO.</h1>
+                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">Próximo CONCURSO.</h1>
                     <!-- Logos de clubes -->
-                    <div class="flex items-center justify-center gap-4 py-8">
+                    <div class="flex flex-wrap items-center justify-center gap-4 py-8">
                         <img src="{{ asset('svg/home/Mesa de trabajo 29.svg') }}" alt="icono-1" class="h-24">
                         <img src="{{ asset('svg/home/arion.psd@150x.png') }}" alt="icono-2" class="h-16">
                         <img src="{{ asset('svg/home/inMRvu.tif@150x.png') }}" alt="icono-3" class="h-20">
@@ -83,15 +83,15 @@
                         <img src="{{ asset('svg/home/Recurso 6@150x.png') }}" alt="icono-3" class="h-20">
                     </div>
 
-                    <h2 class=" text-xl font-semibold pl-20">CAMPEONATO SOBRE PERDIZ<br>
+                    <h2 class=" text-xl font-semibold lg:pl-20 lg:text-left text-center">CAMPEONATO SOBRE PERDIZ<br>
                         SALVAJE DE MONTAÑA
                     </h2>
                     <span
-                        class="text-2xl font-semibold text-BlancoTerciario bg-AzulPrimario px-5 rounded-full ml-20 ">SIERRA DE AZUAGA 2024</span>
+                        class="text-2xl font-semibold text-BlancoTerciario bg-AzulPrimario px-5 rounded-full lg:ml-20 lg:text-left text-center block lg:inline ">SIERRA DE AZUAGA 2024</span>
 
                     <!-- Fechas y ubicación -->
-                    <div class="flex justify-start pl-20 gap-8 py-4">
-                        <div class="flex items-start space-x-2">
+                    <div class="flex lg:justify-start justify-center lg:pl-20  gap-8 py-4">
+                        <div class="flex items-center space-x-2">
                             <img src="{{ asset('svg/home/pointerhorario.svg') }}" alt="icono-4" class=" h-12">
                             <p>
                                 <span class="font-bold">11 y 12 ENE.</span>
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Concentración y contacto -->
-                    <div class=" pl-20">
+                    <div class=" lg:pl-20 lg:text-left text-center">
                         <h3 class="text-lg font-bold text-AzulPrimario">CONCENTRACIÓN</h3>
                         <p>08.30 H, "Bar El Cazador".</p>
                     </div>
@@ -115,15 +115,18 @@
                     <h3 class="text-lg pl-20 text-AzulPrimario"><strong>699 939241</strong> (Rafael Fuentes)</h3>
 
                     <!-- Botón -->
-                    <button
-                        class="my-4 ml-20 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-2 border-[#8E6E53] rounded ">
+                    <div class=" flex justify-center lg:justify-start">
+                        <button
+                        class="my-4 lg:ml-20 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-2 border-[#8E6E53] rounded ">
                         MÁS INFO
                     </button>
+                    </div>
+                    
                 </div>
             </div>
 
             <!-- Patrocinadores -->
-            <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 pl-20">
+            <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 lg:pl-20">
                 <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7">
                 <img src="{{ asset('svg/home/Mesa de trabajo 36.svg') }}" alt="icono-5" class="h-14">
                 <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14">
