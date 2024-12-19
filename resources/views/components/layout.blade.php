@@ -21,9 +21,9 @@
     @include('partials.footer')
     @vite('resources/js/app.js')
 
-    <div class=" fixed z-50 right-8 bottom-12">
+    <div class=" fixed z-50 right-8 bottom-12 bg-BlancoTerciario rounded-full p-3">
         <a href="" class="">
-            <img src="{{ asset('svg/footer/pointerwhastapp.svg') }}" alt="WhatsApp" class=" w-16">
+            <img src="{{ asset('svg/footer/pointerwhastapp.svg') }}" alt="WhatsApp" class=" w-12">
         </a>
     </div>
     

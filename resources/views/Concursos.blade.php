@@ -7,8 +7,7 @@
             </div>
 
             <div class=" p-4">
-                <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser
-                        socio</strong> del club?</h1>
+                <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">Concurso</h1>
 
                 <div class=" w-full ">
                     <form action="" class="flex flex-col space-y-6 pl-4 py-4 mx-auto">
@@ -86,8 +85,7 @@
         </div>
 
         <div class=" p-4">
-            <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser
-                    socio</strong> del club?</h1>
+            <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">Concurso</h1>
 
             <div class=" w-full ">
                 <form action="" class="flex flex-col space-y-6 pl-4 py-4 mx-auto">
