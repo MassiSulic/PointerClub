@@ -37,28 +37,32 @@
                     Nueva Inscripción +
                     </button>
                     
-                    <table class="min-w-full bg-white border border-gray-200">
+                    <table class="table-auto w-full border-collapse border border-gray-300">
                         <thead>
-                            <tr>
-                                <th class="px-4 py-2 border-b">Prueba</th>
-                                <th class="px-4 py-2 border-b">Fecha</th>
-                                <th class="px-4 py-2 border-b">Perro</th>
-                                <th class="px-4 py-2 border-b">Valor</th>
-                                <th class="px-4 py-2 border-b">Acciones</th>
+                            <tr class="bg-gray-100">
+                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Prueba</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Fecha</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Perro</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Valor</th>
+                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-gray-200">
                             @foreach($inscripciones as $inscripcion)
+                                @php
+                                    $partesPrueba = explode(' - ', $inscripcion->prueba);
+                                    $pruebaSinFecha = $partesPrueba[0] . ' - ' . $partesPrueba[1];
+                                @endphp
                                 <tr>
-                                    <td class="px-4 py-2 border-b text-center">{{ $inscripcion->prueba }}</td>
-                                    <td class="px-4 py-2 border-b text-center">{{ $inscripcion->fecha }}</td>
-                                    <td class="px-4 py-2 border-b text-center">{{ $inscripcion->perro }}</td>
-                                    <td class="px-4 py-2 border-b text-center">{{ $inscripcion->valor }} euros</td>
-                                    <td class="px-4 py-2 border-b text-center">
-                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline">
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $pruebaSinFecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->fecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->perro }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->valor }} euros</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 space-x-2">
+                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Eliminar</button>
+                                            <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600">Eliminar</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -139,7 +143,7 @@
 
 
 
-<!-- Modal para Crear/Editar -->
+<!-- Modal para Crear/Editar Perros -->
 <div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
     <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative">
         <!-- Título del Modal -->
@@ -147,7 +151,7 @@
 
         <!-- Botón de cerrar -->
         <button id="modal-close-btn" 
-                class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 text-4xl">
             &times;
         </button>
 
@@ -162,6 +166,14 @@
                 <div>
                     <label for="nombre_perro" class="block text-sm font-medium text-gray-700">Nombre del perro</label>
                     <input type="text" id="nombre_perro" name="nombre_perro" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                           required>
+                </div>
+
+                <!-- Campo: Nombre del propietario -->
+                <div>
+                    <label for="propietario" class="block text-sm font-medium text-gray-700">Nombre del propietario</label>
+                    <input type="text" id="propietario" name="propietario" 
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                            required>
                 </div>
@@ -268,6 +280,8 @@
         document.getElementById('perro-id').value = '';
         document.getElementById('modal-title').innerText = 'Añadir Perro';
         document.getElementById('nombre_perro').value = '';
+        document.getElementById('propietario').value = '';
+        document.getElementById('conductor').value = '';
         document.getElementById('raza').value = '';
         document.getElementById('sexo').value = '';
         document.getElementById('chip').value = '';
@@ -282,7 +296,7 @@
     
         // Abrir el modal para editar un perro existente
         document.querySelectorAll('.edit-perro-btn').forEach(button => {
-    button.addEventListener('click', function () {
+        button.addEventListener('click', function () {
         const id = this.dataset.id;
 
         // Limpiar el formulario y campo _method
@@ -300,6 +314,7 @@
 
                 document.getElementById('perro-id').value = id;
                 document.getElementById('nombre_perro').value = data.nombre_perro;
+                document.getElementById('propietario').value = data.propietario;
                 document.getElementById('conductor').value = data.conductor;
                 document.getElementById('raza').value = data.raza;
                 document.getElementById('sexo').value = data.sexo;
