@@ -13,8 +13,8 @@
     </div>
 
     <!-- Menú desplegable (mobile y tablet) -->
-    <div id="mobile-menu" class="hidden bg-AzulPrimario text-white p-4">
-        <ul class="space-y-2 text-sm">
+    <div id="mobile-menu" class="hidden bg-AzulPrimario text-white p-4 h-screen">
+        <ul class="space-y-4 text-lg">
             <li><a href="{{ route('elPointer') }}" class="block hover:underline">El Pointer</a></li>
             <li class="relative">
                 <button id="club-mobile-button" class="flex items-center justify-between w-full hover:underline">
