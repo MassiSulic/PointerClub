@@ -39,7 +39,8 @@ class InscripcionController extends Controller
         $request->session()->put('inscripciones', $inscripciones);
         $request->session()->put('total', $total);
     
-        return redirect()->route('confirmarGet')->with('success', 'La inscripción se realizó con éxito.');
+        // return redirect()->route('confirmarGet')->with('success', 'La inscripción se realizó con éxito.');
+        return redirect()->route('confirmarGet')->with('showPopup', true);
     }
 
     public function confirmarGet(Request $request)

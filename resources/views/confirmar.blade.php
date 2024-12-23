@@ -34,19 +34,47 @@
             </table>
         </div>
 
-        @if(session('success'))
+        {{-- @if(session('success'))
             <div class="mt-4 text-center">
                 <p class="text-green-500 font-bold">{{ session('success') }}</p>
                 <a href="{{ route('dashboard') }}" class="bg-blue-500 text-white py-2 px-4 rounded mt-2 inline-block">Ver inscripciones</a>
             </div>
-        @endif
+        @endif --}}
 
         <div class="flex justify-end mt-4 w-11/12 mx-auto mb-4">
-            <form id="pagarDespuesForm" action="{{ route('pagar-despues') }}" method="POST">
+            <form id="pagarDespuesForm" action="{{ route('pagar-despues') }}" method="POST" class="mr-2">
                 @csrf
                 <input type="hidden" name="inscripciones" value="{{ json_encode($inscripciones) }}">
-                <button type="submit" class="text-white py-2 px-4 rounded ml-2" style="background-color: #776A54;">Pagar después</button>
-            </form>
+                <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar después</button>
+            </form>               
+                <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
         </div>
     </div>
 </x-layout>
+
+<!-- Modal de Inscripcion Correcta -->
+<div id="inscripcionModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h5 class="text-lg font-bold mb-4">Inscripción</h5>
+        <p>¡La inscripción se realizó correctamente!</p>
+        <div class="mt-4 flex justify-end space-x-2">
+            <a href="{{ route('dashboard') }}#inscripciones" class="bg-blue-500 text-white py-2 px-4 rounded">Ver inscripciones</a>
+            <button id="closeModal" class="bg-blue-500 text-white py-2 px-4 rounded">Aceptar</button>
+        </div>
+    </div>
+</div>
+<!-- Modal de Inscripcion Correcta -->
+
+{{-- Script para mensaje de inscripcion correcta --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('showPopup'))
+            document.getElementById('inscripcionModal').classList.remove('hidden');
+        @endif
+
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('inscripcionModal').classList.add('hidden');
+        });
+    });
+</script>
+{{-- Script para mensaje de inscripcion correcta --}}

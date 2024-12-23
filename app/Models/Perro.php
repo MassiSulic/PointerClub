@@ -17,9 +17,10 @@ class Perro extends Model
         'user_id',
         'propietario',
         'conductor',
-        'chip', //hacer obligatorio
-        'loe', //hacer obligatorio
-        'cartilla',
+        'fecha_nacimiento',
+        'microchip', //hacer obligatorio
+        'libro_de_origenes', //hacer obligatorio
+        'cartilla_de_trabajo',
         'nombre_perro',
         'raza',
         'sexo',

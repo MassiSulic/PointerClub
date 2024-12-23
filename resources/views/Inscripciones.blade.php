@@ -111,7 +111,6 @@
     </div>
 </div>
 
-
     {{-- abre y cierra el modal de inscripciones --}}
     
     

@@ -32,24 +32,25 @@ class PerroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'chip' => 'required|numeric',
-            'loe' => 'required|numeric',
+            'microchip' => 'required|string|max:15',
+            'libro_de_origenes' => 'required|string|max:30',
             'nombre_perro' => 'required|string|max:50',
             'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon','Setter Irlandés',
             'sexo' => 'required|in:Macho,Hembra',
             'pais' => 'required|string|max:20',
-            'cartilla' => 'nullable|numeric',
+            'cartilla_de_trabajo' => 'nullable|numeric',
             'conductor' => 'required|string|max:50',
+            'fecha_nacimiento' => 'required|date',
             'propietario' => 'required|string|max:50',
         ], [
-            'chip.required' => 'El número de chip es obligatorio.',
-            'chip.numeric' => 'El número de chip debe ser numérico.',
-            'loe.required' => 'El número de LOE es obligatorio.',
+            'microchip.required' => 'El número de microchip es obligatorio.',
+            'libro_de_origenes.required' => 'El número de LOE es obligatorio.',
             'nombre_perro.required' => 'El nombre del perro es obligatorio.',
             'raza.required' => 'La raza del perro es obligatoria.',
             'sexo.required' => 'El sexo del perro es obligatorio.',
             'pais.required' => 'El país es obligatorio.',
             'conductor.required' => 'El nombre del conductor es obligatorio.',
+            'fecha_nacimiento.required' => 'La fecha de nacimiento es obligatoria.',
             'propietario.required' => 'El nombre del conductor es obligatorio.',
         ]);
 
@@ -80,8 +81,9 @@ class PerroController extends Controller
     public function update(Request $request, $id)
 {
     $request->validate([
-        'chip' => 'required|numeric',
-        'loe' => 'required|numeric',
+        'fecha_nacimiento' => 'required|date',
+        'microchip' => 'required|string|max:15',
+        'libro_de_origenes' => 'required|string|max:30',
         'nombre_perro' => 'required|string|max:50',
         'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon,Setter Irlandés',
         'sexo' => 'required|in:Macho,Hembra',
