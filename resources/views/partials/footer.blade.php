@@ -28,8 +28,8 @@
         <div class="flex items-center justify-around gap-8 ml-4">
             <div class="flex flex-row gap-4">
                 <a href=""><img src="{{ asset('svg/footer/Mesa de trabajo 43.svg') }}" alt="WhatsApp" class="h-8"></a>
-                <a href="https://www.instagram.com/pointerclubespana/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"><img src="{{ asset('svg/footer/Mesa de trabajo 43_1.svg') }}" alt="Instagram" class="h-8"></a>
-                <a href="https://www.facebook.com/pointerclubspain/?locale=es_ES"><img src="{{ asset('svg/footer/Mesa de trabajo 44.svg') }}" alt="Facebook" class="h-8"></a>
+                <a href="https://www.instagram.com/pointerclubespana/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D" target="_blank"><img src="{{ asset('svg/footer/Mesa de trabajo 43_1.svg') }}" alt="Instagram" class="h-8"></a>
+                <a href="https://www.facebook.com/pointerclubspain/?locale=es_ES" target="_blank"><img src="{{ asset('svg/footer/Mesa de trabajo 44.svg') }}" alt="Facebook" class="h-8"></a>
             </div>
             <div class="flex flex-row items-center gap-4">
                 <img src="{{ asset('svg/home/Mesa de trabajo 34.svg') }}" alt="FCI" class=" h-24 mb-7">
@@ -89,8 +89,8 @@
         <div class="flex justify-center my-12">
             <div class="flex space-x-4">
                 <a href=""><img src="{{ asset('svg/footer/Mesa de trabajo 43.svg') }}" alt="WhatsApp" class="h-10"></a>
-                <a href="https://www.instagram.com/pointerclubespana/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D"><img src="{{ asset('svg/footer/Mesa de trabajo 43_1.svg') }}" alt="Instagram" class="h-10"></a>
-                <a href="https://www.facebook.com/pointerclubspain/?locale=es_ES"><img src="{{ asset('svg/footer/Mesa de trabajo 44.svg') }}" alt="Facebook" class="h-10"></a>
+                <a href="https://www.instagram.com/pointerclubespana/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D" target="_blank"><img src="{{ asset('svg/footer/Mesa de trabajo 43_1.svg') }}" alt="Instagram" class="h-10"></a>
+                <a href="https://www.facebook.com/pointerclubspain/?locale=es_ES" target="_blank"><img src="{{ asset('svg/footer/Mesa de trabajo 44.svg') }}" alt="Facebook" class="h-10"></a>
             </div>
         </div>
 

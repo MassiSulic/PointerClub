@@ -24,7 +24,7 @@
             </p>
 
             <div class="p-4 bg-MarronSecundario text-BlancoTerciario">
-                <p>EAgradecer la labor de todas las entidades colaboradoras, el AYUNTAMIENTO DE FUENTES DE EBRO y la SOCIEDAD DE CAZADORES FUENTES DE EBRO, a nuestro patrocinador, ARION PETFOODS, y especialmente al Delegado en Aragón del Pointer Club Español, Sr. Iván García Calleja, que han
+                <p>Agradecer la labor de todas las entidades colaboradoras, el AYUNTAMIENTO DE FUENTES DE EBRO y la SOCIEDAD DE CAZADORES FUENTES DE EBRO, a nuestro patrocinador, ARION PETFOODS, y especialmente al Delegado en Aragón del Pointer Club Español, Sr. Iván García Calleja, que han
                     hecho posible la celebración y éxito de esta prueba.</p>
             </div>
 

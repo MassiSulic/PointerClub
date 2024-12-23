@@ -49,11 +49,11 @@
         </div>
 
         <div class="absolute inset-y-0 right-0 flex items-center mr-28 w-48 gap-4">
-            <a href="https://www.instagram.com/pointerclubespana/">
-                <img src="{{ asset('svg/navbar/Instagram.svg') }}" alt="Instagram" class="w-7">
+            <a href="https://www.instagram.com/pointerclubespana/" target="_blank">
+                <img src="{{ asset('svg/navbar/Instagram.svg') }}"  alt="Instagram" class="w-7">
             </a>
-            <a href="https://www.facebook.com/pointerclubspain/">
-                <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Facebook" class="w-7">
+            <a href="https://www.facebook.com/pointerclubspain/" target="_blank">
+                <img src="{{ asset('svg/navbar/Facebook.svg') }}"  alt="Facebook" class="w-7">
             </a>
             <a href="{{ route('login') }}">
                 <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class="w-7">
