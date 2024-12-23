@@ -18,11 +18,12 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->index(); // Índice
 
             // Información del perro
-            $table->string('propietario', 255); // varchar(255)
-            $table->string('conductor', 255); // varchar(255)
-            $table->unsignedBigInteger('chip')->index(); // bigint(20) UNSIGNED con índice
-            $table->unsignedInteger('loe')->index(); // int(10) UNSIGNED con índice
-            $table->unsignedInteger('cartilla')->nullable(); // int(10) UNSIGNED NULL
+            $table->string('propietario', 50); // varchar(50)
+            $table->string('conductor', 50); // varchar(50)
+            $table->date('fecha_nacimiento'); // date
+            $table->string('microchip', 15); // varchar(15)
+            $table->string('libro_de_origenes', 30); // varchar(30)
+            $table->string('cartilla_de_trabajo', 30)->nullable(); // int(30) UNSIGNED NULL
             $table->string('nombre_perro', 50); // varchar(50)
 
             // Enumeraciones

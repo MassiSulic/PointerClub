@@ -157,7 +157,7 @@ La prevención se basa en la vacunación
 . La hepatitis vírica canina siempre forma parte de la primera  vacunación de los cachorros y a menudo también de las dosis de recuerdo anuales.
 Muchas Vacunas contra la hepatitis vírica contienen la cepa CAV-2 en lugar de la CAV-1, ya que proporciona una protección cruzada contra ciertas formas de la tos de las perreras y es menos probable que provoque la aparición de edema corneal.
 
-Según la situación particular de su perro, el veterinario escogerá el protocolo más adecuado para sus necesidades.Tener la cartilla de vacunación al día es un requisito obligatorio para asistir a las exposiciones y las residencias caninas.
+Según la situación particular de su perro, el veterinario escogerá el protocolo más adecuado para sus necesidades.Tener la cartilla de trabajo de vacunación al día es un requisito obligatorio para asistir a las exposiciones y las residencias caninas.
 " />
             </div>
         </div>

@@ -35,7 +35,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold mb-4">Inscripciones</h3>
+                    <h3 class="text-lg font-bold mb-4" id="inscripciones">Inscripciones</h3>
 
                     <button id="add-inscripcion-btn" 
                     class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-2">
@@ -191,26 +191,34 @@
                            required>
                 </div>
 
-                <!-- Campo: Chip -->
+                <!-- Campo: Fecha de nacimiento -->
                 <div>
-                    <label for="chip" class="block text-sm font-medium text-gray-700">Chip</label>
-                    <input type="number" id="chip" name="chip" 
+                    <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700">Fecha de nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                           required>
+                </div>
+
+                <!-- Campo: Microchip -->
+                <div>
+                    <label for="microchip" class="block text-sm font-medium text-gray-700">Microchip</label>
+                    <input type="text" id="microchip" name="microchip" 
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                            required>
                 </div>
 
                 <!-- Campo: LOE -->
                 <div>
-                    <label for="loe" class="block text-sm font-medium text-gray-700">LOE</label>
-                    <input type="number" id="loe" name="loe" 
+                    <label for="libro_de_origenes" class="block text-sm font-medium text-gray-700">Libro de origenes</label>
+                    <input type="text" id="libro_de_origenes" name="libro_de_origenes" 
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                            required>
                 </div>
 
-                <!-- Campo: Cartilla -->
+                <!-- Campo: Cartilla de trabajo -->
                 <div>
-                    <label for="cartilla" class="block text-sm font-medium text-gray-700">Cartilla</label>
-                    <input type="number" id="cartilla" name="cartilla" 
+                    <label for="cartilla_de_trabajo" class="block text-sm font-medium text-gray-700">Cartilla de trabajo</label>
+                    <input type="number" id="cartilla_de_trabajo" name="cartilla_de_trabajo" 
                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
@@ -287,11 +295,12 @@
         document.getElementById('nombre_perro').value = '';
         document.getElementById('propietario').value = '';
         document.getElementById('conductor').value = '';
+        document.getElementById('fecha_nacimiento').value = '';
         document.getElementById('raza').value = '';
         document.getElementById('sexo').value = '';
-        document.getElementById('chip').value = '';
-        document.getElementById('loe').value = '';
-        document.getElementById('cartilla').value = '';
+        document.getElementById('microchip').value = '';
+        document.getElementById('libro_de_origenes').value = '';
+        document.getElementById('cartilla_de_trabajo').value = '';
         document.getElementById('pais').value = '';
 
         // Mostrar el modal
@@ -321,11 +330,12 @@
                 document.getElementById('nombre_perro').value = data.nombre_perro;
                 document.getElementById('propietario').value = data.propietario;
                 document.getElementById('conductor').value = data.conductor;
+                document.getElementById('fecha_nacimiento').value = data.fecha_nacimiento;
                 document.getElementById('raza').value = data.raza;
                 document.getElementById('sexo').value = data.sexo;
-                document.getElementById('chip').value = data.chip;
-                document.getElementById('loe').value = data.loe;
-                document.getElementById('cartilla').value = data.cartilla;
+                document.getElementById('microchip').value = data.microchip;
+                document.getElementById('libro_de_origenes').value = data.libro_de_origenes;
+                document.getElementById('cartilla_de_trabajo').value = data.cartilla_de_trabajo;
                 document.getElementById('pais').value = data.pais;
 
                 document.getElementById('modal-title').innerText = 'Editar Perro';
