@@ -4,9 +4,9 @@
             <h3 class=" px-4 py-2 text-3xl border-b-4 border-MarronSecundario">Estándar</h3>
             <div class=" px-4 mt-2">
                 <x-faq-item question="ESTÁNDAR MORFOLÓGICO"
-                    answer="  <embed src='{{ asset('storage/ESTANDAR_MORFOLOGICO_POINTER_FCI.pdf') }}' type='application/pdf' width='100%' height='600px'> " />
+                    answer="  <embed src='{{ asset('storage\uploads\ESTANDAR_MORFOLOGICO_POINTER_FCI.pdf') }}' type='application/pdf' width='100%' height='600px'> " />
                 <x-faq-item question="ESTÁNDAR DE TRABAJO"
-                    answer=" <embed src='{{ asset('storage/ESTANDAR_TRABAJO_POINTER_RSCE.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
+                    answer=" <embed src='{{ asset('storage\uploads\ESTANDAR_TRABAJO_POINTER_RSCE.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
             </div>
         </div>
 
@@ -16,11 +16,11 @@
                     <h3 class=" px-4 py-2 text-3xl border-b-4 border-MarronSecundario">Reglamentos</h3>
                     <div class=" px-4 mt-2">
                         <x-faq-item question="REGLAMENTOS DE TRABAJO. "
-                            answer="<embed src='{{ asset('storage/Reglamento_Perros_Muestra-Retrievers-1.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
+                            answer="<embed src='{{ asset('storage\uploads\Reglamento_Perros_Muestra-Retrievers-1.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                         <x-faq-item question="REGLAMENTO DE LA COPA EUROPA DE CAZA PRÁCTICA"
-                            answer="<embed src='{{ asset('storage/REGLAMENTO_COPA_ESPANA_CAZA_PRACTICA_INTERCLUBES.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
+                            answer="<embed src='{{ asset('storage\uploads\REGLAMENTO_COPA_ESPANA_CAZA_PRACTICA_INTERCLUBES.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                         <x-faq-item question="REGLAMENTO DE JUECES DE PRUEBAS Y EXPOSICIONES"
-                            answer="<embed src='{{ asset('storage/REGLAMENTO_JUECES_MAYO_2024.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
+                            answer="<embed src='{{ asset('storage\uploads\REGLAMENTO_JUECES_MAYO_2024.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                     </div>
                 </div>
             </div>
