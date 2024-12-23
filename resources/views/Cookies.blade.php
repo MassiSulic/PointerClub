@@ -68,11 +68,7 @@
             Estos navegadores están sometidos a actualizaciones o modificaciones, por lo que no podemos garantizar que se ajusten completamente a la versión de su navegador. También puede ser que utilice otro navegador minoritario no contemplado en estos enlaces.
         </p>
 
-        <p>
-            Si está de acuerdo con la política de cookies de VENI BAR haga clic en el botón «Aceptar».
-        </p>
-
-        <div class="container mx-auto p-4">
+        <div class="container mx-auto">
             {{-- <h1 class="text-2xl font-bold mb-4">Política de Cookies</h1> --}}
             <div id="cookies-info"
                 class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
