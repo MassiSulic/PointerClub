@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Perro;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PruebaInscripta;
+use App\Models\Prueba;
 
 class PerroController extends Controller
 {
@@ -16,10 +17,12 @@ class PerroController extends Controller
         ->where('user_id', Auth::user()->id) // Filtrar por usuario autenticado
         ->paginate(10);
 
+        $pruebas = Prueba::all();
+
     $inscripciones = PruebaInscripta::where('user_id', Auth::user()->id)->paginate(10);
 
     // Cambia la vista al dashboard
-    return view('dashboard', compact('perros', 'inscripciones'));
+    return view('dashboard', compact('perros', 'inscripciones', 'pruebas'));
     }
 
 
@@ -32,13 +35,13 @@ class PerroController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'microchip' => 'required|string|max:15',
-            'libro_de_origenes' => 'required|string|max:30',
+            'microchip' => 'required|string|max:16',
+            'libro_de_origenes' => 'required|string|max:16',
             'nombre_perro' => 'required|string|max:50',
             'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon','Setter Irlandés',
             'sexo' => 'required|in:Macho,Hembra',
             'pais' => 'required|string|max:20',
-            'cartilla_de_trabajo' => 'nullable|numeric',
+            'cartilla_de_trabajo' => 'nullable|string|max:30',
             'conductor' => 'required|string|max:50',
             'fecha_nacimiento' => 'required|date',
             'propietario' => 'required|string|max:50',
@@ -82,8 +85,8 @@ class PerroController extends Controller
 {
     $request->validate([
         'fecha_nacimiento' => 'required|date',
-        'microchip' => 'required|string|max:15',
-        'libro_de_origenes' => 'required|string|max:30',
+        'microchip' => 'required|string|max:16',
+        'libro_de_origenes' => 'required|string|max:16',
         'nombre_perro' => 'required|string|max:50',
         'raza' => 'required|in:Pointer,Setter Inglés,Setter Gordon,Setter Irlandés',
         'sexo' => 'required|in:Macho,Hembra',
@@ -102,7 +105,7 @@ class PerroController extends Controller
     // Actualizar los datos
     $perro->update($request->all());
 
-    return redirect()->route('perros.index')->with('success', 'Perro actualizado con éxito.');
+    return redirect()->route('perros.index')->with('success', 'Se actualizó correctamente el perro ' . $perro->nombre_perro);
 }
 
 
@@ -110,7 +113,7 @@ class PerroController extends Controller
     {
         $perro->delete();
 
-        return redirect()->route('perros.index')->with('success', 'Perro eliminado con éxito.');
+        return redirect()->route('perros.index')->with('success', 'Se eliminó correctamente el perro ' . $perro->nombre_perro);
     }
 
   }

@@ -6,10 +6,10 @@
             </h2>
         </x-slot> --}}
     
-        <div class="py-12 h-full">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-12 w-full">
+            <div class="max-w-7xl mx-auto sm:px-1 lg:px-1 w-full">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
+                    <div class="p-6 text-gray-900 w-full">
                         <h3 class="text-lg font-bold mb-4">Gestión de Perros</h3>
     
                         <!-- Botón para añadir un perro -->
@@ -31,25 +31,25 @@
         </div>
     </div>
     
-    <div class="py-6 h-full">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="py-6 h-full w-full">
+        <div class="max-w-7xl mx-auto sm:px-1 lg:px-1 w-full">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-bold mb-4" id="inscripciones">Inscripciones</h3>
+                    <h3 class="text-lg font-bold mb-4" id="inscripciones">Mis Inscripciones</h3>
 
-                    <button id="add-inscripcion-btn" 
+                    {{-- <button id="add-inscripcion-btn" 
                     class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-2">
                     Nueva Inscripción +
-                    </button>
+                    </button> --}}
                     
                     <table class="table-auto w-full border-collapse border border-gray-300">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Prueba</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Fecha</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Perro</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Valor</th>
-                                <th class="border border-gray-300 px-4 py-2 text-left text-sm font-medium text-gray-700">Acciones</th>
+                                <th class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">Prueba</th>
+                                <th class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">Fecha</th>
+                                <th class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">Perro</th>
+                                <th class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">Valor</th>
+                                <th class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -59,12 +59,12 @@
                                     $pruebaSinFecha = $partesPrueba[0] . ' - ' . $partesPrueba[1];
                                 @endphp
                                 <tr>
-                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $pruebaSinFecha }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->fecha }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->perro }}</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800">{{ $inscripcion->valor }} euros</td>
-                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 space-x-2">
-                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline-block">
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">{{ $pruebaSinFecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">{{ $inscripcion->fecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">{{ $inscripcion->perro }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">{{ $inscripcion->valor }} euros</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 space-x-2 text-center">
+                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Seguro de Eliminar esta Inscripción?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600">Eliminar</button>
@@ -186,9 +186,102 @@
                 <!-- Campo: Nombre del conductor -->
                 <div>
                     <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del conductor</label>
-                    <input type="text" id="conductor" name="conductor" 
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                           required>
+                    <select id="conductor" name="conductor" 
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                            required>
+                        <option value="">Seleccione un conductor</option>
+                        @foreach([
+                            'Albamonte, Sandro',
+                            'Aringhieri, Samuele',
+                            'Avril, Davide',
+                            'Bardon, Pascal',
+                            'Boissonnade',
+                            'Boitheauville, Adrien',
+                            'Borrella, Raúl',
+                            'Brun',
+                            'Burlat, Pascal',
+                            'Cassiaut, Pierre',
+                            'Cherubini, Fabio',
+                            'Coulon, Floriant',
+                            'Faissat, Jerome',
+                            'Gaitan, Juan Diego',
+                            'Garcia Vincent',
+                            'Gaspar Jimenez',
+                            'Gatti, Stefano',
+                            'Giovannelli',
+                            'Gómez, Francisco',
+                            'Gutierrez, Alberto',
+                            'Iazzetta, Mauro',
+                            'Inacio, Ricardo',
+                            'Jáñez, José Antonio',
+                            'Laffon, J. M.',
+                            'Latreille',
+                            'Lisarde Sabater, Vicente',
+                            'Locatelli, Roberto',
+                            'Lorca',
+                            'Maymard',
+                            'Medrano, Nacho',
+                            'Merle Des Isles, Antony',
+                            'Mitic, Aleksandar',
+                            'Mora Mota, Jose M.',
+                            'Nicoletti, Nicola',
+                            'Nikolic, Zoran',
+                            'Pezzotta, Giuseppe',
+                            'Pianaro, Graziano',
+                            'Sanz, José Luís',
+                            'Scarpecci, Simone',
+                            'Soddu, Lucca',
+                            'Sohier, Patrick',
+                            'Stankovic, Boban',
+                            'Tenailleau',
+                            'Teulieres, Patrick',
+                            'Trullen, Héctor',
+                            'Balado, Jesus',
+                            'Bischi, Leonardo',
+                            'Blanchet',
+                            'Bounaude',
+                            'Bourgeois, Emmanuel',
+                            'Bruni, Davide',
+                            'Burresi, Leonardo',
+                            'Condado, Yann',
+                            'Dave, Camille',
+                            'Esser',
+                            'Fernández, Pablo',
+                            'Fontecedro, Giuseppe',
+                            'Garcia Verdejo, Antonio',
+                            'Gavrilovic, Dejan',
+                            'Giavarinni, Claudio',
+                            'Ginestet, A.',
+                            'Gonzales, Xavi',
+                            'Hamon, Thierry',
+                            'Imizcoz, Daniel',
+                            'Kartalija, Stanislav',
+                            'Lemos, Rui',
+                            'Lombardi, Rudy',
+                            'López, Juan',
+                            'Maggiolo, Luigi',
+                            'Massias, Patrick',
+                            'Mavridis, Thorodis',
+                            'Moreno, Javier',
+                            'Moretti',
+                            'Nunziata, Andrea',
+                            'Pachis',
+                            'Palomo, Juan Miguel',
+                            'Pezzota, Ernesto',
+                            'Pioppi, Giovanni',
+                            'Richelli, Matteo',
+                            'Roche, Nicolas',
+                            'Sánchez Ropero, Francisco',
+                            'Scudiero, Paolo',
+                            'Simeons, Richard',
+                            'Targuetti, Emannuel',
+                            'Testa, Angelo',
+                            'Traina, Severino',
+                            'Villamiel, César'
+                        ] as $conductor)
+                            <option value="{{ $conductor }}">{{ $conductor }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Campo: Fecha de nacimiento -->
@@ -203,23 +296,27 @@
                 <div>
                     <label for="microchip" class="block text-sm font-medium text-gray-700">Microchip</label>
                     <input type="text" id="microchip" name="microchip" 
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                           required>
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                           maxlength="16" required>
+                    <small>Hasta 16 dígitos numéricos.</small>
                 </div>
 
-                <!-- Campo: LOE -->
+                <!-- Campo: Libro de Orígenes -->
                 <div>
-                    <label for="libro_de_origenes" class="block text-sm font-medium text-gray-700">Libro de origenes</label>
+                    <label for="libro_de_origenes" class="block text-sm font-medium text-gray-700">Libro de Orígenes</label>
                     <input type="text" id="libro_de_origenes" name="libro_de_origenes" 
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                           required>
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        maxlength="16" required>
+                    <small>Máximo 16 caracteres, puede incluir números, letras y el símbolo "/".</small>
                 </div>
 
                 <!-- Campo: Cartilla de trabajo -->
                 <div>
                     <label for="cartilla_de_trabajo" class="block text-sm font-medium text-gray-700">Cartilla de trabajo</label>
-                    <input type="number" id="cartilla_de_trabajo" name="cartilla_de_trabajo" 
-                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                    <input type="text" id="cartilla_de_trabajo" name="cartilla_de_trabajo" 
+                           class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                           maxlength="7">
+                    <small>Máximo 7 caracteres, puede incluir números, letras y el símbolo "/".</small>
                 </div>
 
                 <!-- Campo: Raza -->
@@ -228,6 +325,7 @@
                     <select id="raza" name="raza" 
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                             required>
+                            <option value="">Seleccione la raza</option>    
                         <option value="Pointer">Pointer</option>
                         <option value="Setter Inglés">Setter Inglés</option>
                         <option value="Setter Gordon">Setter Gordon</option>
@@ -241,6 +339,7 @@
                     <select id="sexo" name="sexo" 
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
                             required>
+                        <option value="">Seleccione el sexo</option>
                         <option value="Macho">Macho</option>
                         <option value="Hembra">Hembra</option>
                     </select>
@@ -413,3 +512,54 @@
         window.location.href = "{{ route('Inscripciones') }}";
     });
 </script>
+
+
+{{--  Validacion de input Cartilla de Trabajo --}}
+<script>
+    document.getElementById('cartilla_de_trabajo').addEventListener('input', function (e) {
+        let value = e.target.value.toUpperCase(); // Convertir a mayúsculas
+        const validValue = value.replace(/[^A-Z0-9/]/g, ''); // Eliminar caracteres no permitidos
+        if (value !== validValue) {
+            e.target.value = validValue; // Actualizar el valor del input
+        } else {
+            e.target.value = value; // Actualizar el valor del input
+        }
+        if (validValue.length > 7) {
+            e.target.setCustomValidity('Máximo 7 caracteres, puede incluir números, letras y el símbolo "/".');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+</script>
+{{--  Validacion de input Cartilla de Trabajo --}}
+
+
+
+{{-- Validacion de input de Microchip --}}
+<script>
+    document.getElementById('microchip').addEventListener('input', function (e) {
+        const value = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+        e.target.value = value.slice(0, 16); // Limitar a 16 caracteres
+    });
+</script>
+{{-- Validacion de input de Microchip --}}
+
+
+{{-- Validacion de input de Libro de Orígenes --}}
+<script>
+    document.getElementById('libro_de_origenes').addEventListener('input', function (e) {
+        let value = e.target.value.toUpperCase(); // Convertir a mayúsculas
+        const validValue = value.replace(/[^A-Z0-9/]/g, ''); // Eliminar caracteres no permitidos
+        if (value !== validValue) {
+            e.target.value = validValue; // Actualizar el valor del input
+        } else {
+            e.target.value = value; // Actualizar el valor del input
+        }
+        if (validValue.length > 16) {
+            e.target.setCustomValidity('Máximo 16 caracteres, puede incluir números, letras y el símbolo "/".');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+</script>
+{{-- Validacion de input de Libro de Orígenes --}}

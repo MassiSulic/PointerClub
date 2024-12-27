@@ -37,6 +37,11 @@
             <li><a href="{{ route('Socios') }}" class="block" class=" hover:underline ">Socios</a></li>
             <li><a href="{{ route('Actualidad') }}" class="block" class=" hover:underline ">Actualidad</a></li>
             <li><a href="{{ route('Contacto') }}" class="block" class=" hover:underline ">Contacto</a></li>
+            @auth
+            <li><a href="{{ route('dashboard') }}" class="block bg-white text-[#032D39] hover:bg-[#8E6E53] hover:text-white font-semibold py-0.5 px-2 rounded border border-[#032D39]">Mi Cuenta</a></li>
+            @else
+                <li><a href="{{ route('login') }}" class="block bg-white text-[#032D39] hover:bg-[#8E6E53] hover:text-white font-semibold py-0.5 px-2 rounded border border-[#032D39]">Iniciar Sesión</a></li>
+            @endauth
         </ul>
     </div>
 </nav>
@@ -94,6 +99,11 @@
             <li><a href="{{ route('Socios') }}" class=" hover:underline ">Socios</a></li>
             <li><a href="{{ route('Actualidad') }}" class=" hover:underline ">Actualidad</a></li>
             <li><a href="{{ route('Contacto') }}" class=" hover:underline ">Contacto</a></li>
+            @auth
+            <li><a href="{{ route('dashboard') }}" class="block bg-white text-[#032D39] hover:bg-[#8E6E53] hover:text-white font-semibold py-0.5 px-2 rounded border border-[#032D39]">Mi Cuenta</a></li>
+            @else
+                <li><a href="{{ route('login') }}" class="block bg-white text-[#032D39] hover:bg-[#8E6E53] hover:text-white font-semibold py-0.5 px-2 rounded border border-[#032D39]">Iniciar Sesión</a></li>
+            @endauth
         </ul>
     </div>
 </nav>
