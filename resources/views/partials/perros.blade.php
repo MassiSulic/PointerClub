@@ -37,7 +37,7 @@
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->pais }}</td>
                     <td class="border border-gray-300 text-sm text-gray-800 text-center" style="width: 190px;">
                         <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-                            <button id="inscribirBtn" class="inscribir-perro-btn px-2 py-1 text-white bg-emerald-900 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150" data-id="{{ $perro->id }}" title="Inscribirse a una Prueba">
+                            <button id="inscribirBtn" class="inscribir-perro-btn px-2 py-1 text-white bg-black hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150" data-id="{{ $perro->id }}" title="Inscribirse a una Prueba">
                                 Inscribirse
                             </button>
                             <button class="edit-perro-btn px-2 py-1 text-white bg-blue-500 rounded hover:bg-blue-600" 
