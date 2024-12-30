@@ -112,7 +112,20 @@
 </div>
 
     {{-- abre y cierra el modal de inscripciones --}}
-    
+
+
+    <!-- Modal de Primero debes Añadir un perro -->
+    <div id="mensajeModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+            <h2 class="text-xl font-bold mb-4">Debes añadir un perro primero</h2>
+            <div class="flex justify-end space-x-4">
+                <button id="cancelarBtn" class="bg-gray-500 text-white py-2 px-4 rounded">Cancelar</button>
+                <a href="{{ route('dashboard') }}" class="bg-blue-500 text-white py-2 px-4 rounded">Añadir Perro</a>
+            </div>
+        </div>
+    </div>    
+    <!-- Modal de Primero debes Añadir un perro -->
+
     
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -325,6 +338,30 @@
                 document.getElementById('confirmarInscripcionForm').submit();
             });
         });
+
+        // Abre modal para añadir perro en caso que no tenga perros añadidos
+        const mensajeModal = document.getElementById('mensajeModal');
+        const cancelarBtn = document.getElementById('cancelarBtn');
+        const hayPerros = @json($perros->isNotEmpty());
+
+        inscribirBtn.addEventListener('click', function () {
+        if (hayPerros) {
+            // Mostrar el modal de inscripción
+            modal.classList.remove('hidden');
+        } else {
+            // Mostrar el modal de mensaje
+            mensajeModal.classList.remove('hidden');
+        }
+        });
+
+        cancelarBtn.addEventListener('click', function () {
+            // Ocultar el modal de mensaje
+            mensajeModal.classList.add('hidden');
+        });
+        // Abre modal para añadir perro en caso que no tenga perros añadidos
+
     </script>
+
+    
 
 </x-layout>
