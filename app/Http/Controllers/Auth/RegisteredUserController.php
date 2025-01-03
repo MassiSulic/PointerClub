@@ -39,6 +39,9 @@ class RegisteredUserController extends Controller
             'region' => ['required', 'string', 'max:20'],
             'pais' => ['required', 'string', 'max:20'],
             'telefono' => ['required', 'string', 'max:20'],
+        ], [
+            'email.unique' => 'El correo electrónico ya ha sido registrado.',
+            'identificacion.unique' => 'El número de identificación ya ha sido registrado.',
         ]);
 
         $user = User::create([

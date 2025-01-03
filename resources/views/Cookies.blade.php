@@ -8,11 +8,11 @@
             Las cookies también pueden ser utilizadas para registrar información anónima sobre cómo utiliza el sitio el visitante, como desde qué página web ha accedido o si ha utilizado un banner publicitario para llegar a la misma.
         </p>
 
-        <h2 class="text-xl font-semibold mb-4">¿Por qué VISTAS POINTER utiliza cookies?</h2>
+        <h2 class="text-xl font-semibold mb-4">¿Por qué POINTER utiliza cookies?</h2>
         <p class="mb-6">
             Utilizamos cookies estrictamente necesarias y esenciales para que usted navegue por nuestro sitio web y pueda moverse libremente, utilizar áreas seguras, configurar opciones personalizadas, etc.<br>
             También utilizamos cookies que recogen datos relativos al análisis de uso de la web. Estas se utilizan para ayudar a mejorar la experiencia de uso del usuario y el rendimiento de la página.<br>
-            Esta web también puede tener enlaces de redes sociales (como Facebook, Instagram, Twitter, YouTube, Linkedin). VENI BAR no controla las cookies utilizadas por estos sitios externos. Para más información sobre las cookies de las redes sociales u otras webs ajenas, aconsejamos que revise sus propias políticas de cookies.
+            Esta web también puede tener enlaces de redes sociales (como Facebook, Instagram, Twitter, YouTube, Linkedin). POINTER no controla las cookies utilizadas por estos sitios externos. Para más información sobre las cookies de las redes sociales u otras webs ajenas, aconsejamos que revise sus propias políticas de cookies.
         </p>
 
         <h2 class="text-xl font-semibold mb-4">¿Qué uso damos a los diferentes tipos de cookies?</h2>
