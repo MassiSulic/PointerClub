@@ -78,6 +78,12 @@ class RedsysController extends Controller
             // Crear el formulario de pago con Redsys
             $form = Redsys::createForm();
 
+            // Verificar si el formulario es un array
+        if (!is_array($form)) {
+            Log::error('El formulario de Redsys no tiene el formato esperado:', ['form' => $form]);
+            return back()->with('error', 'El formulario de Redsys no tiene el formato esperado.');
+        }
+
         } catch (\Exception $e) {
             return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
         }
