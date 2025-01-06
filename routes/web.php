@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PerroController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\RedsysController;
 
 // Definición de todas las vistas que responden al método GET + Rutas con nombre
 Route::view('/', 'Inicio')->name('Inicio');
@@ -42,6 +43,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet');
     Route::post('/pagar-despues', [InscripcionController::class, 'pagarDespues'])->name('pagar-despues');
     Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
+
+    // Rutas para Redsys
+    Route::controller(RedsysController::class)->prefix('redsys')->group(function () {
+    Route::post('/notification', 'notification')->name('redsys.notification');
+    Route::get('/success', 'success')->name('redsys.success');
+    Route::get('/failure', 'failure')->name('redsys.failure');
+
+    Route::post('/redsys/process', [RedsysController::class, 'process'])->name('redsys.process');
+});
+
+
 });
 
 require __DIR__.'/auth.php';

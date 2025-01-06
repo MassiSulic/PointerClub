@@ -47,7 +47,12 @@
                 <input type="hidden" name="inscripciones" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar después</button>
             </form>               
+            <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
+                @csrf
+                <input type="hidden" name="total" value="{{ $total }}">
+                <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
+            </form>            
         </div>
     </div>
 </x-layout>
