@@ -45,12 +45,20 @@ class RedsysController extends Controller
         // Datos del pedido
         $amount = $request->input('total'); // Convertimos a céntimos
         $order = time(); // Usamos timestamp como número de pedido
-        $fechas = $request->input('fechas'); // Supongamos que las fechas vienen en un array
-
-        // Unimos las fechas con un espacio entre ellas
-        $fechasConcatenadas = implode(' ', $fechas);
         
+        
+        $fechas = $request->input('fechas');
+
+        // Si no es un array, tratamos de convertirlo a uno
+        if (!is_array($fechas)) {
+            $fechas = explode(',', $fechas); // Suponiendo que las fechas vienen separadas por comas
+        }
+
+        // Ahora unimos las fechas con un espacio entre ellas
+        $fechasConcatenadas = implode(' ', $fechas);
+
         $description = 'Inscripción para la prueba ' . $request->input('nombre_prueba') . ' ' . $fechasConcatenadas;
+
         
         Log::debug('Redsys Payment Parameters:', [
             'amount' => $amount,
