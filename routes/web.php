@@ -50,8 +50,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/success', 'success')->name('redsys.success');
     Route::get('/failure', 'failure')->name('redsys.failure');
 
-    Route::post('/redsys/process', [RedsysController::class, 'process'])->name('redsys.process');
-});
+    // Ruta para procesar el pago y redirigir a Redsys
+    Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
+    Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
+    });
+
 
 
 });

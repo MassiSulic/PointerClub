@@ -75,11 +75,14 @@ class RedsysController extends Controller
             $signature = Redsys::generateMerchantSignature($key);
             Redsys::setMerchantSignature($signature);
 
-            // Redirigir directamente a Redsys
-            $redsysUrl = Redsys::getRedirectUrl();
-            return redirect()->to($redsysUrl);
+            // Crear el formulario de pago con Redsys
+            $form = Redsys::createForm();
+
         } catch (\Exception $e) {
             return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
         }
+
+        // Redirigir a la vista con el formulario
+        return view('redsys.form', compact('form'));
     }
 }
