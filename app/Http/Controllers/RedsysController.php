@@ -35,60 +35,54 @@ class RedsysController extends Controller
     }
 
     public function process(Request $request)
-    {
-        try {
-            $key = config('redsys.key');
-            $merchantCode = config('redsys.merchantcode');
-            $terminal = config('redsys.terminal');
-            $enviroment = config('redsys.enviroment');
+{
+    try {
+        $key = config('redsys.key');
+        $merchantCode = config('redsys.merchantcode');
+        $terminal = config('redsys.terminal');
+        $enviroment = config('redsys.enviroment');
 
-            // Datos del pedido
-            $amount = $request->input('total') * 100; // Convertimos a céntimos
-            $order = time(); // Usamos timestamp como número de pedido
-            $description = 'Compra en Pointer Club Español';
+        // Datos del pedido
+        $amount = $request->input('total') * 100; // Convertimos a céntimos
+        $order = time(); // Usamos timestamp como número de pedido
+        $description = 'Compra en Pointer Club Español';
 
-            Log::debug('Redsys Payment Parameters:', [
-                'amount' => $amount,
-                'order' => $order,
-                'merchantCode' => $merchantCode,
-                'key' => config('redsys.key'),
-                'notification_url' => config('redsys.url_notification')
-            ]);
+        Log::debug('Redsys Payment Parameters:', [
+            'amount' => $amount,
+            'order' => $order,
+            'merchantCode' => $merchantCode,
+            'key' => config('redsys.key'),
+            'notification_url' => config('redsys.url_notification')
+        ]);
 
-            // Configuración de Redsys
-            Redsys::setAmount($amount);
-            Redsys::setOrder($order);
-            Redsys::setMerchantcode($merchantCode);
-            Redsys::setCurrency('978'); // Euros
-            Redsys::setTransactiontype('0'); // Compra normal
-            Redsys::setTerminal($terminal);
-            Redsys::setMethod('T'); // Pago con tarjeta
-            Redsys::setNotification(config('redsys.url_notification'));
-            Redsys::setUrlOk(config('redsys.url_ok'));
-            Redsys::setUrlKo(config('redsys.url_ko'));
-            Redsys::setVersion('HMAC_SHA256_V1');
-            Redsys::setTradeName(config('redsys.tradename'));
-            Redsys::setProductDescription($description);
-            Redsys::setEnviroment($enviroment);
+        // Configuración de Redsys
+        Redsys::setAmount($amount);
+        Redsys::setOrder($order);
+        Redsys::setMerchantcode($merchantCode);
+        Redsys::setCurrency('978'); // Euros
+        Redsys::setTransactiontype('0'); // Compra normal
+        Redsys::setTerminal($terminal);
+        Redsys::setMethod('T'); // Pago con tarjeta
+        Redsys::setNotification(config('redsys.url_notification'));
+        Redsys::setUrlOk(config('redsys.url_ok'));
+        Redsys::setUrlKo(config('redsys.url_ko'));
+        Redsys::setVersion('HMAC_SHA256_V1');
+        Redsys::setTradeName(config('redsys.tradename'));
+        Redsys::setProductDescription($description);
+        Redsys::setEnviroment($enviroment);
 
-            // Generar firma
-            $signature = Redsys::generateMerchantSignature($key);
-            Redsys::setMerchantSignature($signature);
+        // Generar firma
+        $signature = Redsys::generateMerchantSignature($key);
+        Redsys::setMerchantSignature($signature);
 
-            // Crear el formulario de pago con Redsys
-            $form = Redsys::createForm();
+        // Crear el formulario de pago con Redsys
+        $form = Redsys::createForm(); // Este es un string HTML
 
-            // Verificar si el formulario es un array
-        if (!is_array($form)) {
-            Log::error('El formulario de Redsys no tiene el formato esperado:', ['form' => $form]);
-            return back()->with('error', 'El formulario de Redsys no tiene el formato esperado.');
-        }
-
-        } catch (\Exception $e) {
-            return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
-        }
-
-        // Redirigir a la vista con el formulario
-        return view('redsys.form', compact('form'));
+    } catch (\Exception $e) {
+        return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
     }
+
+    // Redirigir a la vista con el formulario (ahora como string)
+    return view('redsys.form', compact('form'));
+}
 }

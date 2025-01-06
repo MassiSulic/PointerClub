@@ -9,12 +9,7 @@
     <h1>Redirigiendo al sistema de pagos...</h1>
 
     <!-- Formulario de pago generado por Redsys -->
-    <form action="https://sis-t.redsys.es/sis/realizarPago" method="POST">
-        @foreach($form as $key => $value)
-            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
-        @endforeach
-        <button type="submit" style="display:none;">Pagar ahora</button>
-    </form>
+    {!! $form !!}  <!-- Aquí insertamos el formulario HTML tal como está -->
 
     <script>
         // Redirigir automáticamente al formulario de pago
