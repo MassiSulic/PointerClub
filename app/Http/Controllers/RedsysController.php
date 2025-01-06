@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Ssheduardo\Redsys\Facades\Redsys;
+use Illuminate\Support\Facades\Log;
 
 class RedsysController extends Controller
 {
@@ -45,6 +46,14 @@ class RedsysController extends Controller
             $amount = $request->input('total') * 100; // Convertimos a céntimos
             $order = time(); // Usamos timestamp como número de pedido
             $description = 'Compra en Pointer Club Español';
+
+            Log::debug('Redsys Payment Parameters:', [
+                'amount' => $amount,
+                'order' => $order,
+                'merchantCode' => $merchantCode,
+                'key' => config('redsys.key'),
+                'notification_url' => config('redsys.url_notification')
+            ]);
 
             // Configuración de Redsys
             Redsys::setAmount($amount);
