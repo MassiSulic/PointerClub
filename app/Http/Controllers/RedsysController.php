@@ -43,10 +43,15 @@ class RedsysController extends Controller
         $enviroment = config('redsys.enviroment');
 
         // Datos del pedido
-        $amount = $request->input('total') * 100; // Convertimos a céntimos
+        $amount = $request->input('total'); // Convertimos a céntimos
         $order = time(); // Usamos timestamp como número de pedido
-        $description = 'Compra en Pointer Club Español';
+        $fechas = $request->input('fechas'); // Supongamos que las fechas vienen en un array
 
+        // Unimos las fechas con un espacio entre ellas
+        $fechasConcatenadas = implode(' ', $fechas);
+        
+        $description = 'Inscripción para la prueba ' . $request->input('nombre_prueba') . ' ' . $fechasConcatenadas;
+        
         Log::debug('Redsys Payment Parameters:', [
             'amount' => $amount,
             'order' => $order,
