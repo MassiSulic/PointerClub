@@ -24,7 +24,7 @@
                             MÁS INFO
                         </button>
                     </a>
-                    
+
                 </div>
                 <!-- Segundo Bloque -->
                 <div class="flex flex-col items-center text-center">
@@ -35,7 +35,7 @@
                             MÁS INFO
                         </button>
                     </a>
-                    
+
                 </div>
                 <!-- Tercer Bloque -->
                 <div class="flex flex-col items-center text-center">
@@ -47,7 +47,7 @@
                             MÁS INFO
                         </button>
                     </a>
-                    
+
                 </div>
             </div>
         </div>
@@ -82,7 +82,8 @@
 
                 <!-- Contenido del evento -->
                 <div class="space-y-4 pb-8">
-                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20" id="proximo-concurso">
+                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20"
+                        id="proximo-concurso">
                         Próximo CONCURSO.</h1>
                     <!-- Logos de clubes -->
                     <div class="flex flex-wrap items-center justify-center gap-4 py-8">

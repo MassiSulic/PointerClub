@@ -27,28 +27,29 @@
         <!-- Recuérdame -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-AzulPrimario shadow-sm focus:bg-AzulPrimario" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Recuérdame') }}</span>
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('¿Olvidaste tu contraseña?') }}
+        <div class="flex items-center justify-around mt-6">
+            <x-primary-button>
+                <a href="{{ route('register') }}">
+                    {{ __('Regístrate aquí') }}
                 </a>
-            @endif
+            </x-primary-button>
+            
 
-            <x-primary-button class="ms-3">
+            <x-primary-button>
                 {{ __('Iniciar sesión') }}
             </x-primary-button>
         </div>
-
-        <!-- Enlace para registrarse -->
-        <div class="text-center mt-4">
-            <a class="underline text-sm text-indigo-600 hover:text-indigo-800 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                {{ __('¿No tienes cuenta? Regístrate aquí') }}
-            </a>
+        <div class=" flex justify-center pt-8 pb-4">
+            @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2" href="{{ route('password.request') }}">
+                    {{ __('¿Olvidaste tu contraseña?') }}
+                </a>
+            @endif
         </div>
     </form>
 </x-guest-layout>
