@@ -16,7 +16,7 @@
                                 class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>
                         <li class=" flex flex-row items-end">
-                            <label for="nombre" class="text-lg font-semibold text-white">APELLIDOS/s:</label>
+                            <label for="nombre" class="text-lg font-semibold text-white">APELLIDO/s:</label>
                             <input type="text" name="Nombre" id="nombre"
                                 class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                         </li>

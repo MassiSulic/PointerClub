@@ -1,10 +1,5 @@
 @include('partials.navigation')
-    <x-app-layout class=" text-gray-900 mt-48">
-        {{-- <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard') }}
-            </h2>
-        </x-slot> --}}
+    <x-app-layout class=" text-white mt-48">
     
         <div class="py-12 w-full">
             <div class="max-w-7xl mx-auto sm:px-1 lg:px-1 w-full">

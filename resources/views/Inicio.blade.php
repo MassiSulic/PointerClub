@@ -72,7 +72,7 @@
 
         </div>
 
-        <div class=" h-24 bg-BlancoTerciario"></div>
+        <div class=" h-24 bg-BlancoTerciario" id="proximo-concurso"></div>
 
         <div class=" text-BlancoTerciario">
             <div class="grid grid-cols-1 lg:grid-cols-2 bg-MarronSecundario">
@@ -82,8 +82,7 @@
 
                 <!-- Contenido del evento -->
                 <div class="space-y-4 pb-8">
-                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20"
-                        id="proximo-concurso">
+                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1>
                     <!-- Logos de clubes -->
                     <div class="flex flex-wrap items-center justify-center gap-4 py-8">

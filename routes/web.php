@@ -27,17 +27,18 @@ Route::view('Delegaciones', 'Delegaciones')->name('Delegaciones');
 Route::view('Criaderos', 'Criaderos')->name('Criaderos');
 Route::view('Galeria', 'Galeria')->name('Galeria');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+// Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PerroController::class, 'index'])->name('dashboard');
-    
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::patch('/profile/update-additional-fields', [ProfileController::class, 'updateAdditionalFields'])->name('profile.update-additional-fields');
-    
+
     // Rutas para el recurso 'perros'
     Route::resource('perros', PerroController::class);
-    
+
     // Rutas para inscripciones
     Route::post('/confirmar', [InscripcionController::class, 'confirmar'])->name('confirmar');
     Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet');
@@ -45,18 +46,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 
     // Rutas para Redsys
-    Route::controller(RedsysController::class)->prefix('redsys')->group(function () {
-    Route::post('/notification', 'notification')->name('redsys.notification');
-    Route::get('/success', 'success')->name('redsys.success');
-    Route::get('/failure', 'failure')->name('redsys.failure');
+    Route::controller(RedsysController::class)
+        ->prefix('redsys')
+        ->group(function () {
+            Route::post('/notification', 'notification')->name('redsys.notification');
+            Route::get('/success', 'success')->name('redsys.success');
+            Route::get('/failure', 'failure')->name('redsys.failure');
 
-    // Ruta para procesar el pago y redirigir a Redsys
-    Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
-    Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
-    });
-
-
-
+            // Ruta para procesar el pago y redirigir a Redsys
+            Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
+            Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
+        });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
