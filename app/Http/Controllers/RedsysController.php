@@ -65,7 +65,8 @@ class RedsysController extends Controller
             'order' => $order,
             'merchantCode' => $merchantCode,
             'key' => config('redsys.key'),
-            'notification_url' => config('redsys.url_notification')
+            'notification_url' => config('redsys.url_notification'),
+            'description' => $description
         ]);
 
         // Configuración de Redsys
