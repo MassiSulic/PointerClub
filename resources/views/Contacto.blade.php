@@ -11,7 +11,6 @@
             <h3 class="mt-4 text-lg w-60 ">HAZTE SOCIO y recibe más beneficios.</h3>
             <button class="mt-4 px-2 py-1 bg-[#C7CBC6] text-black hover:bg-[#616261] border-black border-2">
                 <a href="{{ route('Socios') }}">MÁS INFO</a>
-                
             </button>
         </div>
 
