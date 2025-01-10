@@ -27,7 +27,10 @@ Route::view('Delegaciones', 'Delegaciones')->name('Delegaciones');
 Route::view('Criaderos', 'Criaderos')->name('Criaderos');
 Route::view('Galeria', 'Galeria')->name('Galeria');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+// Se comenta esta linea debajo para omitir verificación de email en local
+// Route::middleware(['auth', 'verified'])->group(function () {
+//Se remplaza por esta linea para omitir verificación de email en local    
+Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PerroController::class, 'index'])->name('dashboard');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
