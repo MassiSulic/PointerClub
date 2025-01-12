@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Ssheduardo\Redsys\Facades\Redsys;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseSuccessfulMail;
 use App\Mail\AdminNotificationMail;
+
 
 class RedsysController extends Controller
 {
@@ -29,23 +31,31 @@ class RedsysController extends Controller
 
     // Método que maneja la compra exitosa
     public function success(Request $request)
-    {
-        // Obtener los detalles de la compra desde el request o base de datos
-        $userName = 'Nombre del Usuario'; // Este dato debe ser dinámico, puedes obtenerlo desde la base de datos o request
-        $description = 'Descripción de la compra'; // Descripción de la compra realizada
-        $amount = $request->input('total'); // Monto de la compra (ajusta según tu estructura de datos)
-        $order = time(); // El número de pedido (puedes usar el ID de la compra o el timestamp)
+{
+    // Obtener el usuario logueado
+    $user = Auth::user();
 
-        // Enviar correo al usuario
-        Mail::to($request->input('email'))->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order));
-
-        // Enviar correo al administrador
-        $adminEmail = 'vaserweb.ok@gmail.com'; // Cambia este correo por el del administrador
-        Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order));
-
-        // Mostrar vista de éxito al cliente
-        return view('redsys.success'); // Aquí se muestra la vista de éxito que debes crear para el cliente
+    // Verificar que el usuario esté autenticado
+    if (!$user) {
+        return back()->with('error', 'Usuario no autenticado');
     }
+
+    $userName = $user->name; // Nombre del usuario logueado
+    $userEmail = $user->email; // Email del usuario logueado
+    $description = 'Descripción de la compra'; // Ajustar según el contexto
+    $amount = $request->input('total'); // Monto de la compra
+    $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
+
+    // Enviar correo al usuario logueado
+    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order));
+
+    // Enviar correo al administrador
+    $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
+    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order));
+
+    // Mostrar vista de éxito al cliente
+    return view('redsys.success');
+}
 
     public function failure()
     {
