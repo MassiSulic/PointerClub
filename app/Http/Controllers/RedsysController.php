@@ -87,28 +87,15 @@ class RedsysController extends Controller
             throw new \Exception('El detalle no tiene un formato JSON válido');
         }
 
-        // Procesar las fechas
-        $fechas = [];
+        // Construir la descripción iterando sobre cada inscripción
+        $description = '';
         foreach ($detalleArray as $item) {
-            if (isset($item['fecha'])) {
-                $fechas[] = $item['fecha'];
-            }
+            $nombrePerro = $item['perro'] ?? 'Perro no especificado';
+            $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
+            $fecha = $item['fecha'] ?? 'Fecha no especificada';
+
+            $description .= "Inscripción para $nombrePerro | $nombrePrueba | $fecha\n";
         }
-
-        // Si no es un array, tratamos de convertirlo a uno
-        if (!is_array($fechas)) {
-            $fechas = explode(',', $fechas); // Suponiendo que las fechas vienen separadas por comas
-        }
-
-        // Ahora unimos las fechas con un espacio entre ellas
-        $fechasConcatenadas = implode(' ', $fechas);
-
-        // Añadir el nombre del perro y mantener la descripción como estaba antes
-        $nombrePerro = $detalleArray[0]['perro'] ?? 'Perro no especificado'; // Tomar el nombre del primer perro
-        $nombrePrueba = $request->input('nombre_prueba', 'Prueba no especificada');
-
-        // Descripción como estaba antes, pero añadiendo el perro al inicio
-        $description = "Inscripción para $nombrePerro |  $nombrePrueba | $fechasConcatenadas";
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
@@ -125,7 +112,7 @@ class RedsysController extends Controller
         Redsys::setUrlKo(config('redsys.url_ko'));
         Redsys::setVersion('HMAC_SHA256_V1');
         Redsys::setTradeName(config('redsys.tradename'));
-        Redsys::setProductDescription($description);
+        Redsys::setProductDescription($description); // Descripción completa
         Redsys::setEnviroment($enviroment);
 
         // Generar firma
@@ -142,6 +129,7 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario (ahora como string)
     return view('redsys.form', compact('form'));
 }
+
 
 
     
