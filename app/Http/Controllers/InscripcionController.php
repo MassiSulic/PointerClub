@@ -49,7 +49,7 @@ public function pagarDespues(Request $request)
     // Usar la fecha correcta para la descripción del producto en Redsys
     $descripcionProducto = '';
     foreach ($inscripciones as $inscripcion) {
-        // Concatenamos la fecha correcta elegida por el usuario
+        // Concatenamos el nombre de la prueba sin la fecha de la prueba y la fecha correcta elegida por el usuario
         $descripcionProducto .= "Inscripción para la prueba {$inscripcion['prueba']} - {$inscripcion['fecha']} ";
     }
 
@@ -60,6 +60,7 @@ public function pagarDespues(Request $request)
 
     return redirect()->route('confirmarGet')->with('showPopup', true);
 }
+
 
 
     public function confirmarGet(Request $request)
