@@ -108,7 +108,7 @@ class RedsysController extends Controller
         $nombrePrueba = $request->input('nombre_prueba', 'Prueba no especificada');
 
         // Descripción como estaba antes, pero añadiendo el perro al inicio
-        $description = "Perro: $nombrePerro - Inscripción para $nombrePrueba $fechasConcatenadas";
+        $description = "Inscripción para $nombrePerro |  $nombrePrueba | $fechasConcatenadas";
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
