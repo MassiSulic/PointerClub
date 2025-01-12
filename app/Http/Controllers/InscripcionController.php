@@ -10,20 +10,6 @@ class InscripcionController extends Controller
 {
   
     public function confirmar(Request $request)
-    {
-        $inscripciones = json_decode($request->input('inscripciones'), true);
-        
-        // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
-        foreach ($inscripciones as &$inscripcion) {
-            // Solo limpiamos las fechas del nombre de la prueba, no tocamos las fechas elegidas por el usuario
-            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
-    
-        $total = array_sum(array_column($inscripciones, 'valor'));
-        return view('confirmar', compact('inscripciones', 'total'));
-    }
-    
-    public function confirmar(Request $request)
 {
     $inscripciones = json_decode($request->input('inscripciones'), true);
 
@@ -81,6 +67,8 @@ public function pagarDespues(Request $request)
 
     return redirect()->route('confirmarGet')->with('showPopup', true);
 }
+
+
 
 
     public function confirmarGet(Request $request)
