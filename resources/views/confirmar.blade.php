@@ -16,8 +16,8 @@
                 <tbody>
                     @foreach($inscripciones as $inscripcion)
                     @php
-                        // Usar una expresión regular para eliminar la fecha (en formato dd/mm/yy) al final del nombre de la prueba
-                        $pruebaSinFecha = preg_replace('/ - \d{2}\/\d{2}\/\d{2}$/', '', $inscripcion['prueba']);
+                        $partesPrueba = explode(' - ', $inscripcion['prueba']);
+                        $pruebaSinFecha = $partesPrueba[0] . ' - ' . $partesPrueba[1];
                     @endphp
                     <tr>
                         <td class="px-4 py-2 border-b text-center">{{ $pruebaSinFecha }}</td>
