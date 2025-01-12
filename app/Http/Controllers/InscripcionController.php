@@ -12,17 +12,25 @@ class InscripcionController extends Controller
     public function confirmar(Request $request)
     {
         $inscripciones = json_decode($request->input('inscripciones'), true);
+        
+        // Limpiar el nombre de la prueba, eliminando las fechas
+        foreach ($inscripciones as &$inscripcion) {
+            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
+        }
+
         $total = array_sum(array_column($inscripciones, 'valor'));
         return view('confirmar', compact('inscripciones', 'total'));
     }
-    
-
-
 
     public function pagarDespues(Request $request)
     {
         $inscripciones = json_decode($request->input('inscripciones'), true);
-    
+
+        // Limpiar el nombre de la prueba, eliminando las fechas
+        foreach ($inscripciones as &$inscripcion) {
+            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
+        }
+
         // Guardar cada inscripción en la base de datos
         foreach ($inscripciones as $inscripcion) {
             PruebaInscripta::create([
@@ -33,13 +41,12 @@ class InscripcionController extends Controller
                 'valor' => $inscripcion['valor'],
             ]);
         }
-    
+
         $total = array_sum(array_column($inscripciones, 'valor'));
-    
+
         $request->session()->put('inscripciones', $inscripciones);
         $request->session()->put('total', $total);
-    
-        // return redirect()->route('confirmarGet')->with('success', 'La inscripción se realizó con éxito.');
+
         return redirect()->route('confirmarGet')->with('showPopup', true);
     }
 
