@@ -10,45 +10,58 @@ class InscripcionController extends Controller
 {
   
     public function confirmar(Request $request)
-    {
-        $inscripciones = json_decode($request->input('inscripciones'), true);
-        
-        // Limpiar el nombre de la prueba, eliminando las fechas
-        foreach ($inscripciones as &$inscripcion) {
-            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
+{
+    $inscripciones = json_decode($request->input('inscripciones'), true);
 
-        $total = array_sum(array_column($inscripciones, 'valor'));
-        return view('confirmar', compact('inscripciones', 'total'));
+    // Limpiar el nombre de la prueba, eliminando las fechas
+    foreach ($inscripciones as &$inscripcion) {
+        $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
     }
 
-    public function pagarDespues(Request $request)
-    {
-        $inscripciones = json_decode($request->input('inscripciones'), true);
-
-        // Limpiar el nombre de la prueba, eliminando las fechas
-        foreach ($inscripciones as &$inscripcion) {
-            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
-
-        // Guardar cada inscripción en la base de datos
-        foreach ($inscripciones as $inscripcion) {
-            PruebaInscripta::create([
-                'user_id' => Auth::id(),
-                'prueba' => $inscripcion['prueba'],
-                'fecha' => $inscripcion['fecha'],
-                'perro' => $inscripcion['perro'],
-                'valor' => $inscripcion['valor'],
-            ]);
-        }
-
-        $total = array_sum(array_column($inscripciones, 'valor'));
-
-        $request->session()->put('inscripciones', $inscripciones);
-        $request->session()->put('total', $total);
-
-        return redirect()->route('confirmarGet')->with('showPopup', true);
+    // Usar la fecha correcta para la descripción del producto
+    $descripcionProducto = '';
+    foreach ($inscripciones as $inscripcion) {
+        $descripcionProducto .= "Inscripción para la prueba {$inscripcion['prueba']} - {$inscripcion['fecha']} ";
     }
+
+    $total = array_sum(array_column($inscripciones, 'valor'));
+    return view('confirmar', compact('inscripciones', 'total', 'descripcionProducto'));
+}
+
+public function pagarDespues(Request $request)
+{
+    $inscripciones = json_decode($request->input('inscripciones'), true);
+
+    // Limpiar el nombre de la prueba, eliminando las fechas
+    foreach ($inscripciones as &$inscripcion) {
+        $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2} - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
+    }
+
+    // Guardar cada inscripción en la base de datos
+    foreach ($inscripciones as $inscripcion) {
+        PruebaInscripta::create([
+            'user_id' => Auth::id(),
+            'prueba' => $inscripcion['prueba'],
+            'fecha' => $inscripcion['fecha'],
+            'perro' => $inscripcion['perro'],
+            'valor' => $inscripcion['valor'],
+        ]);
+    }
+
+    $total = array_sum(array_column($inscripciones, 'valor'));
+
+    // Usar la fecha correcta para la descripción del producto
+    $descripcionProducto = '';
+    foreach ($inscripciones as $inscripcion) {
+        $descripcionProducto .= "Inscripción para la prueba {$inscripcion['prueba']} - {$inscripcion['fecha']} ";
+    }
+
+    $request->session()->put('inscripciones', $inscripciones);
+    $request->session()->put('total', $total);
+
+    return redirect()->route('confirmarGet')->with('showPopup', true)->with('descripcionProducto', $descripcionProducto);
+}
+
 
     public function confirmarGet(Request $request)
 {
