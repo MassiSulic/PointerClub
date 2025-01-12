@@ -10,57 +10,54 @@ class InscripcionController extends Controller
 {
   
     public function confirmar(Request $request)
-    {
-        $inscripciones = json_decode($request->input('inscripciones'), true);
-        
-        // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
-        foreach ($inscripciones as &$inscripcion) {
-            // Solo limpiamos las fechas del nombre de la prueba, no tocamos las fechas elegidas por el usuario
-            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
-    
-        $total = array_sum(array_column($inscripciones, 'valor'));
-        return view('confirmar', compact('inscripciones', 'total'));
-    }
-    
-    public function pagarDespues(Request $request)
-    {
-        $inscripciones = json_decode($request->input('inscripciones'), true);
-    
-        // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
-        foreach ($inscripciones as &$inscripcion) {
-            // Solo limpiamos las fechas del nombre de la prueba, no tocamos las fechas elegidas por el usuario
-            $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
-    
-        // Guardar cada inscripción en la base de datos
-        foreach ($inscripciones as $inscripcion) {
-            PruebaInscripta::create([
-                'user_id' => Auth::id(),
-                'prueba' => $inscripcion['prueba'],
-                'fecha' => $inscripcion['fecha'], // Aquí guardamos la fecha elegida por el usuario
-                'perro' => $inscripcion['perro'],
-                'valor' => $inscripcion['valor'],
-            ]);
-        }
-    
-        $total = array_sum(array_column($inscripciones, 'valor'));
-    
-        // Usar la fecha correcta para la descripción del producto en Redsys
-        $descripcionProducto = '';
-        foreach ($inscripciones as $inscripcion) {
-            // Concatenamos el nombre de la prueba limpio de fechas y la fecha correcta elegida por el usuario
-            $descripcionProducto .= "Inscripción para {$inscripcion['prueba']} - {$inscripcion['fecha']} ";
-        }
-    
-        // Guardamos en la sesión la descripción para que se use en la vista de confirmación
-        $request->session()->put('inscripciones', $inscripciones);
-        $request->session()->put('total', $total);
-        $request->session()->put('descripcionProducto', $descripcionProducto); // Guardamos la descripción final
-    
-        return redirect()->route('confirmarGet')->with('showPopup', true);
-    } 
+{
+    $inscripciones = json_decode($request->input('inscripciones'), true);
 
+    // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
+    foreach ($inscripciones as &$inscripcion) {
+        // Solo limpiamos las fechas del nombre de la prueba, no tocamos las fechas elegidas por el usuario
+        $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
+    }
+
+    $total = array_sum(array_column($inscripciones, 'valor'));
+    return view('confirmar', compact('inscripciones', 'total'));
+}
+
+public function pagarDespues(Request $request)
+{
+    $inscripciones = json_decode($request->input('inscripciones'), true);
+
+    // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
+    foreach ($inscripciones as &$inscripcion) {
+        $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
+    }
+
+    // Guardar cada inscripción en la base de datos
+    foreach ($inscripciones as $inscripcion) {
+        PruebaInscripta::create([
+            'user_id' => Auth::id(),
+            'prueba' => $inscripcion['prueba'],
+            'fecha' => $inscripcion['fecha'], // Aquí guardamos la fecha elegida por el usuario
+            'perro' => $inscripcion['perro'],
+            'valor' => $inscripcion['valor'],
+        ]);
+    }
+
+    $total = array_sum(array_column($inscripciones, 'valor'));
+
+    // Construir la descripción del producto para Redsys
+    $descripcionProducto = '';
+    foreach ($inscripciones as $inscripcion) {
+        $descripcionProducto .= "Perro: {$inscripcion['perro']} - Prueba: {$inscripcion['prueba']} - Fecha: {$inscripcion['fecha']} \n";
+    }
+
+    // Guardar la descripción y otros datos en la sesión
+    $request->session()->put('inscripciones', $inscripciones);
+    $request->session()->put('total', $total);
+    $request->session()->put('descripcionProducto', $descripcionProducto); // Guardamos la descripción final
+
+    return redirect()->route('confirmarGet')->with('showPopup', true);
+}
 
 
     public function confirmarGet(Request $request)
