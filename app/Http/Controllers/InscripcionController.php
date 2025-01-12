@@ -27,8 +27,11 @@ class InscripcionController extends Controller
     }
 
     $total = array_sum(array_column($inscripciones, 'valor'));
+
+    // Pasamos los datos a la vista de confirmación
     return view('confirmar', compact('inscripciones', 'total', 'descripcionProducto'));
 }
+
 
 public function pagarDespues(Request $request)
 {
