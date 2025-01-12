@@ -103,15 +103,12 @@ class RedsysController extends Controller
         // Ahora unimos las fechas con un espacio entre ellas
         $fechasConcatenadas = implode(' ', $fechas);
 
-        // Construir descripción detallada
-        $description = '';
-        foreach ($detalleArray as $item) {
-            $perro = $item['perro'] ?? 'Perro no especificado';
-            $prueba = $item['prueba'] ?? 'Prueba no especificada';
-            $fecha = $item['fecha'] ?? 'Fecha no especificada';
+        // Añadir el nombre del perro y mantener la descripción como estaba antes
+        $nombrePerro = $detalleArray[0]['perro'] ?? 'Perro no especificado'; // Tomar el nombre del primer perro
+        $nombrePrueba = $request->input('nombre_prueba', 'Prueba no especificada');
 
-            $description .= "Perro: $perro - Prueba: $prueba - Fecha: $fecha\n";
-        }
+        // Descripción como estaba antes, pero añadiendo el perro al inicio
+        $description = "Perro: $nombrePerro - Inscripción para $nombrePrueba $fechasConcatenadas";
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
@@ -145,6 +142,7 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario (ahora como string)
     return view('redsys.form', compact('form'));
 }
+
 
     
 }
