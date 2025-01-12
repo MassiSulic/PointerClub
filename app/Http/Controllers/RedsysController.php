@@ -106,7 +106,7 @@ class RedsysController extends Controller
     
             // Descripción de la prueba
             $nombrePrueba = $request->input('nombre_prueba', 'Prueba no especificada');
-            $description = 'Inscripción para la prueba ' . $nombrePrueba . ' ' . $fechasConcatenadas;
+            $description = 'Inscripción para ' . $nombrePrueba . ' ' . $fechasConcatenadas;
     
             Log::debug('Redsys Payment Parameters:', [
                 'amount' => $amount,
