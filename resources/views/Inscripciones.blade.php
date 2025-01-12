@@ -9,6 +9,11 @@
             <button id="inscribirBtn" class=" bg-AzulPrimario text-white px-4 py-2 rounded">+ Inscribir mi perro</button>
         </div>
         <div class="overflow-x-auto w-11/12 mx-auto mb-10">
+            @php
+                $mostrarJuez1 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_1); });
+                $mostrarJuez2 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_2); });
+                $mostrarJuez3 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_3); });
+            @endphp
             <table class="min-w-full bg-white rounded">
                 <thead>
                     <tr>
@@ -16,9 +21,15 @@
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Disciplina</th>
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Fechas</th>
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Lugar</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 1</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 2</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white rounded-tr">Juez 3</th>
+                        @if($mostrarJuez1)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 1</th>
+                        @endif
+                        @if($mostrarJuez2)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 2</th>
+                        @endif
+                        @if($mostrarJuez3)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white rounded-tr">Juez 3</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +50,15 @@
                             <td class="px-4 py-2 border-r border-AzulPrimario text-center">
                                 {{ str_replace('|', ' - ', $prueba->fecha) }}</td>
                             <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->lugar }}</td>
-                            <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->nombre_juez_1 }}</td>
-                            <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->nombre_juez_2 }}</td>
-                            <td class="px-4 py-2 text-center border-AzulPrimario ">{{ $prueba->nombre_juez_3 }}</td>
+                            @if($mostrarJuez1)
+                                <td class="px-4 py-2 text-center border-r border-AzulPrimario">{{ $prueba->nombre_juez_1 }}</td>
+                            @endif
+                            @if($mostrarJuez2)
+                                <td class="px-4 py-2 text-center border-r border-AzulPrimario">{{ $prueba->nombre_juez_2 }}</td>
+                            @endif
+                            @if($mostrarJuez3)
+                                <td class="px-4 py-2 text-center border-AzulPrimario">{{ $prueba->nombre_juez_3 }}</td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

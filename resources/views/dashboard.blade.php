@@ -181,102 +181,9 @@
                 <!-- Campo: Nombre del conductor -->
                 <div>
                     <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del conductor</label>
-                    <select id="conductor" name="conductor" 
-                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                            required>
-                        <option value="">Seleccione un conductor</option>
-                        @foreach([
-                            'Albamonte, Sandro',
-                            'Aringhieri, Samuele',
-                            'Avril, Davide',
-                            'Bardon, Pascal',
-                            'Boissonnade',
-                            'Boitheauville, Adrien',
-                            'Borrella, Raúl',
-                            'Brun',
-                            'Burlat, Pascal',
-                            'Cassiaut, Pierre',
-                            'Cherubini, Fabio',
-                            'Coulon, Floriant',
-                            'Faissat, Jerome',
-                            'Gaitan, Juan Diego',
-                            'Garcia Vincent',
-                            'Gaspar Jimenez',
-                            'Gatti, Stefano',
-                            'Giovannelli',
-                            'Gómez, Francisco',
-                            'Gutierrez, Alberto',
-                            'Iazzetta, Mauro',
-                            'Inacio, Ricardo',
-                            'Jáñez, José Antonio',
-                            'Laffon, J. M.',
-                            'Latreille',
-                            'Lisarde Sabater, Vicente',
-                            'Locatelli, Roberto',
-                            'Lorca',
-                            'Maymard',
-                            'Medrano, Nacho',
-                            'Merle Des Isles, Antony',
-                            'Mitic, Aleksandar',
-                            'Mora Mota, Jose M.',
-                            'Nicoletti, Nicola',
-                            'Nikolic, Zoran',
-                            'Pezzotta, Giuseppe',
-                            'Pianaro, Graziano',
-                            'Sanz, José Luís',
-                            'Scarpecci, Simone',
-                            'Soddu, Lucca',
-                            'Sohier, Patrick',
-                            'Stankovic, Boban',
-                            'Tenailleau',
-                            'Teulieres, Patrick',
-                            'Trullen, Héctor',
-                            'Balado, Jesus',
-                            'Bischi, Leonardo',
-                            'Blanchet',
-                            'Bounaude',
-                            'Bourgeois, Emmanuel',
-                            'Bruni, Davide',
-                            'Burresi, Leonardo',
-                            'Condado, Yann',
-                            'Dave, Camille',
-                            'Esser',
-                            'Fernández, Pablo',
-                            'Fontecedro, Giuseppe',
-                            'Garcia Verdejo, Antonio',
-                            'Gavrilovic, Dejan',
-                            'Giavarinni, Claudio',
-                            'Ginestet, A.',
-                            'Gonzales, Xavi',
-                            'Hamon, Thierry',
-                            'Imizcoz, Daniel',
-                            'Kartalija, Stanislav',
-                            'Lemos, Rui',
-                            'Lombardi, Rudy',
-                            'López, Juan',
-                            'Maggiolo, Luigi',
-                            'Massias, Patrick',
-                            'Mavridis, Thorodis',
-                            'Moreno, Javier',
-                            'Moretti',
-                            'Nunziata, Andrea',
-                            'Pachis',
-                            'Palomo, Juan Miguel',
-                            'Pezzota, Ernesto',
-                            'Pioppi, Giovanni',
-                            'Richelli, Matteo',
-                            'Roche, Nicolas',
-                            'Sánchez Ropero, Francisco',
-                            'Scudiero, Paolo',
-                            'Simeons, Richard',
-                            'Targuetti, Emannuel',
-                            'Testa, Angelo',
-                            'Traina, Severino',
-                            'Villamiel, César'
-                        ] as $conductor)
-                            <option value="{{ $conductor }}">{{ $conductor }}</option>
-                        @endforeach
-                    </select>
+                    <input type="text" id="conductor" name="conductor" 
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                    required>
                 </div>
 
                 <!-- Campo: Fecha de nacimiento -->
@@ -558,3 +465,24 @@
     });
 </script>
 {{-- Validacion de input de Libro de Orígenes --}}
+
+
+<!-- Validación de input: Nombre del conductor -->
+<script>
+    document.getElementById('conductor').addEventListener('input', function (e) {
+        let value = e.target.value;
+        
+        // Eliminar caracteres no alfabéticos (incluye espacios y guiones para nombres compuestos)
+        const validValue = value.replace(/[^a-zA-Z\s'-]/g, '');
+        if (value !== validValue) {
+            e.target.value = validValue;
+        } else {
+            e.target.value = value;
+        }
+        
+        // Formatear cada palabra: Primera letra en mayúscula, el resto en minúscula
+        e.target.value = e.target.value
+            .toLowerCase() // Convertir todo a minúsculas primero
+            .replace(/\b\w/g, char => char.toUpperCase()); // Primera letra de cada palabra en mayúscula
+    });
+</script>
