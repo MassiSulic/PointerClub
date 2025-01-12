@@ -89,13 +89,37 @@ class RedsysController extends Controller
 
         // Construir la descripción iterando sobre cada inscripción
         $description = '';
-        foreach ($detalleArray as $item) {
-            $nombrePerro = $item['perro'] ?? 'Perro no especificado';
-            $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
-            $fecha = $item['fecha'] ?? 'Fecha no especificada';
+        $lastPerro = ''; // Variable para almacenar el último perro procesado
+        $lastPrueba = ''; // Variable para almacenar la última prueba procesada
+        $fechas = []; // Para almacenar las fechas del mismo perro y prueba
 
-            $description .= "Inscripción para $nombrePerro | $nombrePrueba | $fecha\n";
+    foreach ($detalleArray as $item) {
+        $nombrePerro = $item['perro'] ?? 'Perro no especificado';
+        $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
+        
+        // Separar la parte después del guion en 'prueba'
+        $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
+        $fecha = $item['fecha'] ?? 'Fecha no especificada';
+
+        // Si es el mismo perro y prueba, agregar la fecha al array
+        if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
+            $fechas[] = $fecha;
+        } else {
+            // Si cambiamos de perro o prueba, formatear la descripción
+            if (!empty($fechas)) {
+                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+            }
+            // Actualizar variables
+            $lastPerro = $nombrePerro;
+            $lastPrueba = $pruebaSegment;
+            $fechas = [$fecha]; // Reiniciar fechas con la nueva fecha
         }
+    }
+
+    // Añadir la última entrada
+    if (!empty($fechas)) {
+        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+    }
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
@@ -129,8 +153,5 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario (ahora como string)
     return view('redsys.form', compact('form'));
 }
-
-
-
     
 }
