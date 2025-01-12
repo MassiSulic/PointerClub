@@ -65,35 +65,61 @@ class RedsysController extends Controller
     public function process(Request $request)
 {
     try {
+        // Log para inspeccionar los datos recibidos
+        Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
+
+        // Validación básica de entradas
+        $request->validate([
+            'total' => 'required|numeric',
+            'detalle' => 'required',
+            'fechas' => 'nullable', // Puede estar vacío
+            'nombre_prueba' => 'required|string'
+        ]);
+
+        // Configuración inicial de Redsys
         $key = config('redsys.key');
         $merchantCode = config('redsys.merchantcode');
         $terminal = config('redsys.terminal');
         $enviroment = config('redsys.enviroment');
 
         // Datos del pedido
-        $amount = $request->input('total'); // Convertimos a céntimos
+        $amount = $request->input('total'); // Cantidad total
         $order = time(); // Usamos timestamp como número de pedido
-        
-        
-        $fechas = $request->input('fechas');
+        $detalle = $request->input('detalle');
+        Log::debug('Detalle enviado:', ['detalle' => $detalle]);
 
-        // Si no es un array, tratamos de convertirlo a uno
-        if (!is_array($fechas)) {
-            $fechas = explode(',', $fechas); // Suponiendo que las fechas vienen separadas por comas
+        // Manejo de fechas
+        $fechas = $request->input('fechas');
+        if ($fechas) {
+            if (!is_array($fechas)) {
+                $fechas = explode(',', $fechas); // Convertir a array si es una cadena
+            }
+            // Limpieza de las fechas (quitar espacios y validar formato)
+            $fechas = array_map('trim', $fechas);
+            $fechas = array_filter($fechas, function ($fecha) {
+                return \DateTime::createFromFormat('Y-m-d', $fecha) !== false;
+            });
+
+            // Concatenar las fechas con un separador
+            $fechasConcatenadas = implode(' ', $fechas);
+        } else {
+            $fechasConcatenadas = 'Sin fechas especificadas';
         }
 
-        // Ahora unimos las fechas con un espacio entre ellas
-        $fechasConcatenadas = implode(' ', $fechas);
+        // Descripción del producto
+        $nombrePrueba = $request->input('nombre_prueba');
+        $description = sprintf(
+            'Inscripción para la prueba "%s" %s',
+            $nombrePrueba,
+            $fechasConcatenadas
+        );
+        Log::debug('Descripción generada:', ['description' => $description]);
 
-        $description = 'Inscripción para la prueba ' . $request->input('nombre_prueba') . ' ' . $fechasConcatenadas;
-
-        
+        // Log para depurar los parámetros de Redsys
         Log::debug('Redsys Payment Parameters:', [
             'amount' => $amount,
             'order' => $order,
             'merchantCode' => $merchantCode,
-            'key' => config('redsys.key'),
-            'notification_url' => config('redsys.url_notification'),
             'description' => $description
         ]);
 
@@ -121,10 +147,12 @@ class RedsysController extends Controller
         $form = Redsys::createForm(); // Este es un string HTML
 
     } catch (\Exception $e) {
+        \Log::error('Error al procesar el pago:', ['error' => $e->getMessage()]);
         return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
     }
 
-    // Redirigir a la vista con el formulario (ahora como string)
+    // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
 }
