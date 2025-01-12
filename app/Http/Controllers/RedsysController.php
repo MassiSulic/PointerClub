@@ -42,8 +42,8 @@ class RedsysController extends Controller
 
     $userName = $user->name; // Nombre del usuario logueado
     $userEmail = $user->email; // Email del usuario logueado
-    $description = 'Descripción de la compra'; // Ajustar según el contexto
-    $amount = $request->input('total'); // Monto de la compra
+    $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
+    $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
     // Enviar correo al usuario logueado
