@@ -78,7 +78,7 @@
             </div>
             <div class="lg:w-1/2 md:w-1/2 h-[300px] md:h-[450px]">
                 <div class="h-full bg-contain bg-no-repeat bg-center"
-                    style="background-image: url({{ asset('image/home/Semana.png') }});"></div>
+                    style="background-image: url({{ asset('image/home/CampeonatoEuropa.jpg') }});"></div>
             </div>
 
         </div>

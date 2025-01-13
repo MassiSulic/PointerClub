@@ -5,6 +5,7 @@
         <a href="{{ route('Inicio') }}">
             <img src="{{ asset('svg/navbar/Logo.svg') }}" alt="Logo" class="w-16">
         </a>
+        <img src="svg/navbar/BanderasMobile.svg" class=" w-64" alt="">
         <button id="menu-button" class="text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">

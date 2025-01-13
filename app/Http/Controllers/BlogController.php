@@ -74,19 +74,19 @@ class BlogController extends Controller
                 'title' => 'SEMANA DE ANDALUCIA  2025',
                 'excerpt' => '¡No te pierdas nada de información!',
                 'slug' => 'semana',
-                'image' => asset('Blog/semanaAndalucia.jpg')
+                'image' => asset('Blog/Semana2.png')
             ],
             (object)[
                 'title' => 'ALOJAMIENTOS PARA LA SEMANA DE ANDALUCÍA',
                 'excerpt' => 'Recuerda reservar con tiempo tu alojamiento.',
                 'slug' => 'alojamiento',
-                'image' => asset('Blog/alojamiento.jpg')
+                'image' => asset('Blog/AlojamientoPerro.jpg')
             ],
             (object)[
                 'title' => '¡Nueva Web del Pointer Club Español!',
                 'excerpt' => 'Un espacio renovado para socios y amantes del Pointer Inglés',
                 'slug' => 'nuevaWeb',
-                'image' => asset('Blog/IMG_0412.jpg')
+                'image' => asset('Blog/NuevaCompu.png')
             ],
         ];
     }
