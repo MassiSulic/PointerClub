@@ -196,7 +196,7 @@
                     const perrosSeleccionados = inscripcion.querySelectorAll('input[name="perros[]"]:checked').length;
                     const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
                     const esSocioValido = numeroSocio && numerosSociosValidos.includes(numeroSocio);
-                    const precio = esSocioValido ? 5 : 40; // precio
+                    const precio = esSocioValido ? 1 : 40; // precio
                     totalPrecio += fechasSeleccionadas * perrosSeleccionados * precio;
     
                     // Actualizar el precio dinámico al lado del nombre del perro
@@ -345,7 +345,7 @@
                     const prueba = inscripcion.querySelector('#prueba option:checked').textContent;
                     const fechas = Array.from(inscripcion.querySelectorAll('input[name^="fechas_"]:checked')).map(input => input.value);
                     const perros = Array.from(inscripcion.querySelectorAll('input[name="perros[]"]:checked')).map(input => input.nextElementSibling.textContent.trim());
-                    const precio = esSocioValido ? 5 : 40; // precio
+                    const precio = esSocioValido ? 1 : 40; // precio
                     fechas.forEach(fecha => {
                         perros.forEach(perro => {
                             inscripciones.push({ prueba, fecha, perro, valor: precio });
