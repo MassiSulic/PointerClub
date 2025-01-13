@@ -45,12 +45,6 @@ class RedsysController extends Controller
     $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
-
-    $detalle = $request->input('detalle');
-    if (!$detalle) {
-        Log::error('No se recibieron detalles de la compra.');
-        return back()->with('error', 'Detalles de la compra no recibidos.');
-    }
     
     // Enviar correo al usuario logueado
     Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $request->input('detalle')));
