@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="icon" type="image/svg" href="svg/navbar/Favicon.svg">
+
     <title>{{ config('app.name', 'Pointer Club Español') }}</title>
 
     <!-- Fonts -->
@@ -18,7 +20,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div class="min-h-screen flex flex-col sm:justify-center items-center py-6 relative"
-        style="background-image: url({{ asset('image/login/wallpaper.jpg') }}); 
+        style="background-image: url({{ asset('image/login/wallpaper-login.jpg') }});
            background-size: cover; 
            background-position: center; 
            background-repeat: no-repeat;">
