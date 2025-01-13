@@ -77,7 +77,7 @@
     <input type="hidden" name="inscripciones" id="inscripcionesInput">
 </form>
 <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-    <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-4/5 flex flex-col">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-600px flex flex-col transform -translate-y-1/2">
         <div class="flex justify-end">
             <button id="closeModalXBtn" class="text-gray-500 hover:text-gray-700 text-4xl">&times;</button>
         </div>
