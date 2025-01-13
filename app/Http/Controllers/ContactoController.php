@@ -31,10 +31,9 @@ class ContactoController extends Controller
 
         $data = $request->only('nombre', 'tel', 'correo', 'mensaje');
 
-        Mail::send([], [], function ($message) use ($data) {
+        Mail::send('emails.contacto', $data, function ($message) use ($data) {
             $message->to('info@pointerclubespana.es')
-                ->subject('Nueva consulta desde el formulario de contacto')
-                ->setBody('Nombre: ' . $data['nombre'] . '<br>Tel: ' . $data['tel'] . '<br>Correo: ' . $data['correo'] . '<br>Mensaje: ' . $data['mensaje'], 'text/html');
+                ->subject('Nueva consulta desde el formulario de contacto');
         });
 
         return back()->with('success', 'Consulta enviada con éxito.');
