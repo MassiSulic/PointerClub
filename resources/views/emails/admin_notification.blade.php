@@ -63,6 +63,15 @@
         <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
 
+    <div class="details">
+        <h2>Datos de Inscripciones</h2>
+        <ul>
+            @foreach ($inscripcionesData as $inscripcion)
+                <li>{{ $inscripcion['perro'] }} - {{ $inscripcion['prueba'] }} - {{ $inscripcion['fecha'] }} - {{ $inscripcion['valor'] }}</li>
+            @endforeach
+        </ul>
+    </div>
+
     <div class="total">
         <p><strong>Total: {{ $amount }} €</strong></p>
     </div>
@@ -73,4 +82,3 @@
 
 </body>
 </html>
-
