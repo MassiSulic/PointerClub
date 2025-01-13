@@ -46,39 +46,16 @@ class RedsysController extends Controller
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
-    // Decodificar el detalle del JSON recibido en el request
-    $detalleArray = json_decode($request->input('detalle'), true);
-
-    // Verificar que el detalle se haya decodificado correctamente
-    if ($detalleArray === null) {
-        return back()->with('error', 'El detalle de la compra no es válido.');
-    }
-
-    // Construir el HTML del detalle
-    $detalleHtml = '';
-    foreach ($detalleArray as $item) {
-        $fechas = implode(' - ', $item['fechas'] ?? []);
-        $detalleHtml .= "
-            <tr>
-                <td>{$item['perro']}</td>
-                <td>{$item['prueba']}</td>
-                <td>{$fechas}</td>
-                <td>{$item['valor']}</td>
-            </tr>
-        ";
-    }
-
     // Enviar correo al usuario logueado
-    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $detalleHtml));
+    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $request->input('detalle')));
 
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $detalleHtml));
+    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $request->input('detalle')));
 
     // Mostrar vista de éxito al cliente
     return view('redsys.success');
 }
-
 
     public function failure()
     {
