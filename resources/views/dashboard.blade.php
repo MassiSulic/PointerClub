@@ -40,16 +40,19 @@
                             <tr class="bg-gray-100">
                                 <th
                                     class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
-                                    Prueba</th>
+                                    Concurso - Disciplina</th>
                                 <th
                                     class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
-                                    Fecha</th>
+                                    Fecha del Concurso</th>
                                 <th
                                     class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
                                     Perro</th>
                                 <th
                                     class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
                                     Valor</th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Estado</th>    
                                 <th
                                     class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
                                     Acciones</th>
@@ -70,6 +73,13 @@
                                         {{ $inscripcion->perro }}</td>
                                     <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">
                                         {{ $inscripcion->valor }} euros</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-center">
+                                        @if ($inscripcion->pago == 0)
+                                            <span class="text-red-500">Pendiente de pago</span>
+                                        @else
+                                            <span class="text-green-500">Pagado</span>
+                                        @endif
+                                    </td>    
                                     <td
                                         class="border border-gray-300 px-4 py-2 text-sm text-gray-800 space-x-2 text-center">
                                         <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}"

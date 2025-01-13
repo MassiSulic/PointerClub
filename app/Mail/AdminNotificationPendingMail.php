@@ -29,7 +29,7 @@ class AdminNotificationPendingMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Notificación de Nueva Compra Pendiente',
+            subject: 'Nueva Inscripción con Pago Pendiente',
         );
     }
 

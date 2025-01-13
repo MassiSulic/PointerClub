@@ -100,7 +100,7 @@
     </div>
 
     <div class="footer">
-        <p>Si tiene alguna pregunta, no dude en <a href="mailto:{{ config('mail.from.address') }}">contactarnos</a>.</p>
+        <p>Si tiene alguna pregunta, no dude en <a href="mailto:info@pointerclubespana.es">contactarnos</a>.</p>
     </div>
 
 </body>
