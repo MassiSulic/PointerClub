@@ -52,7 +52,7 @@ class RedsysController extends Controller
         }
 
         Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
-        $adminEmail = 'vaserweb.ok@gmail.com';
+        $adminEmail = 'info@pointerclubespana.es';
         Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
 
         return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));

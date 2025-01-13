@@ -14,37 +14,52 @@
             </button>
         </div>
 
-        <div class=" p-4 bg-MarronSecundario lg:mx-48 sm:mx-20 mx-8">
-            <form action="" class="flex flex-col mx-auto">
-                <ul class="">
-                    <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
-                        <input type="text" name="Nombre" id="nombre"
-                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+        <div class="p-4 bg-MarronSecundario lg:mx-48 sm:mx-20 mx-8">
+            @if (session('success'))
+                <div class="bg-green-500 text-white p-4 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="bg-red-500 text-white p-4 rounded mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('contacto.enviar') }}" method="POST" class="flex flex-col mx-auto">
+                @csrf
+                <ul class="space-y-4">
+                    <li class="flex flex-row items-end">
+                        <label for="nombre" class="text-lg font-semibold text-white mr-2">NOMBRES:</label>
+                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                     </li>
-                    <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">TEL:</label>
-                        <input type="text" name="Nombre" id="nombre"
-                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                    <li class="flex flex-row items-end">
+                        <label for="tel" class="text-lg font-semibold text-white mr-2">TEL:</label>
+                        <input type="text" name="tel" id="tel" value="{{ old('tel') }}"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                     </li>
-                    <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">CORREO:</label>
-                        <input type="text" name="Nombre" id="nombre"
-                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                    <li class="flex flex-row items-end">
+                        <label for="correo" class="text-lg font-semibold text-white mr-2">CORREO:</label>
+                        <input type="email" name="correo" id="correo" value="{{ old('correo') }}"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                     </li>
-                    <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">MENSAJE:</label>
-                        <input type="text" name="Nombre" id="nombre"
-                            class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                    <li class="flex flex-row items-end">
+                        <label for="mensaje" class="text-lg font-semibold text-white mr-2">MENSAJE:</label>
+                        <textarea name="mensaje" id="mensaje"
+                            class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">{{ old('mensaje') }}</textarea>
                     </li>
                 </ul>
                 <div class="flex justify-end">
-                    <button class=" w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
+                    <button class="w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
                 </div>
             </form>
         </div>
-
-        
     </div>
 
     <div class="text-center p-3 bg-[#E8E6D9] text-MarronSecundario flex lg:flex-row justify-center flex-col items-center lg:gap-2 gap-4 mb-24">
@@ -52,7 +67,7 @@
             info@pointerclubespana.es // secretariapointerclub@gmail.com
         </p>
 
-        <div class=" flex flex-row gap-4">
+        <div class="flex flex-row gap-4">
             <a href="">
                 <img src="{{ asset('svg/contacto/Recurso 23.svg') }}" alt="Instagram" class="w-7">
             </a>

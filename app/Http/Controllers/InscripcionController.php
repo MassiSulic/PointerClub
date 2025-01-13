@@ -55,7 +55,7 @@ class InscripcionController extends Controller
         Mail::to($user->email)->send(new PurchasePendingMail($user->name, $total, $order, $inscripciones));
 
         // Enviar correo de notificación pendiente al Administrador
-        $adminEmail = 'vaserweb.ok@gmail.com'; // Introduce directamente el correo electrónico del administrador
+        $adminEmail = 'info@pointerclubespana.es'; // Introduce directamente el correo electrónico del administrador
         Mail::to($adminEmail)->send(new AdminNotificationPendingMail($user->name, $total, $order, $inscripciones));
         
         // Construir la descripción del producto para Redsys
