@@ -99,9 +99,19 @@
         // Sanitizar nombre_prueba: eliminar saltos de línea y espacios innecesarios
         nombrePrueba = nombrePrueba.replace(/\n/g, ' ').trim();
 
-        // Sanitizar detalle: limpiar todos los saltos de línea y espacios extra
-        detalle = detalle.replace(/\n/g, ' ').trim();
-        detalle = JSON.stringify(JSON.parse(detalle)); // Asegurarse de que el JSON esté limpio y no tenga caracteres extra
+        // Sanitizar detalle: limpiar todos los saltos de línea y espacios extra en cada campo
+        let detalleArray = JSON.parse(detalle);
+        detalleArray = detalleArray.map(item => {
+            return {
+                prueba: item.prueba.replace(/\n/g, ' ').trim(),
+                fecha: item.fecha.trim(),
+                perro: item.perro.trim(),
+                valor: item.valor
+            };
+        });
+
+        // Volver a convertir detalle a JSON después de la sanitización
+        detalle = JSON.stringify(detalleArray);
 
         // Asignar los valores sanitizados nuevamente a los inputs del formulario
         document.querySelector('input[name="nombre_prueba"]').value = nombrePrueba;
@@ -114,6 +124,7 @@
         }
     });
 </script>
+
 {{-- Sanitizar los datos enviados --}}
 
 
