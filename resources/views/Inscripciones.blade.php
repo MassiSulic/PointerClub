@@ -9,6 +9,11 @@
             <button id="inscribirBtn" class=" bg-AzulPrimario text-white px-4 py-2 rounded">+ Inscribir mi perro</button>
         </div>
         <div class="overflow-x-auto w-11/12 mx-auto mb-10">
+            @php
+                $mostrarJuez1 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_1); });
+                $mostrarJuez2 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_2); });
+                $mostrarJuez3 = $pruebas->contains(function ($prueba) { return !is_null($prueba->nombre_juez_3); });
+            @endphp
             <table class="min-w-full bg-white rounded">
                 <thead>
                     <tr>
@@ -16,9 +21,15 @@
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Disciplina</th>
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Fechas</th>
                         <th class="px-4 py-2 bg-MarronSecundario text-white">Lugar</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 1</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 2</th>
-                        <th class="px-4 py-2 bg-MarronSecundario text-white rounded-tr">Juez 3</th>
+                        @if($mostrarJuez1)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 1</th>
+                        @endif
+                        @if($mostrarJuez2)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white">Juez 2</th>
+                        @endif
+                        @if($mostrarJuez3)
+                            <th class="px-4 py-2 bg-MarronSecundario text-white rounded-tr">Juez 3</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -39,9 +50,15 @@
                             <td class="px-4 py-2 border-r border-AzulPrimario text-center">
                                 {{ str_replace('|', ' - ', $prueba->fecha) }}</td>
                             <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->lugar }}</td>
-                            <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->nombre_juez_1 }}</td>
-                            <td class="px-4 py-2 border-r border-AzulPrimario text-center">{{ $prueba->nombre_juez_2 }}</td>
-                            <td class="px-4 py-2 text-center border-AzulPrimario ">{{ $prueba->nombre_juez_3 }}</td>
+                            @if($mostrarJuez1)
+                                <td class="px-4 py-2 text-center border-r border-AzulPrimario">{{ $prueba->nombre_juez_1 }}</td>
+                            @endif
+                            @if($mostrarJuez2)
+                                <td class="px-4 py-2 text-center border-r border-AzulPrimario">{{ $prueba->nombre_juez_2 }}</td>
+                            @endif
+                            @if($mostrarJuez3)
+                                <td class="px-4 py-2 text-center border-AzulPrimario">{{ $prueba->nombre_juez_3 }}</td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -50,84 +67,72 @@
     </div>
 
     <!-- Modal -->
-    <form id="confirmarInscripcionForm" action="{{ route('confirmar') }}" method="POST" class="hidden">
-        @csrf
-        <input type="hidden" name="inscripciones" id="inscripcionesInput">
-    </form>
-    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-        <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-4/5 flex flex-col">
-            <div class="flex justify-end">
-                <button id="closeModalXBtn" class="text-gray-500 hover:text-gray-700 text-4xl">&times;</button>
-            </div>
-            <h2 class="text-xl font-bold mb-4">Inscribirse a una prueba</h2>
-            <div id="inscripciones" class="flex-grow overflow-y-auto">
-                <div class="inscripcion">
-                    <label for="prueba" class="block text-sm font-medium text-gray-700">Prueba</label>
-                    <select id="prueba" name="prueba"
-                        class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none
-                 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                        required>
-                        <option value="">Selecciona una prueba</option>
-                        @foreach ($pruebas as $prueba)
-                            @php
-                                $fechas = explode('|', $prueba->fecha); // Convertir la cadena de fechas en un array
-                            @endphp
-                            <option value="{{ $prueba->id }}" data-fechas="{{ $prueba->fecha }}">
-                                {{ $prueba->nombre_prueba }} - {{ $prueba->disciplina }} -
-                                {{ implode(' - ', $fechas) }}
-                            </option>
-                        @endforeach
-                    </select>
+<form id="confirmarInscripcionForm" action="{{ route('confirmar') }}" method="POST" class="hidden">
+    @csrf
+    <input type="hidden" name="inscripciones" id="inscripcionesInput">
+</form>
+<div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-4/5 flex flex-col">
+        <div class="flex justify-end">
+            <button id="closeModalXBtn" class="text-gray-500 hover:text-gray-700 text-4xl">&times;</button>
+        </div>
+        <h2 class="text-xl font-bold mb-4">Inscribirse a una prueba</h2>
+        <div id="inscripciones" class="flex-grow overflow-y-auto">
+            <div class="inscripcion">
+                <label for="prueba" class="block text-sm font-medium text-gray-700">Prueba</label>
+                <select id="prueba" name="prueba" 
+                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none
+                 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                 <option value="">Selecciona una prueba</option>
+                    @foreach($pruebas as $prueba)
+                        @php
+                            $fechas = explode('|', $prueba->fecha); // Convertir la cadena de fechas en un array
+                        @endphp
+                        <option value="{{ $prueba->id }}" data-fechas="{{ $prueba->fecha }}">
+                            {{ $prueba->nombre_prueba }} - {{ $prueba->disciplina }} - {{ implode(' - ', $fechas) }}
+                        </option>
+                    @endforeach
+                </select>
 
-                    <label for="fecha" class="block text-sm font-medium text-gray-700 mt-4">Fecha</label>
-                    <div id="fechas" class="mt-1">
-                        @foreach ($pruebas as $prueba)
-                            @php
-                                $fechas = explode('|', $prueba->fecha);
-                            @endphp
-                            @foreach ($fechas as $fecha)
-                                <div class="flex items-center">
-                                    <input id="fecha_{{ $loop->parent->index }}_{{ $loop->index }}" name="fechas[]"
-                                        type="checkbox" value="{{ $fecha }}"
-                                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                    <label for="fecha_{{ $loop->parent->index }}_{{ $loop->index }}"
-                                        class="ml-2 block text-sm text-gray-900">{{ $fecha }}</label>
-                                </div>
-                            @endforeach
-                        @endforeach
-                    </div>
-
-                    <label for="perros" class="block text-sm font-medium text-gray-700 mt-4">Selecciona tus
-                        perros</label>
-                    <div id="perrosCheckboxes" class="mt-2">
-                        @foreach ($perros as $perro)
+                <label for="fecha" class="block text-sm font-medium text-gray-700 mt-4">Fecha</label>
+                <div id="fechas" class="mt-1">
+                    @foreach($pruebas as $prueba)
+                        @php
+                            $fechas = explode('|', $prueba->fecha);
+                        @endphp
+                        @foreach($fechas as $fecha)
                             <div class="flex items-center">
-                                <input id="perro_{{ $perro->id }}" name="perros[]" type="checkbox"
-                                    value="{{ $perro->id }}"
-                                    class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                                <label for="perro_{{ $perro->id }}" class="ml-2 block text-sm text-gray-900">
-                                    {{ $perro->nombre_perro }}
-                                </label>
-                                <span id="precio_{{ $perro->id }}" class="ml-2 block text-sm text-gray-900"></span>
-                                <!-- Span para mostrar el precio dinámico -->
+                                <input id="fecha_{{ $loop->parent->index }}_{{ $loop->index }}" name="fechas[]" type="checkbox" value="{{ $fecha }}" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                                <label for="fecha_{{ $loop->parent->index }}_{{ $loop->index }}" class="ml-2 block text-sm text-gray-900">{{ $fecha }}</label>
                             </div>
                         @endforeach
+                    @endforeach
+                </div>
+
+                <label for="perros" class="block text-sm font-medium text-gray-700 mt-4">Selecciona tus perros</label>
+                <div id="perrosCheckboxes" class="mt-2">
+                    @foreach($perros as $perro)
+                    <div class="flex items-center">
+                        <input id="perro_{{ $perro->id }}" name="perros[]" type="checkbox" value="{{ $perro->id }}" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                        <label for="perro_{{ $perro->id }}" class="ml-2 block text-sm text-gray-900">
+                            {{ $perro->nombre_perro }} 
+                        </label>
+                        <span id="precio_{{ $perro->id }}" class="ml-2 block text-sm text-gray-900"></span> <!-- Span para mostrar el precio dinámico -->
                     </div>
+                @endforeach
                 </div>
             </div>
-            <div class="flex justify-around p-4 bg-gray-100">
-                <button id="addInscripcionBtn" class="bg-blue-500 text-white py-2 px-4 rounded">Hacer otra
-                    inscripción</button>
-                <button id="terminarInscripcionBtn" class="bg-green-500 text-white py-2 px-4 rounded">Terminar
-                    inscripción</button>
-                <button id="closeModalBtn" class="bg-red-500 text-white py-2 px-4 rounded">Cancelar las
-                    inscripciones</button>
-            </div>
-            <div class="flex justify-end p-4 bg-gray-100">
-                <span id="totalPrecio" class="text-lg font-bold">Total: 0 euros</span>
-            </div>
+        </div>
+        <div class="flex justify-around p-4 bg-gray-100">
+            <button id="addInscripcionBtn" class="bg-blue-500 text-white py-2 px-4 rounded">Hacer otra inscripción</button>
+            <button id="terminarInscripcionBtn" class="bg-green-500 text-white py-2 px-4 rounded">Terminar inscripción</button>
+            <button id="closeModalBtn" class="bg-red-500 text-white py-2 px-4 rounded">Cancelar las inscripciones</button>
+        </div>
+        <div class="flex justify-end p-4 bg-gray-100">
+            <span id="totalPrecio" class="text-lg font-bold">Total: 0 euros</span>
         </div>
     </div>
+</div>
 
     {{-- abre y cierra el modal de inscripciones --}}
 
