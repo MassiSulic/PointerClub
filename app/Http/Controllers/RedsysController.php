@@ -103,6 +103,16 @@ class RedsysController extends Controller
             throw new \Exception('El detalle no tiene un formato JSON válido');
         }
 
+        // Limpiar los datos de los elementos del detalle
+        $detalleArray = array_map(function ($item) {
+            return [
+                'prueba' => trim(str_replace("\n", " ", $item['prueba'])),  // Eliminar saltos de línea y espacios adicionales
+                'fecha' => trim($item['fecha']),  // Eliminar espacios adicionales
+                'perro' => trim($item['perro']),  // Eliminar espacios adicionales
+                'valor' => isset($item['valor']) ? $item['valor'] : 'Valor no especificado', // Validar si existe valor
+            ];
+        }, $detalleArray);
+
         // Crear descripción de las inscripciones
         $description = '';
         $lastPerro = '';
@@ -177,6 +187,7 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
 
 
 
