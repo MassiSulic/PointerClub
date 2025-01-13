@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra Exitosa</title>
+    <title>Inscripción Pendiente</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,7 +68,7 @@
 </head>
 <body>
 
-    <h1>Inscripción exitosa</h1>
+    <h1>Inscripción pendiente</h1>
 
     <p>Estimado <strong>{{ $userName }}</strong>,</p>
     <p>Nos complace informarle que su inscripción ha sido procesada con éxito. A continuación, encontrará los detalles de su inscripción.</p>
@@ -98,6 +98,8 @@
     <div class="order-number">
         <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
+
+    <p style="color: red; font-weight: bold;">Recuerde abonar la inscripción el día de la competencia.</p>
 
     <div class="footer">
         <p>Si tiene alguna pregunta, no dude en <a href="mailto:{{ config('mail.from.address') }}">contactarnos</a>.</p>

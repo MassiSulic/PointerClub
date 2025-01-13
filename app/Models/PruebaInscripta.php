@@ -16,6 +16,7 @@ class PruebaInscripta extends Model
         'fecha',
         'perro',
         'valor',
+        'pago',
     ];
 
     public function user()
