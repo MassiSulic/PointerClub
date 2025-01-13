@@ -12,9 +12,15 @@
     {!! $form !!}  <!-- Aquí insertamos el formulario HTML tal como está -->
 
     <script>
-        // Redirigir automáticamente al formulario de pago
-        document.forms[0].submit();
+        window.onload = function() {
+            // Depuración para verificar si el formulario está presente
+            console.log('Formulario de pago:', document.forms[0]);
+
+            // Redirigir automáticamente al formulario de pago
+            document.forms[0].submit();
+        }
     </script>
 </body>
 </html>
+
     

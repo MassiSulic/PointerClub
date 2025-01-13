@@ -73,7 +73,7 @@ class RedsysController extends Controller
 
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order));
+    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $detalleHtml));
 
     // Mostrar vista de éxito al cliente
     return view('redsys.success');
