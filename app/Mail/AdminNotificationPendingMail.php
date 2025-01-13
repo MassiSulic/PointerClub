@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PurchasePendingMail extends Mailable
+class AdminNotificationPendingMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,14 +29,14 @@ class PurchasePendingMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Inscripción Exitosa',
+            subject: 'Notificación de Nueva Compra Pendiente',
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.purchase_pending',
+            view: 'emails.admin_notification_pending',
         );
     }
 
