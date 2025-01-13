@@ -44,12 +44,12 @@ class RedsysController extends Controller
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
-    // Suponiendo que tienes los datos de las inscripciones en algún lugar, ejemplo:
-    $inscripcionesData = $request->input('inscripcionesData', []); // o lo que sea necesario para obtener esos datos
+    // Recuperar los datos de las inscripciones desde la sesión
+    $inscripcionesData = session('inscripcionesData', []); // Recuperar de sesión (vacío si no existe)
 
-    // Asegurarte de que los datos están disponibles
+    // Verificar que los datos están disponibles
     if (empty($inscripcionesData)) {
-        $inscripcionesData = []; // Evitar que sea null
+        return back()->with('error', 'No se encontraron datos de inscripciones.');
     }
 
     // Enviar correo al usuario
@@ -62,6 +62,7 @@ class RedsysController extends Controller
     // Mostrar vista de éxito al cliente
     return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
 }
+
 
 
 
@@ -136,6 +137,9 @@ class RedsysController extends Controller
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
+        // Almacenar los datos de las inscripciones en la sesión
+        session(['inscripcionesData' => $inscripcionesData]);
+
         // Configurar Redsys para el pago
         Redsys::setAmount($amount);
         Redsys::setOrder($order);
@@ -164,6 +168,7 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
 
 
     
