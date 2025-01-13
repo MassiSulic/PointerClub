@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class PurchaseSuccessfulMail extends Mailable
 {
@@ -31,6 +32,10 @@ class PurchaseSuccessfulMail extends Mailable
      */
     public function __construct($userName, $description, $amount, $order, $detalle)
     {
+        if (empty($detalle)) {
+            Log::debug('Detalle vacío recibido en el correo');
+        }
+
         // Asignamos los datos recibidos al objeto
         $this->userName = $userName;
         $this->description = $description;
