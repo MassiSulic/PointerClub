@@ -89,6 +89,34 @@
 </script>
 {{-- Script para mensaje de inscripcion correcta --}}
 
+{{-- Sanitizar los datos enviados --}}
+<script>
+    document.getElementById('redsysForm').addEventListener('submit', function(event) {
+        let nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
+        let total = document.querySelector('input[name="total"]').value;
+        let detalle = document.querySelector('input[name="detalle"]').value;
+
+        // Sanitizar nombre_prueba: eliminar saltos de línea y espacios innecesarios
+        nombrePrueba = nombrePrueba.replace(/\n/g, ' ').trim();
+
+        // Sanitizar detalle: limpiar todos los saltos de línea y espacios extra
+        detalle = detalle.replace(/\n/g, ' ').trim();
+        detalle = JSON.stringify(JSON.parse(detalle)); // Asegurarse de que el JSON esté limpio y no tenga caracteres extra
+
+        // Asignar los valores sanitizados nuevamente a los inputs del formulario
+        document.querySelector('input[name="nombre_prueba"]').value = nombrePrueba;
+        document.querySelector('input[name="detalle"]').value = detalle;
+
+        // Si algún valor está vacío, prevenimos el envío temporalmente
+        if (!nombrePrueba || !total || !detalle) {
+            event.preventDefault();
+            alert('Faltan datos en el formulario. Verifica los campos.');
+        }
+    });
+</script>
+{{-- Sanitizar los datos enviados --}}
+
+
 
 <!-- verificacion de datos enviados -->
 <script>
