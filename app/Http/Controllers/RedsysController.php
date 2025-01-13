@@ -37,7 +37,6 @@ class RedsysController extends Controller
     // Verificar que el usuario esté autenticado
     if (!$user) {
         Log::debug('Usuario no autenticado');
-        return back()->with('error', 'Usuario no autenticado');
     }
 
     // Datos del usuario
@@ -71,7 +70,6 @@ class RedsysController extends Controller
     // Verificar si el detalle es válido (no vacío ni nulo)
     if (empty($detalle)) {
         Log::error('Detalle vacío recibido');
-        return back()->with('error', 'El detalle de la compra no ha sido recibido correctamente');
     }
 
     // Decodificar el JSON de detalle si es necesario
@@ -81,7 +79,6 @@ class RedsysController extends Controller
     // Verificar si la decodificación del JSON fue exitosa
     if ($detalleArray === null) {
         Log::error('Error al decodificar el JSON del detalle');
-        return back()->with('error', 'El detalle no tiene un formato válido');
     }
 
     // Enviar correo al usuario logueado
