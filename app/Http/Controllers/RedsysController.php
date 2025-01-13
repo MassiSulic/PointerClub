@@ -42,11 +42,56 @@ class RedsysController extends Controller
 
     $userName = $user->name; // Nombre del usuario logueado
     $userEmail = $user->email; // Email del usuario logueado
-    $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
-    // Enviar correo al usuario logueado
+    // Obtener el detalle y decodificarlo
+    $detalle = $request->input('detalle'); // Recibir el detalle como string JSON
+    $detalleArray = json_decode($detalle, true);
+    Log::debug('Detalle decodificado:', ['detalle' => $detalleArray]);
+
+    // Verificar que el detalle se haya decodificado correctamente
+    if ($detalleArray === null) {
+        throw new \Exception('El detalle no tiene un formato JSON válido');
+    }
+
+    // Construir la descripción de la compra como en Redsys
+    $description = '';
+    $lastPerro = ''; // Variable para almacenar el último perro procesado
+    $lastPrueba = ''; // Variable para almacenar la última prueba procesada
+    $fechas = []; // Para almacenar las fechas del mismo perro y prueba
+
+    foreach ($detalleArray as $item) {
+        $nombrePerro = $item['perro'] ?? 'Perro no especificado';
+        $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
+        
+        // Separar la parte después del guion en 'prueba'
+        $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
+        $fecha = $item['fecha'] ?? 'Fecha no especificada';
+
+        // Si es el mismo perro y prueba, agregar la fecha al array
+        if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
+            $fechas[] = $fecha;
+        } else {
+            // Si cambiamos de perro o prueba, formatear la descripción
+            if (!empty($fechas)) {
+                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+            }
+            // Actualizar variables
+            $lastPerro = $nombrePerro;
+            $lastPrueba = $pruebaSegment;
+            $fechas = [$fecha]; // Reiniciar fechas con la nueva fecha
+        }
+    }
+
+    // Añadir la última entrada
+    if (!empty($fechas)) {
+        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+    }
+
+    Log::debug('Descripción generada para Redsys:', ['description' => $description]);
+
+    // Enviar correo al usuario logueado con la descripción generada
     Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order));
 
     // Enviar correo al administrador
@@ -56,6 +101,7 @@ class RedsysController extends Controller
     // Mostrar vista de éxito al cliente
     return view('redsys.success');
 }
+
 
     public function failure()
     {

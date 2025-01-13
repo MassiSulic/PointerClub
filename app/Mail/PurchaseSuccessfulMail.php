@@ -55,6 +55,12 @@ class PurchaseSuccessfulMail extends Mailable
         // Usamos una vista de Blade para el contenido del correo
         return new Content(
             view: 'emails.purchase_successful', // La vista de Blade que creamos
+            with: [
+                'userName' => $this->userName,
+                'description' => $this->description,
+                'amount' => $this->amount,
+                'order' => $this->order,
+            ],
         );
     }
 
