@@ -49,17 +49,9 @@
             </form>               
             <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
                 @csrf
-                {{-- Limpiar el campo 'prueba' antes de enviarlo --}}
-                @php
-                    $inscripcionesLimpiadas = array_map(function ($inscripcion) {
-                        $inscripcion['prueba'] = trim($inscripcion['prueba']); // Eliminar saltos de línea y espacios
-                        return $inscripcion;
-                    }, $inscripciones);
-                @endphp
-
-                <input type="hidden" name="nombre_prueba" value="{{ $inscripcionesLimpiadas[0]['prueba'] }}">
+                <input type="hidden" name="nombre_prueba" value="{{ $inscripciones[0]['prueba'] }}">
                 <input type="hidden" name="total" value="{{ $total }}">
-                <input type="hidden" name="detalle" value="{{ json_encode($inscripcionesLimpiadas) }}">
+                <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
             </form>            
         </div>
@@ -92,29 +84,3 @@
     });
 </script>
 {{-- Script para mensaje de inscripcion correcta --}}
-
-
-<script>
-    // Espera a que el documento se cargue completamente
-    document.addEventListener('DOMContentLoaded', function() {
-        // Selecciona el formulario
-        var form = document.getElementById('redsysForm');
-
-        // Agrega un listener para el evento 'submit'
-        form.addEventListener('submit', function(event) {
-            // Obtén los datos del formulario
-            var detalle = document.getElementById('detalle').value; // El valor del campo 'detalle'
-            var nombrePrueba = document.getElementById('nombre_prueba').value; // O cualquier otro campo relevante
-            var total = document.getElementById('total').value;
-
-            // Registra los datos en la consola
-            console.log('Datos a enviar al backend:');
-            console.log('Detalle:', detalle);
-            console.log('Nombre de la prueba:', nombrePrueba);
-            console.log('Total:', total);
-
-            // Si todo está correcto, el formulario se enviará después del log
-            // Si necesitas validar algo o detener el envío, puedes usar event.preventDefault()
-        });
-    });
-</script>
