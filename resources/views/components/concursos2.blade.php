@@ -4,7 +4,7 @@
     </div>
 
     <div class="p-4 lg:w-2/3 w-full">
-        <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario">Concurso</h1>
+        <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario">{{ $titulo }}</h1>
 
         <div>
             <ul class="flex flex-col space-y-6 pl-4 py-4 mx-auto">
@@ -25,7 +25,7 @@
                         <span class="text-lg font-semibold text-black">Responsable:</span>
                         <span class="w-full border-b-2 border-b-black border-transparent bg-transparent pl-2">{{ $responsable }}</span>
                     </li>
-                    <li class="flex flex-row items-end w-full">
+                    <li class="flex flex-row items-end w-1/3">
                         <span class="text-lg font-semibold text-black">Tel:</span>
                         <span class="w-full border-b-2 border-b-black border-transparent bg-transparent pl-2">{{ $telefono }}</span>
                     </li>
@@ -46,7 +46,8 @@
         </div>
 
         <div class="flex justify-end items-center gap-8 mt-2">
-            <a href="https://pointerclubespana.es/Inscripciones" class="w-30 px-2 py-1 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-black border-2 border-black transition-all duration-300 text-center">
+            <!-- Enlace dinámico -->
+            <a href="{{ $url }}" target="_blank" class="w-30 px-2 py-1 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-black border-2 border-black transition-all duration-300 text-center">
                 INSCRIPCIÓN
             </a>
         </div>
