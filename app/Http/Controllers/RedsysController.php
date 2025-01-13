@@ -40,21 +40,13 @@ class RedsysController extends Controller
         return back()->with('error', 'Usuario no autenticado');
     }
 
-    $userName = $user->name; // Nombre del usuario logueado
-    $userEmail = $user->email; // Email del usuario logueado
+    // Definir variables para la compra
     $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
-    // Enviar correo al usuario logueado
-    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, []));
-
-    // Enviar correo al administrador
-    $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order));
-
     // Mostrar vista de éxito al cliente
-    return view('redsys.success');
+    return view('redsys.success', compact('description', 'amount', 'order'));
 }
 
     public function failure()
