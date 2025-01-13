@@ -49,10 +49,9 @@
 
                 </div>
                 <!-- Tercer Bloque -->
-                <div class="flex flex-col items-center text-center">
+                <div class="flex flex-col justify-between items-center text-center">
                     <img src="{{ asset('svg/home/Trofeo.svg') }}" alt="Icono 3" class="w-28 h-28">
-                    <h3 class="mt-4 text-lg w-60 ">Próximo CONCURSO. <span
-                            class=" bg-MarronSecundario px-2 rounded-full text-white">AZUAGA 2024</span></h3>
+                    <h3 class="mt-4 text-lg w-60 ">Próximo CONCURSO.</h3>
                     <a href="#proximo-concurso">
                         <button class="mt-4 px-2 py-1 bg-[#C7CBC6] text-black hover:bg-[#616261] border-black border-2">
                             MÁS INFO
@@ -63,22 +62,23 @@
             </div>
         </div>
 
-        <div class="bg-AzulPrimario flex flex-col md:flex-row h-auto ">
-            <div class="w-full md:w-1/2 flex flex-col justify-center items-start p-6 text-BlancoTerciario text-left">
+        <div class="bg-AzulPrimario flex flex-col justify-between md:flex-row h-auto ">
+            <div class="md:w-1/2 flex flex-col justify-center items-start p-6 text-BlancoTerciario text-left">
                 <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-                    JORNADA DE CAZA. Reunión<br> de aficionados al pointer.
+                    CAMPEONATOS DE EUROPA POINTER GB/BC
                 </h1>
                 <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4">
-                    30 de Noviembre 2024 en Badajoz.
+                    11, 12 13 y 14 de febrero del 2025.
                 </p>
                 <button
-                    class="mt-4 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-MarronSecundario border-2">
+                    class="mt-4 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-MarronSecundario border-2"
+                    onclick="openModal('{{ route('blog.show', 'campeonatos') }}', 'SEMANA DE ANDALUCIA 2025')">
                     MÁS INFO
                 </button>
             </div>
-            <div class="w-full md:w-1/2 h-[300px] md:h-[600px]">
-                <div class="h-full bg-cover bg-right"
-                    style="background-image: url({{ asset('image/home/Recurso-8.jpg') }});"></div>
+            <div class="lg:w-1/2 md:w-1/2 h-[300px] md:h-[450px]">
+                <div class="h-full bg-contain bg-no-repeat bg-center"
+                    style="background-image: url({{ asset('image/home/Semana.png') }});"></div>
             </div>
 
         </div>
@@ -109,37 +109,49 @@
                 <div class="">
                     <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1>
-                    <img src="image/home/ProximoConcurso/1.jpg" alt="">
+                    <a href="https://pointerclubespana.es/Concursos">
+                        <img src="image/home/ProximoConcurso/1.jpg" alt="">
+                    </a>
                 </div>
             </div>
 
             <!-- Patrocinadores -->
             <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 lg:pl-20">
-                <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7">
+                {{-- <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7"> --}}
                 <img src="{{ asset('svg/home/Mesa de trabajo 36.svg') }}" alt="icono-5" class="h-14">
-                <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14">
+                {{-- <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14"> --}}
             </div>
         </div>
 
         <div class="bg-BlancoTerciario pt-12">
             <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-96">
-                <x-calendar :events="[
+
+                <x-calendario :events="[
                     2 => [
-                        // Febrero
-                        2 => ['Semana Andalucía GB, 02/02, Marchena.', 'Semana Andalucía BC, 02/02, Marchena.'],
-                        3 => ['Semana Andalucía GB, 03/02, Marchena.', 'Semana Andalucía BC, 03/02, Marchena.'],
-                        4 => ['Semana Andalucía GB, 04/02, Jerez.', 'Semana Andalucía BC, 04/02, Jerez.'],
-                        5 => ['Semana Andalucía GB, 05/02, Jerez.', 'Semana Andalucía BC, 05/02, Jerez.'],
-                        6 => ['Semana Andalucía GB, 06/02, Jerez.', 'Semana Andalucía BC, 06/02, Jerez.'],
-                        8 => ['Copa Europa, 08/02, Jerez.'],
-                        9 => ['Copa Europa, 09/02, Jerez.'],
-                        11 => ['Campeonatos Europa BC Pointer, 11/02, Jerez.'],
-                        12 => ['Campeonatos Europa BC Pointer, 12/02, Jerez.'],
-                        13 => ['Campeonatos Europa GB Pointer, 13/02, Jerez.'],
-                        14 => ['Campeonatos Europa GB Pointer, 14/02, Jerez.'],
+                        ['date' => '2025-02-02', 'name' => 'CONCURSOS: GB y BC (Copa de España, Carmona)'],
+                        ['date' => '2025-02-03', 'name' => 'CONCURSOS: GB y BC (Carmona)'],
+                        ['date' => '2025-02-04', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
+                        ['date' => '2025-02-05', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
+                        ['date' => '2025-02-06', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
+                        ['date' => '2025-02-07', 'name' => 'CONCURSOS: EURODERBY (Paterna de Ribera)'],
+                        [
+                            'date' => '2025-02-11',
+                            'name' => 'CONCURSOS: Campeonato de Europa BC Pointer (1ª jornada, Paterna de Ribera)',
+                        ],
+                        [
+                            'date' => '2025-02-12',
+                            'name' => 'CONCURSOS: Campeonato de Europa BC Pointer (2ª jornada, Paterna de Ribera)',
+                        ],
+                        [
+                            'date' => '2025-02-13',
+                            'name' => 'CONCURSOS: Campeonato de Europa GB Pointer (1ª jornada, Paterna de Ribera)',
+                        ],
+                        [
+                            'date' => '2025-02-14',
+                            'name' => 'CONCURSOS: Campeonato de Europa GB Pointer (2ª jornada, Paterna de Ribera)',
+                        ],
                     ],
                 ]" />
-
 
 
 
@@ -147,8 +159,8 @@
 
 
             <div class=" flex flex-col items-center space-y-12 p-20 ">
-                <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
-                    <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" alt="">
+                <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" class="w-48" alt="">
+                {{-- <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
                     <img src="{{ asset('svg/home/icons-partners/pointerdeca.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointerdogtra.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointereskal.svg') }}" alt="">
@@ -159,7 +171,7 @@
                     <img src="{{ asset('svg/home/icons-partners/pointergarmin.svg') }}" alt="" class=" w-48 ">
                     <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt=""
                         class=" w-48 md:place-self-start ">
-                </div>
+                </div> --}}
             </div>
 
         </div>
