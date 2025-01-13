@@ -68,7 +68,7 @@ class BlogController extends Controller
                 'title' => 'CAMPEONATOS DE EUROPA POINTER GB/BC',
                 'excerpt' => 'Descargá los programas completos',
                 'slug' => 'campeonatos',
-                'image' => asset('Blog/img-04.jpg')
+                'image' => asset('Blog/IMG_0404.jpg')
             ],
             (object)[
                 'title' => 'SEMANA DE ANDALUCIA  2025',
@@ -86,7 +86,7 @@ class BlogController extends Controller
                 'title' => '¡Nueva Web del Pointer Club Español!',
                 'excerpt' => 'Un espacio renovado para socios y amantes del Pointer Inglés',
                 'slug' => 'nuevaWeb',
-                'image' => asset('Blog/img-12.jpg')
+                'image' => asset('Blog/IMG_0412.jpg')
             ],
         ];
     }
