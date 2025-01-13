@@ -116,6 +116,11 @@ class RedsysController extends Controller
             $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
             $fecha = $item['fecha'] ?? 'Fecha no especificada';
 
+        // Limpia el campo description de saltos de línea
+        $description = str_replace(["\n", "\r"], '', $description);
+
+        Log::debug('Descripción generada para Redsys (limpia):', ['description' => $description]);
+
             $inscripcionesData[] = [
                 'perro' => $nombrePerro,
                 'prueba' => $nombrePrueba,
