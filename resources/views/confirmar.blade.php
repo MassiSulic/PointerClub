@@ -49,7 +49,12 @@
             </form>               
             <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
                 @csrf
+                @if (isset($inscripciones[0]))
                 <input type="hidden" name="nombre_prueba" value="{{ $inscripciones[0]['prueba'] }}">
+            @else
+                <p>No se ha encontrado ninguna inscripción.</p>
+            @endif
+
                 <input type="hidden" name="total" value="{{ $total }}">
                 <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
