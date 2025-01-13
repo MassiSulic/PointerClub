@@ -196,7 +196,7 @@
                     const perrosSeleccionados = inscripcion.querySelectorAll('input[name="perros[]"]:checked').length;
                     const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
                     const esSocioValido = numeroSocio && numerosSociosValidos.includes(numeroSocio);
-                    const precio = esSocioValido ? 35 : 40;
+                    const precio = esSocioValido ? 1 : 40;
                     totalPrecio += fechasSeleccionadas * perrosSeleccionados * precio;
     
                     // Actualizar el precio dinámico al lado del nombre del perro
