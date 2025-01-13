@@ -47,7 +47,7 @@ class RedsysController extends Controller
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
     // Enviar correo al usuario logueado
-    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order));
+    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, []));
 
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
@@ -65,7 +65,6 @@ class RedsysController extends Controller
     public function process(Request $request)
 {
     try {
-        // Log para inspeccionar los datos recibidos
         Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
 
         $key = config('redsys.key');
@@ -73,12 +72,11 @@ class RedsysController extends Controller
         $terminal = config('redsys.terminal');
         $enviroment = config('redsys.enviroment');
 
-        // Datos del pedido
-        $amount = $request->input('total'); // Convertimos a céntimos
-        $order = time(); // Usamos timestamp como número de pedido
-        $detalle = $request->input('detalle'); // Detalle de los productos o servicios
+        $amount = $request->input('total'); // Total en céntimos
+        $order = time(); // Número de pedido único
+        $detalle = $request->input('detalle'); // Detalle de los productos
 
-        // Decodificar el detalle si es un JSON
+        // Decodificar el detalle (el JSON enviado desde el formulario)
         $detalleArray = json_decode($detalle, true);
         Log::debug('Detalle decodificado:', ['detalle' => $detalleArray]);
 
@@ -87,71 +85,91 @@ class RedsysController extends Controller
             throw new \Exception('El detalle no tiene un formato JSON válido');
         }
 
-        // Construir la descripción iterando sobre cada inscripción
+        // Crear descripción de las inscripciones
         $description = '';
-        $lastPerro = ''; // Variable para almacenar el último perro procesado
-        $lastPrueba = ''; // Variable para almacenar la última prueba procesada
-        $fechas = []; // Para almacenar las fechas del mismo perro y prueba
+        $lastPerro = '';
+        $lastPrueba = '';
+        $fechas = [];
 
-    foreach ($detalleArray as $item) {
-        $nombrePerro = $item['perro'] ?? 'Perro no especificado';
-        $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
-        
-        // Separar la parte después del guion en 'prueba'
-        $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
-        $fecha = $item['fecha'] ?? 'Fecha no especificada';
+        // Almacenar los datos del formulario en una variable (array)
+        $inscripcionesData = [];
 
-        // Si es el mismo perro y prueba, agregar la fecha al array
-        if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
-            $fechas[] = $fecha;
-        } else {
-            // Si cambiamos de perro o prueba, formatear la descripción
-            if (!empty($fechas)) {
-                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+        foreach ($detalleArray as $item) {
+            $nombrePerro = $item['perro'] ?? 'Perro no especificado';
+            $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
+            $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
+            $fecha = $item['fecha'] ?? 'Fecha no especificada';
+
+            // Almacenar cada inscripción en el array
+            $inscripcionesData[] = [
+                'perro' => $nombrePerro,
+                'prueba' => $nombrePrueba,
+                'fecha' => $fecha,
+                'valor' => $item['valor'] ?? 'Valor no especificado',
+            ];
+
+            // Construir la descripción
+            if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
+                $fechas[] = $fecha;
+            } else {
+                if (!empty($fechas)) {
+                    $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+                }
+                $lastPerro = $nombrePerro;
+                $lastPrueba = $pruebaSegment;
+                $fechas = [$fecha]; 
             }
-            // Actualizar variables
-            $lastPerro = $nombrePerro;
-            $lastPrueba = $pruebaSegment;
-            $fechas = [$fecha]; // Reiniciar fechas con la nueva fecha
         }
-    }
 
-    // Añadir la última entrada
-    if (!empty($fechas)) {
-        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
-    }
+        // Añadir la última entrada
+        if (!empty($fechas)) {
+            $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+        }
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
-        // Configuración de Redsys
+        // Enviar los datos por correo electrónico
+        $user = Auth::user();
+        if ($user) {
+            $userEmail = $user->email;
+            $userName = $user->name;
+
+            // Enviar correo al usuario
+            Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $inscripcionesData));
+
+            // Enviar correo al administrador
+            $adminEmail = 'vaserweb.ok@gmail.com'; // Correo del administrador
+            Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $inscripcionesData));
+        }
+
+        // Configurar Redsys para el pago
         Redsys::setAmount($amount);
         Redsys::setOrder($order);
         Redsys::setMerchantcode($merchantCode);
-        Redsys::setCurrency('978'); // Euros
-        Redsys::setTransactiontype('0'); // Compra normal
+        Redsys::setCurrency('978'); 
+        Redsys::setTransactiontype('0'); 
         Redsys::setTerminal($terminal);
-        Redsys::setMethod('T'); // Pago con tarjeta
+        Redsys::setMethod('T');
         Redsys::setNotification(config('redsys.url_notification'));
         Redsys::setUrlOk(config('redsys.url_ok'));
         Redsys::setUrlKo(config('redsys.url_ko'));
         Redsys::setVersion('HMAC_SHA256_V1');
         Redsys::setTradeName(config('redsys.tradename'));
-        Redsys::setProductDescription($description); // Descripción completa
+        Redsys::setProductDescription($description);
         Redsys::setEnviroment($enviroment);
 
-        // Generar firma
+        // Generar firma y formulario de pago
         $signature = Redsys::generateMerchantSignature($key);
         Redsys::setMerchantSignature($signature);
-
-        // Crear el formulario de pago con Redsys
-        $form = Redsys::createForm(); // Este es un string HTML
+        $form = Redsys::createForm();
 
     } catch (\Exception $e) {
         return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
     }
 
-    // Redirigir a la vista con el formulario (ahora como string)
+    // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
     
 }
