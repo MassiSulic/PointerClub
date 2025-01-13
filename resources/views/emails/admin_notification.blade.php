@@ -59,17 +59,18 @@
     <div class="details">
         <p><strong>Nombre del Usuario:</strong> {{ $userName }}</p>
     </div>
+
     @php
-            $totalAmount = 0; // Variable para el total
-        @endphp
-        @foreach ($inscripcionesData as $inscripcion)
-            @php
-                $totalAmount += $inscripcion['valor']; // Sumar el valor de cada inscripción
-            @endphp
+        $totalAmount = 0; // Variable para el total
+    @endphp
+
     <div class="details">
         <h2>Datos de Inscripciones</h2>
         <ul>
             @foreach ($inscripcionesData as $inscripcion)
+                @php
+                    $totalAmount += $inscripcion['valor']; // Sumar el valor de cada inscripción
+                @endphp
                 <li>{{ $inscripcion['perro'] }} - {{ $inscripcion['prueba'] }} - {{ $inscripcion['fecha'] }} - {{ $inscripcion['valor'] }}</li>
             @endforeach
         </ul>
