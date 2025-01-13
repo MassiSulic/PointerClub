@@ -7,14 +7,21 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\RedsysController;
 
+
+// Ruta para la vista Actualidad / Blog
+use App\Http\Controllers\BlogController;
+
+Route::get('Actualidad', [BlogController::class, 'index'])->name('Actualidad');
+Route::get('blog/{slug}', [BlogController::class, 'showBlog'])->name('blog.show');
+
+
 // Definición de todas las vistas que responden al método GET + Rutas con nombre
-Route::view('/', 'Inicio')->name('Inicio');
+Route::get('/', [BlogController::class, 'listForHome'])->name('Inicio');
 Route::view('elPointer', 'elPointer')->name('elPointer');
 Route::view('Concursos', 'Concursos')->name('Concursos');
 Route::get('Inscripciones', [PruebaController::class, 'index'])->name('Inscripciones');
 Route::view('Resultados', 'Resultados')->name('Resultados');
 Route::view('Socios', 'Socios')->name('Socios');
-Route::view('Actualidad', 'Actualidad')->name('Actualidad');
 Route::view('Contacto', 'Contacto')->name('Contacto');
 Route::view('Privacidad', 'Privacidad')->name('Privacidad');
 Route::view('Cookies', 'Cookies')->name('Cookies');

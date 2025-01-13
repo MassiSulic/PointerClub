@@ -1,8 +1,19 @@
 <x-layout>
     <div class="w-full bg-neutral-100 overflow-hidden text-[#123240]">
         <!-- Sección Superior con Imagen y Texto -->
-        <div class="relative h-screen bg-cover bg-center flex justify-end items-center"
-            style="background-image: url({{ asset('image/home/escritorio-2.jpg') }});">
+        <style>
+            .bg-responsive {
+                background-image: url('{{ asset('image/home/cel-37.jpg') }}');
+            }
+
+            @media (min-width: 1024px) {
+                .bg-responsive {
+                    background-image: url('{{ asset('image/home/escritorio-2.jpg') }}');
+                }
+            }
+        </style>
+
+        <div class="relative h-screen bg-cover bg-center flex justify-end items-center bg-responsive">
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
             <div class="text-BlancoTerciario z-10 lg:mr-36 lg:text-left mx-auto text-center h-screen flex flex-col">
                 <div class="flex-grow flex items-center">
@@ -72,67 +83,33 @@
 
         </div>
 
-        <div class=" h-24 bg-BlancoTerciario" id="proximo-concurso"></div>
+        <div class="bg-BlancoTerciario">
+            <div class=" py-24 flex flex-row justify-center gap-4 flex-wrap">
+                @foreach ($blogs as $blog)
+                    <!-- Componente de tarjeta de blog -->
+                    <x-blog-card :title="$blog->title" :excerpt="$blog->excerpt" :contentUrl="route('blog.show', $blog->slug)" :image="$blog->image"
+                        onclick="openModal('{{ route('blog.show', $blog->slug) }}', '{{ $blog->title }}')" />
+                @endforeach
+            </div>
+
+            <!-- Usamos el componente modal -->
+            <x-blog-modal />
+        </div>
+
+        <div class=" bg-BlancoTerciario" id="proximo-concurso"></div>
 
         <div class=" text-BlancoTerciario">
             <div class="grid grid-cols-1 lg:grid-cols-2 bg-MarronSecundario">
                 <!-- Imagen del perro -->
                 <div class="bg-cover bg-top h-full"
-                    style="background-image: url({{ asset('image/home/escritorio-4.jpg') }}); min-height: 300px;"></div>
+                    style="background-image: url({{ asset('image/home/escritorio-4.jpg') }}); min-height: 300px;">
+                </div>
 
                 <!-- Contenido del evento -->
-                <div class="space-y-4 pb-8">
+                <div class="">
                     <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1>
-                    <!-- Logos de clubes -->
-                    <div class="flex flex-wrap items-center justify-center gap-4 py-8">
-                        <img src="{{ asset('svg/home/Mesa de trabajo 29.svg') }}" alt="icono-1" class="h-24">
-                        <img src="{{ asset('svg/home/arion.psd@150x.png') }}" alt="icono-2" class="h-16">
-                        <img src="{{ asset('svg/home/inMRvu.tif@150x.png') }}" alt="icono-3" class="h-20">
-                        <img src="{{ asset('svg/home/Recurso 4@150x.png') }}" alt="icono-3" class="h-20">
-                        <img src="{{ asset('svg/home/Recurso 6@150x.png') }}" alt="icono-3" class="h-20">
-                    </div>
-
-                    <h2 class=" text-xl font-semibold lg:pl-20 lg:text-left text-center">CAMPEONATO SOBRE PERDIZ<br>
-                        SALVAJE DE MONTAÑA
-                    </h2>
-                    <span
-                        class="text-2xl font-semibold text-BlancoTerciario bg-AzulPrimario px-5 rounded-full lg:ml-20 lg:text-left text-center block lg:inline ">SIERRA
-                        DE AZUAGA 2024</span>
-
-                    <!-- Fechas y ubicación -->
-                    <div class="flex lg:justify-start justify-center lg:pl-20  gap-8 py-4">
-                        <div class="flex items-center space-x-2">
-                            <img src="{{ asset('svg/home/pointerhorario.svg') }}" alt="icono-4" class=" h-12">
-                            <p>
-                                <span class="font-bold">11 y 12 ENE.</span>
-                            </p>
-                        </div>
-                        <div class="flex items-start space-x-2">
-                            <img src="{{ asset('svg/home/pointerubicacion.svg') }}" alt="icono-5" class="h-12">
-                            <p>
-                                <span class="font-bold">2700 HECTAREAS,</span><br>
-                                Sierra de Azuaga.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Concentración y contacto -->
-                    <div class=" lg:pl-20 lg:text-left text-center">
-                        <h3 class="text-lg font-bold text-AzulPrimario">CONCENTRACIÓN</h3>
-                        <p>08.30 H, "Bar El Cazador".</p>
-                    </div>
-
-                    <h3 class="text-lg pl-20 text-AzulPrimario"><strong>699 939241</strong> (Rafael Fuentes)</h3>
-
-                    <!-- Botón -->
-                    <div class=" flex justify-center lg:justify-start">
-                        <button
-                            class="my-4 lg:ml-20 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-2 border-[#8E6E53] rounded ">
-                            MÁS INFO
-                        </button>
-                    </div>
-
+                    <img src="image/home/ProximoConcurso/1.jpg" alt="">
                 </div>
             </div>
 
@@ -179,8 +156,7 @@
                 <div class=" gap-12 grid grid-cols-1 md:grid-cols-3 md:w-2/3 place-items-center ">
                     <img src="{{ asset('svg/home/icons-partners/pointerfilson.svg') }}" alt=""
                         class=" w-48 md:place-self-end ">
-                    <img src="{{ asset('svg/home/icons-partners/pointergarmin.svg') }}" alt=""
-                        class=" w-48 ">
+                    <img src="{{ asset('svg/home/icons-partners/pointergarmin.svg') }}" alt="" class=" w-48 ">
                     <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt=""
                         class=" w-48 md:place-self-start ">
                 </div>
