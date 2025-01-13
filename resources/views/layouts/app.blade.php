@@ -23,7 +23,7 @@
         background-position: center; 
         background-repeat: no-repeat; 
         background-color: rgba(0, 0, 0, 0.3); 
-        backdrop-filter: blur(10px);">
+        backdrop-filter: blur(2px);">
         <div class="">
             @include('layouts.navigation')
 
