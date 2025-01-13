@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseSuccessfulMail;
 use App\Mail\AdminNotificationMail;
-use App\Http\Controllers\PruebaController;
-
 
 class RedsysController extends Controller
 {
@@ -21,156 +19,168 @@ class RedsysController extends Controller
         $parameters = Redsys::getMerchantParameters($request->input('Ds_MerchantParameters'));
         $DsResponse = $parameters["Ds_Response"] + 0;
 
+        // Log para ver los parámetros recibidos en la notificación
+        Log::debug('Datos recibidos en la notificación:', $request->all());
+        Log::debug('Parámetros de Redsys:', $parameters);
+        Log::debug('Ds_Response:', $DsResponse);
+
         if (Redsys::check($key, $request->input()) && $DsResponse <= 99) {
-            // Confirmación positiva
+            Log::debug('Confirmación positiva de pago');
             return response('OK', 200);
         } else {
-            // Confirmación negativa
+            Log::debug('Confirmación negativa de pago');
             return response('KO', 400);
         }
     }
 
     public function success(Request $request)
-{
-    // Obtener el usuario logueado
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    // Verificar que el usuario esté autenticado
-    if (!$user) {
-        return back()->with('error', 'Usuario no autenticado');
+        if (!$user) {
+            return back()->with('error', 'Usuario no autenticado');
+        }
+
+        $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
+        $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €';
+        $order = time();
+
+        $inscripcionesData = session('inscripcionesData', []);
+
+        if (empty($inscripcionesData)) {
+            return back()->with('error', 'No se encontraron datos de inscripciones.');
+        }
+
+        Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
+        $adminEmail = 'vaserweb.ok@gmail.com';
+        Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
+
+        return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
     }
-
-    // Definir variables para la compra
-    $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
-    $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
-    $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
-
-    // Recuperar los datos de las inscripciones desde la sesión
-    $inscripcionesData = session('inscripcionesData', []); // Recuperar de sesión (vacío si no existe)
-
-    // Verificar que los datos están disponibles
-    if (empty($inscripcionesData)) {
-        return back()->with('error', 'No se encontraron datos de inscripciones.');
-    }
-
-    // Enviar correo al usuario
-    Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
-
-    // Enviar correo al administrador
-    $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
-
-    // Mostrar vista de éxito al cliente
-    return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
-}
-
-
-
 
     public function failure()
     {
-        return view('redsys.failure'); // Crea una vista para mostrar al cliente
+        return view('redsys.failure');
     }
 
     public function process(Request $request)
-{
-    try {
-        Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
-
-        $key = config('redsys.key');
-        $merchantCode = config('redsys.merchantcode');
-        $terminal = config('redsys.terminal');
-        $enviroment = config('redsys.enviroment');
-
-        $amount = $request->input('total'); // Total en céntimos
-        $order = time(); // Número de pedido único
-        $detalle = $request->input('detalle'); // Detalle de los productos
-
-        // Decodificar el detalle (el JSON enviado desde el formulario)
-        $detalleArray = json_decode($detalle, true);
-        Log::debug('Detalle decodificado:', ['detalle' => $detalleArray]);
-
-        // Verificar que el detalle se haya decodificado correctamente
-        if ($detalleArray === null) {
-            throw new \Exception('El detalle no tiene un formato JSON válido');
-        }
-
-        // Crear descripción de las inscripciones
-        $description = '';
-        $lastPerro = '';
-        $lastPrueba = '';
-        $fechas = [];
-
-        // Almacenar los datos del formulario en una variable (array)
-        $inscripcionesData = [];
-
-        foreach ($detalleArray as $item) {
-            $nombrePerro = $item['perro'] ?? 'Perro no especificado';
-            $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
-            $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
-            $fecha = $item['fecha'] ?? 'Fecha no especificada';
-
-            // Almacenar cada inscripción en el array
-            $inscripcionesData[] = [
-                'perro' => $nombrePerro,
-                'prueba' => $nombrePrueba,
-                'fecha' => $fecha,
-                'valor' => $item['valor'] ?? 'Valor no especificado',
-            ];
-
-            // Construir la descripción
-            if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
-                $fechas[] = $fecha;
-            } else {
-                if (!empty($fechas)) {
-                    $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
-                }
-                $lastPerro = $nombrePerro;
-                $lastPrueba = $pruebaSegment;
-                $fechas = [$fecha]; 
+    {
+        try {
+            // Log de datos iniciales recibidos
+            Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
+    
+            // Configuración de Redsys
+            $key = config('redsys.key');
+            $merchantCode = config('redsys.merchantcode');
+            $terminal = config('redsys.terminal');
+            $environment = config('redsys.environment');
+    
+            $amount = $request->input('total');
+            $order = time();
+            $detalle = $request->input('detalle');
+    
+            // Decodificar el detalle y verificar su formato
+            $detalleArray = json_decode($detalle, true);
+            Log::debug('Detalle decodificado:', ['detalle' => $detalleArray]);
+    
+            if ($detalleArray === null) {
+                throw new \Exception('El detalle no tiene un formato JSON válido');
             }
+    
+            // Inicializar variables para generar la descripción
+            $description = '';
+            $lastPerro = '';
+            $lastPrueba = '';
+            $fechas = [];
+            $inscripcionesData = [];
+    
+            // Procesar cada inscripción y construir la descripción
+            foreach ($detalleArray as $item) {
+                $nombrePerro = $item['perro'] ?? 'Perro no especificado';
+                $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
+                $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
+                $fecha = $item['fecha'] ?? 'Fecha no especificada';
+    
+                // Registrar cada inscripción en los datos para la sesión
+                $inscripcionesData[] = [
+                    'perro' => $nombrePerro,
+                    'prueba' => $nombrePrueba,
+                    'fecha' => $fecha,
+                    'valor' => $item['valor'] ?? 'Valor no especificado',
+                ];
+    
+                // Generar descripción agrupando fechas similares
+                if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
+                    $fechas[] = $fecha;
+                } else {
+                    if (!empty($fechas)) {
+                        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . '. ';
+                    }
+                    $lastPerro = $nombrePerro;
+                    $lastPrueba = $pruebaSegment;
+                    $fechas = [$fecha];
+                }
+            }
+    
+            // Agregar la última agrupación a la descripción
+            if (!empty($fechas)) {
+                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . '. ';
+            }
+    
+            // Eliminar caracteres de salto de línea
+            $description = str_replace(["\n", "\r"], '', $description);
+            Log::debug('Descripción generada para Redsys (limpia):', ['description' => $description]);
+    
+            // Guardar inscripciones en la sesión
+            session(['inscripcionesData' => $inscripcionesData]);
+    
+            // Configurar parámetros para Redsys
+            Redsys::setAmount($amount);
+            Redsys::setOrder($order);
+            Redsys::setMerchantcode($merchantCode);
+            Redsys::setCurrency('978');
+            Redsys::setTransactiontype('0');
+            Redsys::setTerminal($terminal);
+            Redsys::setMethod('T');
+            Redsys::setNotification(config('redsys.url_notification'));
+            Redsys::setUrlOk(config('redsys.url_ok'));
+            Redsys::setUrlKo(config('redsys.url_ko'));
+            Redsys::setVersion('HMAC_SHA256_V1');
+            Redsys::setTradeName(config('redsys.tradename'));
+            Redsys::setProductDescription($description);
+            Redsys::setEnvironment($environment);
+            Redsys::setTradeName('POINTER CLUB ESPANOL');
+            Redsys::setTitular('Ruddy Wasser');
+    
+            // Log de parámetros configurados
+            Log::debug('Parámetros para la firma:', [
+                'amount' => $amount,
+                'order' => $order,
+                'merchantCode' => $merchantCode,
+                'currency' => '978',
+                'transactionType' => '0',
+                'terminal' => $terminal,
+                'description' => $description,
+                'notificationUrl' => config('redsys.url_notification'),
+            ]);
+    
+            // Generar firma y registrar en el log
+            $signature = Redsys::generateMerchantSignature($key);
+            Log::debug('Firma generada para Redsys:', ['signature' => $signature]);
+    
+            // Generar el formulario y registrar en el log
+            Redsys::setMerchantSignature($signature);
+            $form = Redsys::createForm();
+            Log::debug('Formulario generado para Redsys:', ['form' => $form]);
+    
+        } catch (\Exception $e) {
+            // Manejo de errores y registro
+            Log::error('Error al procesar el pago:', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
         }
-
-        // Añadir la última entrada
-        if (!empty($fechas)) {
-            $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
-        }
-
-        Log::debug('Descripción generada para Redsys:', ['description' => $description]);
-
-        // Almacenar los datos de las inscripciones en la sesión
-        session(['inscripcionesData' => $inscripcionesData]);
-
-        // Configurar Redsys para el pago
-        Redsys::setAmount($amount);
-        Redsys::setOrder($order);
-        Redsys::setMerchantcode($merchantCode);
-        Redsys::setCurrency('978'); 
-        Redsys::setTransactiontype('0'); 
-        Redsys::setTerminal($terminal);
-        Redsys::setMethod('T');
-        Redsys::setNotification(config('redsys.url_notification'));
-        Redsys::setUrlOk(config('redsys.url_ok'));
-        Redsys::setUrlKo(config('redsys.url_ko'));
-        Redsys::setVersion('HMAC_SHA256_V1');
-        Redsys::setTradeName(config('redsys.tradename'));
-        Redsys::setProductDescription($description);
-        Redsys::setEnviroment($enviroment);
-
-        // Generar firma y formulario de pago
-        $signature = Redsys::generateMerchantSignature($key);
-        Redsys::setMerchantSignature($signature);
-        $form = Redsys::createForm();
-
-    } catch (\Exception $e) {
-        return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
+    
+        // Retornar la vista con el formulario
+        return view('redsys.form', compact('form'));
     }
-
-    // Redirigir a la vista con el formulario
-    return view('redsys.form', compact('form'));
-}
-
-
-
     
 }

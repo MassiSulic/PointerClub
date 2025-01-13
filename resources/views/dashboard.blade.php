@@ -198,7 +198,6 @@
 
                 <!-- Campo: Nombre del conductor -->
                 <div>
-<<<<<<< HEAD
                     <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del
                         conductor</label>
                     <select id="conductor" name="conductor"
@@ -297,12 +296,6 @@
                             <option value="{{ $conductor }}">{{ $conductor }}</option>
                         @endforeach
                     </select>
-=======
-                    <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del conductor</label>
-                    <input type="text" id="conductor" name="conductor" 
-                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
-                    required>
->>>>>>> 11ca10f4b620e96421dbb2c09f4f160890764eb9
                 </div>
 
                 <!-- Campo: Fecha de nacimiento -->
@@ -592,27 +585,3 @@
     });
 </script>
 {{-- Validacion de input de Libro de Orígenes --}}
-<<<<<<< HEAD
-=======
-
-
-<!-- Validación de input: Nombre del conductor -->
-<script>
-    document.getElementById('conductor').addEventListener('input', function (e) {
-        let value = e.target.value;
-        
-        // Eliminar caracteres no alfabéticos (incluye espacios y guiones para nombres compuestos)
-        const validValue = value.replace(/[^a-zA-Z\s'-]/g, '');
-        if (value !== validValue) {
-            e.target.value = validValue;
-        } else {
-            e.target.value = value;
-        }
-        
-        // Formatear cada palabra: Primera letra en mayúscula, el resto en minúscula
-        e.target.value = e.target.value
-            .toLowerCase() // Convertir todo a minúsculas primero
-            .replace(/\b\w/g, char => char.toUpperCase()); // Primera letra de cada palabra en mayúscula
-    });
-</script>
->>>>>>> 11ca10f4b620e96421dbb2c09f4f160890764eb9

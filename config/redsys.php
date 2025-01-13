@@ -6,6 +6,6 @@ return [
     'url_ko'                => env('REDSYS_URL_KO','https://pointerclubespana.es/redsys/failure'),
     'merchantcode'          => env('REDSYS_MERCHANT_CODE','058538802'),
     'terminal'              => env('REDSYS_TERMINAL','001'),
-    'enviroment'            => env('REDSYS_ENVIRONMENT','real'),
-    'tradename'             => env('REDSYS_TRADENAME','Pointer Club Español'),
+    'environment'            => env('REDSYS_ENVIRONMENT','live'),
+    'tradename'             => env('REDSYS_TRADENAME','Pointer Club Espanol'),
 ];
