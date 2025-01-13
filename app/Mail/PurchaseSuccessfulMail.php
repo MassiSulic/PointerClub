@@ -18,6 +18,7 @@ class PurchaseSuccessfulMail extends Mailable
     public $description;
     public $amount;
     public $order;
+    public $detalle;
 
     /**
      * Create a new message instance.
@@ -26,14 +27,16 @@ class PurchaseSuccessfulMail extends Mailable
      * @param string $description
      * @param float $amount
      * @param string $order
+     * @param string $detalle
      */
-    public function __construct($userName, $description, $amount, $order)
+    public function __construct($userName, $description, $amount, $order, $detalle)
     {
         // Asignamos los datos recibidos al objeto
         $this->userName = $userName;
         $this->description = $description;
         $this->amount = $amount;
         $this->order = $order;
+        $this->detalle = $detalle;
     }
 
     /**
