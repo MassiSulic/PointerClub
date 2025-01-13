@@ -31,58 +31,37 @@ class RedsysController extends Controller
 
     // Método que maneja la compra exitosa
     public function success(Request $request)
-    {
-        // Obtener el usuario logueado
-        $user = Auth::user();
-    
-        // Verificar que el usuario esté autenticado
-        if (!$user) {
-            Log::error('Usuario no autenticado al procesar la compra.');
-            return back()->with('error', 'Usuario no autenticado');
-        }
-    
-        // Registrar el nombre del usuario
-        Log::debug('Usuario autenticado:', ['userName' => $user->name]);
-    
-        $userName = $user->name; // Nombre del usuario logueado
-        $userEmail = $user->email; // Email del usuario logueado
-    
-        // Obtener los datos de la compra
-        $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
-        $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
-        $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
-    
-        // Verificar que los detalles de la compra estén presentes
-        $detalle = $request->input('detalle');
-        if (!$detalle) {
-            Log::error('No se recibieron detalles de la compra.');
-            return back()->with('error', 'Detalles de la compra no recibidos.');
-        }
-    
-        // Log de los detalles recibidos
-        Log::debug('Detalles de la compra:', ['detalle' => $detalle]);
-    
-        // Enviar correo al usuario logueado
-        try {
-            Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $detalle));
-            Log::info('Correo enviado al usuario', ['userEmail' => $userEmail]);
-        } catch (\Exception $e) {
-            Log::error('Error al enviar correo al usuario', ['error' => $e->getMessage()]);
-        }
-    
-        // Enviar correo al administrador
-        $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-        try {
-            Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $detalle));
-            Log::info('Correo enviado al administrador', ['adminEmail' => $adminEmail]);
-        } catch (\Exception $e) {
-            Log::error('Error al enviar correo al administrador', ['error' => $e->getMessage()]);
-        }
-    
-        // Mostrar vista de éxito al cliente
-        return view('redsys.success');
+{
+    // Obtener el usuario logueado
+    $user = Auth::user();
+
+    // Verificar que el usuario esté autenticado
+    if (!$user) {
+        return back()->with('error', 'Usuario no autenticado');
+    }
+
+    $userName = $user->name; // Nombre del usuario logueado
+    $userEmail = $user->email; // Email del usuario logueado
+    $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
+    $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
+    $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
+
+    $detalle = $request->input('detalle');
+    if (!$detalle) {
+        Log::error('No se recibieron detalles de la compra.');
+        return back()->with('error', 'Detalles de la compra no recibidos.');
     }
     
+    // Enviar correo al usuario logueado
+    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $request->input('detalle')));
+
+    // Enviar correo al administrador
+    $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
+    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $request->input('detalle')));
+
+    // Mostrar vista de éxito al cliente
+    return view('redsys.success');
+}
 
     public function failure()
     {
