@@ -66,67 +66,75 @@ class RedsysController extends Controller
     public function process(Request $request)
     {
         try {
+            // Log de datos iniciales recibidos
             Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
-
+    
+            // Configuración de Redsys
             $key = config('redsys.key');
             $merchantCode = config('redsys.merchantcode');
             $terminal = config('redsys.terminal');
             $environment = config('redsys.environment');
-
-            $amount = $request->input('total');
+    
+            $amount = $request->input('total') * 100; // Si Redsys espera el monto en céntimos
             $order = time();
             $detalle = $request->input('detalle');
-
+    
+            // Decodificar el detalle y verificar su formato
             $detalleArray = json_decode($detalle, true);
             Log::debug('Detalle decodificado:', ['detalle' => $detalleArray]);
-
+    
             if ($detalleArray === null) {
                 throw new \Exception('El detalle no tiene un formato JSON válido');
             }
-
+    
+            // Inicializar variables para generar la descripción
             $description = '';
             $lastPerro = '';
             $lastPrueba = '';
             $fechas = [];
-
             $inscripcionesData = [];
+    
+            // Procesar cada inscripción y construir la descripción
             foreach ($detalleArray as $item) {
                 $nombrePerro = $item['perro'] ?? 'Perro no especificado';
                 $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
                 $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
                 $fecha = $item['fecha'] ?? 'Fecha no especificada';
-
-                $description = str_replace(["\n", "\r"], '', $description);
-
-                Log::debug('Descripción generada para Redsys (limpia):', ['description' => $description]);
-
+    
+                // Registrar cada inscripción en los datos para la sesión
                 $inscripcionesData[] = [
                     'perro' => $nombrePerro,
                     'prueba' => $nombrePrueba,
                     'fecha' => $fecha,
                     'valor' => $item['valor'] ?? 'Valor no especificado',
                 ];
-
+    
+                // Generar descripción agrupando fechas similares
                 if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
                     $fechas[] = $fecha;
                 } else {
                     if (!empty($fechas)) {
-                        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+                        $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . '. ';
                     }
                     $lastPerro = $nombrePerro;
                     $lastPrueba = $pruebaSegment;
                     $fechas = [$fecha];
                 }
             }
-
+    
+            // Agregar la última agrupación a la descripción
             if (!empty($fechas)) {
-                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
+                $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . '. ';
             }
-
-            Log::debug('Descripción generada para Redsys:', ['description' => $description]);
-
+    
+            // Eliminar caracteres de salto de línea
+            $description = str_replace(["\n", "\r"], '', $description);
+            Log::debug('Descripción generada para Redsys (limpia):', ['description' => $description]);
+    
+            // Guardar inscripciones en la sesión
             session(['inscripcionesData' => $inscripcionesData]);
-
+    
+            // Configurar parámetros para Redsys
             Redsys::setAmount($amount);
             Redsys::setOrder($order);
             Redsys::setMerchantcode($merchantCode);
@@ -141,7 +149,8 @@ class RedsysController extends Controller
             Redsys::setTradeName(config('redsys.tradename'));
             Redsys::setProductDescription($description);
             Redsys::setEnvironment($environment);
-
+    
+            // Log de parámetros configurados
             Log::debug('Parámetros para la firma:', [
                 'amount' => $amount,
                 'order' => $order,
@@ -152,19 +161,24 @@ class RedsysController extends Controller
                 'description' => $description,
                 'notificationUrl' => config('redsys.url_notification'),
             ]);
-
+    
+            // Generar firma y registrar en el log
             $signature = Redsys::generateMerchantSignature($key);
             Log::debug('Firma generada para Redsys:', ['signature' => $signature]);
-
+    
+            // Generar el formulario y registrar en el log
             Redsys::setMerchantSignature($signature);
             $form = Redsys::createForm();
             Log::debug('Formulario generado para Redsys:', ['form' => $form]);
-
+    
         } catch (\Exception $e) {
+            // Manejo de errores y registro
             Log::error('Error al procesar el pago:', ['error' => $e->getMessage()]);
             return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
         }
-
+    
+        // Retornar la vista con el formulario
         return view('redsys.form', compact('form'));
     }
+    
 }
