@@ -15,6 +15,7 @@ class CreatePruebasInscriptasTable extends Migration
             $table->string('fecha', 255); // Columna 'fecha' (varchar(255))
             $table->string('perro');
             $table->integer('valor');
+            $table->boolean('pago')->default(false);
             $table->timestamps();
 
             // Agregar la clave foránea
