@@ -88,3 +88,20 @@
     });
 </script>
 {{-- Script para mensaje de inscripcion correcta --}}
+
+
+<!-- verificacion de datos enviados -->
+<script>
+document.getElementById('redsysForm').addEventListener('submit', function(event) {
+    const nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
+    const total = document.querySelector('input[name="total"]').value;
+    const detalle = document.querySelector('input[name="detalle"]').value;
+
+    console.log('nombre_prueba:', nombrePrueba);
+    console.log('total:', total);
+    console.log('detalle:', detalle);
+
+    // Si algo no está correcto, evita que el formulario se envíe (solo para depuración)
+    // event.preventDefault();
+});
+</script>
