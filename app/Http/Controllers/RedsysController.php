@@ -29,7 +29,6 @@ class RedsysController extends Controller
         }
     }
 
-    // Método que maneja la compra exitosa
     public function success(Request $request)
 {
     // Obtener el usuario logueado
@@ -37,26 +36,68 @@ class RedsysController extends Controller
 
     // Verificar que el usuario esté autenticado
     if (!$user) {
+        Log::debug('Usuario no autenticado');
         return back()->with('error', 'Usuario no autenticado');
     }
 
+    // Datos del usuario
     $userName = $user->name; // Nombre del usuario logueado
     $userEmail = $user->email; // Email del usuario logueado
+
+    // Verificar datos recibidos desde el formulario
+    Log::debug('Datos del formulario:', [
+        'nombre_prueba' => $request->input('nombre_prueba'),
+        'fechas' => $request->input('fechas', []),
+        'total' => $request->input('total'),
+        'detalle' => $request->input('detalle')
+    ]);
+
+    // Descripción de la compra
     $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
+    Log::debug('Descripción de la compra generada:', ['description' => $description]);
+
+    // Monto de la compra (en formato de euros)
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
+    Log::debug('Monto de la compra:', ['amount' => $amount]);
+
+    // Generar un número de pedido único (timestamp)
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
-    Log::debug('Detalle enviado:', ['detalle' => $request->input('detalle')]);
+    Log::debug('Número de pedido:', ['order' => $order]);
+
+    // Obtener y verificar el detalle
+    $detalle = $request->input('detalle');
+    Log::debug('Detalle recibido:', ['detalle_raw' => $detalle]);
+
+    // Verificar si el detalle es válido (no vacío ni nulo)
+    if (empty($detalle)) {
+        Log::error('Detalle vacío recibido');
+        return back()->with('error', 'El detalle de la compra no ha sido recibido correctamente');
+    }
+
+    // Decodificar el JSON de detalle si es necesario
+    $detalleArray = json_decode($detalle, true);
+    Log::debug('Detalle decodificado:', ['detalle_array' => $detalleArray]);
+
+    // Verificar si la decodificación del JSON fue exitosa
+    if ($detalleArray === null) {
+        Log::error('Error al decodificar el JSON del detalle');
+        return back()->with('error', 'El detalle no tiene un formato válido');
+    }
 
     // Enviar correo al usuario logueado
-    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $request->input('detalle')));
+    Log::debug('Enviando correo al usuario:', ['email' => $userEmail]);
+    Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $detalleArray));
 
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $request->input('detalle')));
+    Log::debug('Enviando correo al administrador:', ['email' => $adminEmail]);
+    Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $detalleArray));
 
     // Mostrar vista de éxito al cliente
+    Log::debug('Mostrando vista de éxito');
     return view('redsys.success');
 }
+
 
     public function failure()
     {
