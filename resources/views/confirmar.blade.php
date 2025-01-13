@@ -92,3 +92,29 @@
     });
 </script>
 {{-- Script para mensaje de inscripcion correcta --}}
+
+
+<script>
+    // Espera a que el documento se cargue completamente
+    document.addEventListener('DOMContentLoaded', function() {
+        // Selecciona el formulario
+        var form = document.getElementById('redsysForm');
+
+        // Agrega un listener para el evento 'submit'
+        form.addEventListener('submit', function(event) {
+            // Obtén los datos del formulario
+            var detalle = document.getElementById('detalle').value; // El valor del campo 'detalle'
+            var nombrePrueba = document.getElementById('nombre_prueba').value; // O cualquier otro campo relevante
+            var total = document.getElementById('total').value;
+
+            // Registra los datos en la consola
+            console.log('Datos a enviar al backend:');
+            console.log('Detalle:', detalle);
+            console.log('Nombre de la prueba:', nombrePrueba);
+            console.log('Total:', total);
+
+            // Si todo está correcto, el formulario se enviará después del log
+            // Si necesitas validar algo o detener el envío, puedes usar event.preventDefault()
+        });
+    });
+</script>
