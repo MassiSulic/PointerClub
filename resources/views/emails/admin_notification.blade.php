@@ -58,9 +58,6 @@
 
     <div class="details">
         <p><strong>Nombre del Usuario:</strong> {{ $userName }}</p>
-        <p><strong>Descripción de la Compra:</strong> {{ $description }}</p>
-        <p><strong>Monto Total:</strong> {{ $amount }} €</p>
-        <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
 
     <div class="details">
@@ -73,11 +70,15 @@
     </div>
 
     <div class="total">
-        <p><strong>Total: {{ $amount }} €</strong></p>
+        <p><strong>Total: {{ number_format($totalAmount, 2, ',', '.') }} euros</strong></p>
+    </div>
+
+    <div class="order-number">
+        <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
 
     <div class="footer">
-        <p>Por favor, revisa la compra y toma las acciones necesarias.</p>
+        <p>Por favor, revisa la compra.</p>
     </div>
 
 </body>
