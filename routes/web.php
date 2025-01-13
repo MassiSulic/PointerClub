@@ -30,12 +30,9 @@ Route::view('Galeria', 'Galeria')->name('Galeria');
 // Se comenta esta linea debajo para omitir verificación de email en local
 // Route::middleware(['auth', 'verified'])->group(function () {
 //Se remplaza por esta linea para omitir verificación de email en local    
-// Rutas protegidas
-// En producción, considera usar `verified` si se requiere verificación de correo electrónico.
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PerroController::class, 'index'])->name('dashboard');
 
-    // Gestión del perfil del usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -46,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Rutas para inscripciones
     Route::post('/confirmar', [InscripcionController::class, 'confirmar'])->name('confirmar');
-    Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet'); // Considera si realmente necesitas GET y POST para la misma ruta.
+    Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet');
     Route::post('/pagar-despues', [InscripcionController::class, 'pagarDespues'])->name('pagar-despues');
     Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 
@@ -54,15 +51,13 @@ Route::middleware(['auth'])->group(function () {
     Route::controller(RedsysController::class)
         ->prefix('redsys')
         ->group(function () {
-            Route::post('/notification', 'notification')->name('redsys.notification'); // Endpoint crítico, protege contra accesos no autorizados.
-            Route::get('/success', 'success')->name('redsys.success'); // Redirección tras éxito en Redsys.
-            Route::get('/failure', 'failure')->name('redsys.failure'); // Redirección tras fallo en Redsys.
-            
-            // Procesar y redirigir al portal de Redsys
-            Route::post('/process', 'process')->name('redsys.process'); 
-            
-            // Mostrar formulario de Redsys
-            Route::get('/form', 'showForm')->name('redsys.form'); // Esta ruta podría requerir validación adicional si no debe ser pública.
+            Route::post('/notification', 'notification')->name('redsys.notification');
+            Route::get('/success', 'success')->name('redsys.success');
+            Route::get('/failure', 'failure')->name('redsys.failure');
+
+            // Ruta para procesar el pago y redirigir a Redsys
+            Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
+            Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
         });
 });
 

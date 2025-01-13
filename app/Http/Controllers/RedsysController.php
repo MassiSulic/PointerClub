@@ -16,19 +16,27 @@ use App\Http\Controllers\PruebaController;
 class RedsysController extends Controller
 {
     public function notification(Request $request)
-    {
-        $key = config('redsys.key');
-        $parameters = Redsys::getMerchantParameters($request->input('Ds_MerchantParameters'));
-        $DsResponse = $parameters["Ds_Response"] + 0;
+{
+    $key = config('redsys.key');
+    $parameters = Redsys::getMerchantParameters($request->input('Ds_MerchantParameters'));
+    $DsResponse = $parameters["Ds_Response"] + 0;
 
-        if (Redsys::check($key, $request->input()) && $DsResponse <= 99) {
-            // Confirmación positiva
-            return response('OK', 200);
-        } else {
-            // Confirmación negativa
-            return response('KO', 400);
-        }
+    // Log para ver los parámetros recibidos en la notificación
+    Log::debug('Datos recibidos en la notificación:', $request->all());
+    Log::debug('Parámetros de Redsys:', $parameters);
+    Log::debug('Ds_Response:', $DsResponse);
+
+    if (Redsys::check($key, $request->input()) && $DsResponse <= 99) {
+        // Confirmación positiva
+        Log::debug('Confirmación positiva de pago');
+        return response('OK', 200);
+    } else {
+        // Confirmación negativa
+        Log::debug('Confirmación negativa de pago');
+        return response('KO', 400);
     }
+}
+
 
     public function success(Request $request)
 {
