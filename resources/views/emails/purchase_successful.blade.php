@@ -27,11 +27,12 @@
             margin-bottom: 20px;
         }
         .summary p {
-            margin: 0;
+            margin: 0 0 10px;
         }
         .details {
             border-top: 1px solid #ddd;
             padding-top: 10px;
+            margin-top: 20px;
         }
         .details table {
             width: 100%;
@@ -44,11 +45,16 @@
         }
         .details th {
             background-color: #f1f1f1;
+            font-weight: bold;
         }
         .footer {
             margin-top: 20px;
             font-size: 0.9em;
             color: #555;
+            text-align: center;
+        }
+        .footer p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -72,14 +78,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($detalleArray as $item)
-                        <tr>
-                            <td>{{ $item['perro'] }}</td>
-                            <td>{{ $item['prueba'] }}</td>
-                            <td>{{ implode(' - ', $item['fechas']) }}</td>
-                            <td>{{ $item['valor'] }}</td>
-                        </tr>
-                    @endforeach
+                    {!! $detalleHtml !!}
                 </tbody>
             </table>
         </div>
@@ -90,4 +89,3 @@
     </div>
 </body>
 </html>
-
