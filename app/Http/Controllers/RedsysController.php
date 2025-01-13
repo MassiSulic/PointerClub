@@ -109,16 +109,13 @@ class RedsysController extends Controller
         $lastPrueba = '';
         $fechas = [];
 
-        // Almacenar los datos del formulario en una variable (array)
         $inscripcionesData = [];
-
         foreach ($detalleArray as $item) {
             $nombrePerro = $item['perro'] ?? 'Perro no especificado';
             $nombrePrueba = $item['prueba'] ?? 'Prueba no especificada';
             $pruebaSegment = explode(' - ', $nombrePrueba)[1] ?? 'Prueba no especificada';
             $fecha = $item['fecha'] ?? 'Fecha no especificada';
 
-            // Almacenar cada inscripción en el array
             $inscripcionesData[] = [
                 'perro' => $nombrePerro,
                 'prueba' => $nombrePrueba,
@@ -126,7 +123,6 @@ class RedsysController extends Controller
                 'valor' => $item['valor'] ?? 'Valor no especificado',
             ];
 
-            // Construir la descripción
             if ($nombrePerro === $lastPerro && $pruebaSegment === $lastPrueba) {
                 $fechas[] = $fecha;
             } else {
@@ -135,26 +131,24 @@ class RedsysController extends Controller
                 }
                 $lastPerro = $nombrePerro;
                 $lastPrueba = $pruebaSegment;
-                $fechas = [$fecha]; 
+                $fechas = [$fecha];
             }
         }
 
-        // Añadir la última entrada
         if (!empty($fechas)) {
             $description .= $lastPerro . ' - ' . $lastPrueba . ' - ' . implode(' - ', $fechas) . "\n";
         }
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
-        // Almacenar los datos de las inscripciones en la sesión
         session(['inscripcionesData' => $inscripcionesData]);
 
         // Configurar Redsys para el pago
         Redsys::setAmount($amount);
         Redsys::setOrder($order);
         Redsys::setMerchantcode($merchantCode);
-        Redsys::setCurrency('978'); 
-        Redsys::setTransactiontype('0'); 
+        Redsys::setCurrency('978');
+        Redsys::setTransactiontype('0');
         Redsys::setTerminal($terminal);
         Redsys::setMethod('T');
         Redsys::setNotification(config('redsys.url_notification'));
@@ -165,18 +159,37 @@ class RedsysController extends Controller
         Redsys::setProductDescription($description);
         Redsys::setenvironment($environment);
 
-        // Generar firma y formulario de pago
+        // Registrar los parámetros antes de generar la firma
+        Log::debug('Parámetros para la firma:', [
+            'amount' => $amount,
+            'order' => $order,
+            'merchantCode' => $merchantCode,
+            'currency' => '978',
+            'transactionType' => '0',
+            'terminal' => $terminal,
+            'description' => $description,
+            'notificationUrl' => config('redsys.url_notification'),
+        ]);
+
+        // Generar firma y registrar el valor
         $signature = Redsys::generateMerchantSignature($key);
+        Log::debug('Firma generada para Redsys:', ['signature' => $signature]);
+
+        // Registrar datos adicionales enviados al formulario
         Redsys::setMerchantSignature($signature);
         $form = Redsys::createForm();
+        Log::debug('Formulario generado para Redsys:', ['form' => $form]);
 
     } catch (\Exception $e) {
+        // Registrar cualquier error durante el proceso
+        Log::error('Error al procesar el pago:', ['error' => $e->getMessage()]);
         return back()->with('error', 'Error al procesar el pago: ' . $e->getMessage());
     }
 
     // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
 
 
 
