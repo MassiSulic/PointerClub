@@ -18,6 +18,7 @@ class AdminNotificationMail extends Mailable
     public $description;
     public $amount;
     public $order;
+    public $inscripcionesData;
 
     /**
      * Create a new message instance.
@@ -26,15 +27,18 @@ class AdminNotificationMail extends Mailable
      * @param string $description
      * @param float $amount
      * @param string $order
+     * @param array $inscripcionesData  // Recibimos el array de inscripciones
      */
-    public function __construct($userName, $description, $amount, $order)
+    public function __construct($userName, $description, $amount, $order, $inscripcionesData)
     {
         // Asignamos los datos recibidos al objeto
         $this->userName = $userName;
         $this->description = $description;
         $this->amount = $amount;
         $this->order = $order;
+        $this->inscripcionesData = $inscripcionesData; // Ahora también pasamos los datos de las inscripciones
     }
+
 
     /**
      * Get the message envelope.
