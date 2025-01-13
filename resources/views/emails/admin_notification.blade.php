@@ -71,7 +71,7 @@
                 @php
                     $totalAmount += $inscripcion['valor']; // Sumar el valor de cada inscripción
                 @endphp
-                <li>{{ $inscripcion['perro'] }} - {{ $inscripcion['prueba'] }} - {{ $inscripcion['fecha'] }} - {{ $inscripcion['valor'] }}</li>
+                <li>{{ $inscripcion['perro'] }} - {{ $inscripcion['prueba'] }} - {{ $inscripcion['fecha'] }} - {{ $inscripcion['valor'] }} euros</li>
             @endforeach
         </ul>
     </div>

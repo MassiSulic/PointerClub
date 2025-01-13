@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseSuccessfulMail;
 use App\Mail\AdminNotificationMail;
+use App\Http\Controllers\PruebaController;
 
 
 class RedsysController extends Controller
@@ -58,6 +59,15 @@ class RedsysController extends Controller
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
     Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
+
+    // Guardar las inscripciones en la base de datos utilizando el método inscribir del PruebaController
+    try {
+        $pruebaController = new PruebaController();
+        $inscripcionRequest = new Request(['inscripciones' => $inscripcionesData]);
+        $pruebaController->inscribir($inscripcionRequest);
+    } catch (\Exception $e) {
+        return back()->with('error', 'Hubo un error al guardar las inscripciones: ' . $e->getMessage());
+    }
 
     // Mostrar vista de éxito al cliente
     return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
