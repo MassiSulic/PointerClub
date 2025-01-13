@@ -149,7 +149,7 @@ class RedsysController extends Controller
             Redsys::setTradeName(config('redsys.tradename'));
             Redsys::setProductDescription($description);
             Redsys::setEnvironment($environment);
-            Redsys::setTradeName('POINTER CLUB ESPAÑOL');
+            Redsys::setTradeName('POINTER CLUB ESPANOL');
             Redsys::setTitular('Ruddy Wasser');
     
             // Log de parámetros configurados

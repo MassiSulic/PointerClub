@@ -7,5 +7,5 @@ return [
     'merchantcode'          => env('REDSYS_MERCHANT_CODE','058538802'),
     'terminal'              => env('REDSYS_TERMINAL','001'),
     'environment'            => env('REDSYS_ENVIRONMENT','live'),
-    'tradename'             => env('REDSYS_TRADENAME','Pointer Club Español'),
+    'tradename'             => env('REDSYS_TRADENAME','Pointer Club Espanol'),
 ];
