@@ -44,16 +44,25 @@ class RedsysController extends Controller
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
+    // Suponiendo que tienes los datos de las inscripciones en algún lugar, ejemplo:
+    $inscripcionesData = $request->input('inscripcionesData', []); // o lo que sea necesario para obtener esos datos
+
+    // Asegurarte de que los datos están disponibles
+    if (empty($inscripcionesData)) {
+        $inscripcionesData = []; // Evitar que sea null
+    }
+
     // Enviar correo al usuario
-    Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $request->input('additional_argument')));
+    Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
 
     // Enviar correo al administrador
     $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
-    Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order));
+    Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
 
     // Mostrar vista de éxito al cliente
-    return view('redsys.success', compact('description', 'amount', 'order'));
+    return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
 }
+
 
 
     public function failure()
