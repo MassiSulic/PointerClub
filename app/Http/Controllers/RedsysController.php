@@ -42,7 +42,7 @@ class RedsysController extends Controller
         }
 
         $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
-        $amount = $request->input('total') * 100; // Convertir a céntimos
+        $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €';
         $order = time();
 
         $inscripcionesData = session('inscripcionesData', []);
@@ -75,7 +75,7 @@ class RedsysController extends Controller
             $terminal = config('redsys.terminal');
             $environment = config('redsys.environment');
     
-            $amount = $request->input('total') * 100; // Convertir a céntimos
+            $amount = $request->input('total');
             $order = time();
             $detalle = $request->input('detalle');
     
