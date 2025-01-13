@@ -29,7 +29,6 @@ class RedsysController extends Controller
         }
     }
 
-    // Método que maneja la compra exitosa
     public function success(Request $request)
 {
     // Obtener el usuario logueado
@@ -45,9 +44,17 @@ class RedsysController extends Controller
     $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €'; // Convertir a euros
     $order = time(); // Número de pedido (puedes ajustarlo según sea necesario)
 
+    // Enviar correo al usuario
+    Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $request->input('additional_argument')));
+
+    // Enviar correo al administrador
+    $adminEmail = 'vaserweb.ok@gmail.com'; // Cambiar por el correo del administrador
+    Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order));
+
     // Mostrar vista de éxito al cliente
     return view('redsys.success', compact('description', 'amount', 'order'));
 }
+
 
     public function failure()
     {
@@ -120,20 +127,6 @@ class RedsysController extends Controller
 
         Log::debug('Descripción generada para Redsys:', ['description' => $description]);
 
-        // Enviar los datos por correo electrónico
-        $user = Auth::user();
-        if ($user) {
-            $userEmail = $user->email;
-            $userName = $user->name;
-
-            // Enviar correo al usuario
-            Mail::to($userEmail)->send(new PurchaseSuccessfulMail($userName, $description, $amount, $order, $inscripcionesData));
-
-            // Enviar correo al administrador
-            $adminEmail = 'vaserweb.ok@gmail.com'; // Correo del administrador
-            Mail::to($adminEmail)->send(new AdminNotificationMail($userName, $description, $amount, $order, $inscripcionesData));
-        }
-
         // Configurar Redsys para el pago
         Redsys::setAmount($amount);
         Redsys::setOrder($order);
@@ -162,6 +155,7 @@ class RedsysController extends Controller
     // Redirigir a la vista con el formulario
     return view('redsys.form', compact('form'));
 }
+
 
     
 }
