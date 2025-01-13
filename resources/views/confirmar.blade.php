@@ -49,9 +49,17 @@
             </form>               
             <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
                 @csrf
-                <input type="hidden" name="nombre_prueba" value="{{ $inscripciones[0]['prueba'] }}">
+                {{-- Limpiar el campo 'prueba' antes de enviarlo --}}
+                @php
+                    $inscripcionesLimpiadas = array_map(function ($inscripcion) {
+                        $inscripcion['prueba'] = trim($inscripcion['prueba']); // Eliminar saltos de línea y espacios
+                        return $inscripcion;
+                    }, $inscripciones);
+                @endphp
+
+                <input type="hidden" name="nombre_prueba" value="{{ $inscripcionesLimpiadas[0]['prueba'] }}">
                 <input type="hidden" name="total" value="{{ $total }}">
-                <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
+                <input type="hidden" name="detalle" value="{{ json_encode($inscripcionesLimpiadas) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
             </form>            
         </div>
