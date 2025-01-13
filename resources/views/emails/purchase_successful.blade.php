@@ -51,6 +51,13 @@
             color: #2a7a46;
             text-decoration: none;
         }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            color: #2a7a46;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +69,13 @@
 
     <h2>Detalles de Inscripción:</h2>
     <ul>
+        @php
+            $totalAmount = 0; // Variable para el total
+        @endphp
         @foreach ($inscripcionesData as $inscripcion)
+            @php
+                $totalAmount += $inscripcion['valor']; // Sumar el valor de cada inscripción
+            @endphp
             <li class="inscripcion">
                 <strong>Perro:</strong> {{ $inscripcion['perro'] }} <br>
                 <strong>Prueba:</strong> {{ $inscripcion['prueba'] }} <br>
@@ -72,10 +85,13 @@
         @endforeach
     </ul>
 
+    <div class="total">
+        <p><strong>Total: {{ number_format($totalAmount, 2, ',', '.') }} euros</strong></p>
+    </div>
+
     <div class="footer">
         <p>Si tiene alguna pregunta, no dude en <a href="mailto:{{ config('mail.from.address') }}">contactarnos</a>.</p>
     </div>
 
 </body>
 </html>
-
