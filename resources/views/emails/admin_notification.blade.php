@@ -1,10 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificación de Nueva Compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #2a7a46;
+            text-align: center;
+            font-size: 24px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .details {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 8px 0;
+        }
+        .details strong {
+            color: #333;
+        }
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+        .footer a {
+            color: #2a7a46;
+            text-decoration: none;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2a7a46;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
 <body>
+
     <h1>Se ha realizado una nueva compra</h1>
-    <p><strong>Nombre del Usuario:</strong> {{ $userName }}</p>
-    <p><strong>Descripción de la Compra:</strong> {{ $description }}</p>
-    <p><strong>Monto Total:</strong> {{ $amount }} €</p>
-    <p><strong>Número de Pedido:</strong> {{ $order }}</p>
-    <p>Por favor, revisa la compra y toma las acciones necesarias.</p>
+
+    <div class="details">
+        <p><strong>Nombre del Usuario:</strong> {{ $userName }}</p>
+        <p><strong>Descripción de la Compra:</strong> {{ $description }}</p>
+        <p><strong>Monto Total:</strong> {{ $amount }} €</p>
+        <p><strong>Número de Pedido:</strong> {{ $order }}</p>
+    </div>
+
+    <div class="total">
+        <p><strong>Total: {{ $amount }} €</strong></p>
+    </div>
+
+    <div class="footer">
+        <p>Por favor, revisa la compra y toma las acciones necesarias.</p>
+    </div>
+
 </body>
 </html>
+

@@ -43,7 +43,7 @@ class AdminNotificationMail extends Mailable
     {
         // Establecemos el asunto del correo para el administrador
         return new Envelope(
-            subject: 'Nueva Compra Realizada',
+            subject: 'Nueva Inscripción',
         );
     }
 

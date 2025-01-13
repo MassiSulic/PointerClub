@@ -46,7 +46,7 @@ class PurchaseSuccessfulMail extends Mailable
     {
         // Establecemos el asunto del correo
         return new Envelope(
-            subject: 'Confirmación de Compra',
+            subject: 'Confirmación de Inscripción',
         );
     }
 
