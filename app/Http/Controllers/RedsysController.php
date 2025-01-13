@@ -36,34 +36,33 @@ class RedsysController extends Controller
     public function success(Request $request)
     {
         $user = Auth::user();
-    
+
         if (!$user) {
             return back()->with('error', 'Usuario no autenticado');
         }
-    
-        // El monto recibido está en céntimos, lo convertimos a euros para mostrar al usuario
-        $amountInCents = $request->input('total'); // Monto en céntimos
-        $amount = number_format($amountInCents / 100, 2, ',', '.') . ' €'; // Monto en euros para mostrar al usuario
-    
+
         $description = $request->input('nombre_prueba') . ' ' . implode(' ', $request->input('fechas', []));
+        $amount = number_format($request->input('total') / 100, 2, ',', '.') . ' €';
         $order = time();
-    
+
         $inscripcionesData = session('inscripcionesData', []);
-    
+
         if (empty($inscripcionesData)) {
             return back()->with('error', 'No se encontraron datos de inscripciones.');
         }
-    
-        // Enviar correo de confirmación al usuario
+
         Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
-    
-        // Enviar notificación al administrador
         $adminEmail = 'vaserweb.ok@gmail.com';
         Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
-    
+
         return view('redsys.success', compact('description', 'amount', 'order', 'inscripcionesData'));
     }
-    
+
+    public function failure()
+    {
+        return view('redsys.failure');
+    }
+
     public function process(Request $request)
     {
         try {
@@ -76,8 +75,7 @@ class RedsysController extends Controller
             $terminal = config('redsys.terminal');
             $environment = config('redsys.environment');
     
-            // El monto recibido ya está en céntimos, lo usamos tal cual
-            $amountInCents = $request->input('total');
+            $amount = $request->input('total');
             $order = time();
             $detalle = $request->input('detalle');
     
@@ -137,7 +135,7 @@ class RedsysController extends Controller
             session(['inscripcionesData' => $inscripcionesData]);
     
             // Configurar parámetros para Redsys
-            Redsys::setAmount($amountInCents); // Usar el monto en céntimos
+            Redsys::setAmount($amount);
             Redsys::setOrder($order);
             Redsys::setMerchantcode($merchantCode);
             Redsys::setCurrency('978');
@@ -154,7 +152,7 @@ class RedsysController extends Controller
     
             // Log de parámetros configurados
             Log::debug('Parámetros para la firma:', [
-                'amount' => $amountInCents,
+                'amount' => $amount,
                 'order' => $order,
                 'merchantCode' => $merchantCode,
                 'currency' => '978',
@@ -182,6 +180,5 @@ class RedsysController extends Controller
         // Retornar la vista con el formulario
         return view('redsys.form', compact('form'));
     }
-    
     
 }

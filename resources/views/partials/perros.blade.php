@@ -190,37 +190,25 @@
     
             // Función para actualizar el total del precio
             function actualizarTotal() {
-            totalPrecio = 0;
-            document.querySelectorAll('.inscripcion').forEach(inscripcion => {
-                const fechasSeleccionadas = inscripcion.querySelectorAll('input[name^="fechas_"]:checked').length;
-                const perrosSeleccionados = inscripcion.querySelectorAll('input[name="perros[]"]:checked').length;
-                const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
-                const esSocioValido = numeroSocio && numerosSociosValidos.includes(numeroSocio);
-                const precio = esSocioValido ? 1 : 40; // precio en euros
-
-                // Calcular el precio total en euros
-                totalPrecio += fechasSeleccionadas * perrosSeleccionados * precio;
-
-                // Actualizar el precio dinámico al lado del nombre del perro
-                inscripcion.querySelectorAll('input[name="perros[]"]:checked').forEach(perro => {
-                    const precioSpan = document.getElementById(`precio_${perro.value}`);
-                    if (precioSpan) {
-                        precioSpan.textContent = `${precio} euros`;
-                    }
+                totalPrecio = 0;
+                document.querySelectorAll('.inscripcion').forEach(inscripcion => {
+                    const fechasSeleccionadas = inscripcion.querySelectorAll('input[name^="fechas_"]:checked').length;
+                    const perrosSeleccionados = inscripcion.querySelectorAll('input[name="perros[]"]:checked').length;
+                    const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
+                    const esSocioValido = numeroSocio && numerosSociosValidos.includes(numeroSocio);
+                    const precio = esSocioValido ? 1 : 40; // precio
+                    totalPrecio += fechasSeleccionadas * perrosSeleccionados * precio;
+    
+                    // Actualizar el precio dinámico al lado del nombre del perro
+                    inscripcion.querySelectorAll('input[name="perros[]"]:checked').forEach(perro => {
+                        const precioSpan = document.getElementById(`precio_${perro.value}`);
+                        if (precioSpan) {
+                            precioSpan.textContent = `${precio} euros`;
+                        }
+                    });
                 });
-            });
-
-            // Convertir el total a céntimos (multiplicar por 100)
-            let totalPrecioCentesimos = totalPrecio * 100;
-
-            // Mostrar el precio total en euros en la interfaz
-            totalPrecioSpan.textContent = `Total: ${totalPrecio} euros`;
-
-            // Aquí puedes enviar totalPrecioCentesimos a la pasarela de pago (Redsys)
-            // Por ejemplo, en el formulario de pago, puedes poner:
-            // document.getElementById('precioTotal').value = totalPrecioCentesimos;
-        }
-
+                totalPrecioSpan.textContent = `Total: ${totalPrecio} euros`;
+            }
     
             // Evento para abrir el modal
             inscribirBtns.forEach(btn => {
