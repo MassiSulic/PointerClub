@@ -80,7 +80,7 @@ class RedsysController extends Controller
         $key = config('redsys.key');
         $merchantCode = config('redsys.merchantcode');
         $terminal = config('redsys.terminal');
-        $enviroment = config('redsys.enviroment');
+        $environment = config('redsys.environment');
 
         $amount = $request->input('total'); // Total en céntimos
         $order = time(); // Número de pedido único
@@ -155,7 +155,7 @@ class RedsysController extends Controller
         Redsys::setVersion('HMAC_SHA256_V1');
         Redsys::setTradeName(config('redsys.tradename'));
         Redsys::setProductDescription($description);
-        Redsys::setEnviroment($enviroment);
+        Redsys::setenvironment($environment);
 
         // Generar firma y formulario de pago
         $signature = Redsys::generateMerchantSignature($key);
