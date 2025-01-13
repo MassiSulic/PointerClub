@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="{{ $metaDescription ?? 'Esta es la pagina del Pointer Club Español' }}">
+    <link rel="icon" type="image/svg" href="svg/navbar/Favicon.svg">
     <title>{{ $metaTitle ?? 'Pointer Club Español' }}</title>
     <!-- Importación de estilos para tailwind. ATENCIÓN! Para que funcione tiene que estar el servidor de desarrollo de vit (npm run dev) -->
     @vite('resources/css/app.css')
