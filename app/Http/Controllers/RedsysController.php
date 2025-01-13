@@ -75,7 +75,7 @@ class RedsysController extends Controller
             $terminal = config('redsys.terminal');
             $environment = config('redsys.environment');
     
-            $amount = $request->input('total') * 100; // Si Redsys espera el monto en céntimos
+            $amount = $request->input('total');
             $order = time();
             $detalle = $request->input('detalle');
     
