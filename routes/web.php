@@ -6,6 +6,7 @@ use App\Http\Controllers\PerroController;
 use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\RedsysController;
+use App\Http\Controllers\ContactoController;
 
 
 // Ruta para la vista Actualidad / Blog
@@ -68,5 +69,9 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
         Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
     });
+
+
+
+    Route::post('/contacto', [ContactoController::class, 'enviarConsulta'])->name('contacto.enviar');
 
 require __DIR__ . '/auth.php';

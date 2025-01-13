@@ -15,26 +15,27 @@
         </div>
 
         <div class=" p-4 bg-MarronSecundario lg:mx-48 sm:mx-20 mx-8">
-            <form action="" class="flex flex-col mx-auto">
+            <form action="{{ route('contacto.enviar') }}" method="POST" class="flex flex-col mx-auto">
+                @csrf
                 <ul class="">
                     <li class=" flex flex-row items-end">
                         <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
-                        <input type="text" name="Nombre" id="nombre"
+                        <input type="text" name="nombre" id="nombre"
                             class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
                     <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">TEL:</label>
-                        <input type="text" name="Nombre" id="nombre"
+                        <label for="tel" class="text-lg font-semibold text-white">TEL:</label>
+                        <input type="text" name="tel" id="tel"
                             class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
                     <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">CORREO:</label>
-                        <input type="text" name="Nombre" id="nombre"
+                        <label for="correo" class="text-lg font-semibold text-white">CORREO:</label>
+                        <input type="email" name="correo" id="correo"
                             class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
                     <li class=" flex flex-row items-end">
-                        <label for="nombre" class="text-lg font-semibold text-white">MENSAJE:</label>
-                        <input type="text" name="Nombre" id="nombre"
+                        <label for="mensaje" class="text-lg font-semibold text-white">MENSAJE:</label>
+                        <input type="text" name="mensaje" id="mensaje"
                             class="w-full border-b-2 border-b-white border-transparent bg-transparent">
                     </li>
                 </ul>
