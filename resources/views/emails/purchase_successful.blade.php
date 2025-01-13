@@ -58,6 +58,12 @@
             text-align: center;
             color: #2a7a46;
         }
+        .order-number {
+            font-size: 16px;
+            margin-top: 15px;
+            text-align: center;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -87,6 +93,10 @@
 
     <div class="total">
         <p><strong>Total: {{ number_format($totalAmount, 2, ',', '.') }} euros</strong></p>
+    </div>
+
+    <div class="order-number">
+        <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
 
     <div class="footer">
