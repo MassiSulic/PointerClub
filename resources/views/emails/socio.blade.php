@@ -1,4 +1,3 @@
-<!-- filepath: /c:/xampp/htdocs/PointerClub/resources/views/emails/socio.blade.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>

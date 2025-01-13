@@ -7,7 +7,23 @@
                 la misma en el momento en que ésta se produzca.
             </p>
 
-            <div class=" w-full ">
+            <div class="w-full">
+                @if (session('success'))
+                    <div class="bg-green-500 text-white p-4 rounded mb-4">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <div class="bg-red-500 text-white p-4 rounded mb-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <form action="{{ route('socios.enviar') }}" method="POST" class="flex flex-col p-6 pt-0 mx-auto bg-MarronSecundario">
                     @csrf
                     <ul class="space-y-4">
@@ -64,10 +80,10 @@
         </div>
     </div>
 
-    <div class=" bg-[#E8E6D9] px-80 my-16 p-8 ">
+    <div class="bg-[#E8E6D9] px-80 my-16 p-8">
         <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser socio</strong> del club?</h1>
 
-        <p class=" pt-2">
+        <p class="pt-2">
             <strong>- Descuento en las inscripciones</strong> (5€).<br>
             <strong>- Informe anual</strong> (digital y gráfico).<br>
             - Tarjetas de <strong>descuento en productos de patrocinadores.</strong>
