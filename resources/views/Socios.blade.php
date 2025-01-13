@@ -8,54 +8,57 @@
             </p>
 
             <div class=" w-full ">
-                <form action="" class="flex flex-col p-6 pt-0 mx-auto bg-MarronSecundario">
-                    <ul class="">
-                        <li class=" flex flex-row items-end">
-                            <label for="nombre" class="text-lg font-semibold text-white">NOMBRES:</label>
-                            <input type="text" name="Nombre" id="nombre"
-                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                <form action="{{ route('socios.enviar') }}" method="POST" class="flex flex-col p-6 pt-0 mx-auto bg-MarronSecundario">
+                    @csrf
+                    <ul class="space-y-4">
+                        <li class="flex flex-row items-end">
+                            <label for="nombre" class="text-lg font-semibold text-white mr-2">NOMBRES:</label>
+                            <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                         </li>
-                        <li class=" flex flex-row items-end">
-                            <label for="nombre" class="text-lg font-semibold text-white">APELLIDO/s:</label>
-                            <input type="text" name="Nombre" id="nombre"
-                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <li class="flex flex-row items-end">
+                            <label for="apellido" class="text-lg font-semibold text-white mr-2">APELLIDO/s:</label>
+                            <input type="text" name="apellido" id="apellido" value="{{ old('apellido') }}"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                         </li>
-                        <div class=" flex flex-row">
-                            <li class=" flex flex-row items-end w-full">
-                                <label for="nombre" class="text-lg font-semibold text-white">PAÍS:</label>
-                                <input type="text" name="Nombre" id="nombre"
-                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <div class="flex flex-row space-x-4">
+                            <li class="flex flex-row items-end w-full">
+                                <label for="pais" class="text-lg font-semibold text-white mr-2">PAÍS:</label>
+                                <input type="text" name="pais" id="pais" value="{{ old('pais') }}"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                             </li>
-                            <li class=" flex flex-row items-end w-full">
-                                <label for="nombre" class="text-lg font-semibold text-white">PROVINCIA:</label>
-                                <input type="text" name="Nombre" id="nombre"
-                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            <li class="flex flex-row items-end w-full">
+                                <label for="provincia" class="text-lg font-semibold text-white mr-2">PROVINCIA:</label>
+                                <input type="text" name="provincia" id="provincia" value="{{ old('provincia') }}"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                             </li>
                         </div>
-                        <li class=" flex flex-row items-end">
-                            <label for="nombre" class="text-lg font-semibold text-white">CIUDAD:</label>
-                            <input type="text" name="Nombre" id="nombre"
-                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <li class="flex flex-row items-end">
+                            <label for="ciudad" class="text-lg font-semibold text-white mr-2">CIUDAD:</label>
+                            <input type="text" name="ciudad" id="ciudad" value="{{ old('ciudad') }}"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                         </li>
-                        <div class=" flex flex-row">
-                            <li class=" flex flex-row items-end w-full">
-                                <label for="nombre" class="text-lg font-semibold text-white">CP:</label>
-                                <input type="text" name="Nombre" id="nombre"
-                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <div class="flex flex-row space-x-4">
+                            <li class="flex flex-row items-end w-full">
+                                <label for="cp" class="text-lg font-semibold text-white mr-2">CP:</label>
+                                <input type="text" name="cp" id="cp" value="{{ old('cp') }}"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                             </li>
-                            <li class=" flex flex-row items-end w-full">
-                                <label for="nombre" class="text-lg font-semibold text-white">TEL:</label>
-                                <input type="text" name="Nombre" id="nombre"
-                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                            <li class="flex flex-row items-end w-full">
+                                <label for="tel" class="text-lg font-semibold text-white mr-2">TEL:</label>
+                                <input type="text" name="tel" id="tel" value="{{ old('tel') }}"
+                                    class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                             </li>
                         </div>
-                        <li class=" flex flex-row items-end">
-                            <label for="nombre" class="text-lg font-semibold text-white">CORREO:</label>
-                            <input type="text" name="Nombre" id="nombre"
-                                class="w-full border-b-2 border-b-white border-transparent bg-transparent">
+                        <li class="flex flex-row items-end">
+                            <label for="correo" class="text-lg font-semibold text-white mr-2">CORREO:</label>
+                            <input type="email" name="correo" id="correo" value="{{ old('correo') }}"
+                                class="w-full border-b-2 border-b-white border-transparent bg-transparent text-white focus:outline-none focus:border-white">
                         </li>
                     </ul>
-
+                    <div class="flex justify-end">
+                        <button class="w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
+                    </div>
                 </form>
                 <div class="flex justify-end">
                     <button class=" w-30 mt-4 px-8 py-1 bg-[#C7CBC6] text-[#123240] font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
