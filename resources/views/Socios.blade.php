@@ -60,9 +60,6 @@
                         <button class="w-30 mt-4 px-4 py-2 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
                     </div>
                 </form>
-                <div class="flex justify-end">
-                    <button class=" w-30 mt-4 px-8 py-1 bg-[#C7CBC6] text-[#123240] font-semibold hover:bg-[#616261] hover:text-white border-2 border-black transition-all duration-300" type="submit">Enviar</button>
-                </div>
             </div>
         </div>
     </div>
