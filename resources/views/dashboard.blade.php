@@ -206,9 +206,100 @@
                 <div>
                     <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del
                         conductor</label>
-                        <input type="text" id="conductor" name="conductor"
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                        required>
+                        <select id="conductor" name="conductor" 
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" 
+                            required>
+                        <option value="">Seleccione un conductor</option>
+                        <option value="Nombre no aparece en la lista">El nombre no aparece en la lista</option>
+                        <option value="Propietario">Propietario</option>
+                        <option value="Albamonte, Sandro">Albamonte, Sandro</option>
+                        <option value="Aringhieri, Samuele">Aringhieri, Samuele</option>
+                        <option value="Avril, Davide">Avril, Davide</option>
+                        <option value="Balado, Jesus">Balado, Jesus</option>
+                        <option value="Bardon, Pascal">Bardon, Pascal</option>
+                        <option value="Bischi, Leonardo">Bischi, Leonardo</option>
+                        <option value="Blanchet">Blanchet</option>
+                        <option value="Boissonnade">Boissonnade</option>
+                        <option value="Boitheauville, Adrien">Boitheauville, Adrien</option>
+                        <option value="Borrella, Raúl">Borrella, Raúl</option>
+                        <option value="Bounaude">Bounaude</option>
+                        <option value="Bourgeois, Emmanuel">Bourgeois, Emmanuel</option>
+                        <option value="Brun">Brun</option>
+                        <option value="Bruni, Davide">Bruni, Davide</option>
+                        <option value="Burlat, Pascal">Burlat, Pascal</option>
+                        <option value="Burresi, Leonardo">Burresi, Leonardo</option>
+                        <option value="Cassiaut, Pierre">Cassiaut, Pierre</option>
+                        <option value="Cherubini, Fabio">Cherubini, Fabio</option>
+                        <option value="Condado, Yann">Condado, Yann</option>
+                        <option value="Coulon, Floriant">Coulon, Floriant</option>
+                        <option value="Dave, Camille">Dave, Camille</option>
+                        <option value="Esser">Esser</option>
+                        <option value="Faissat, Jerome">Faissat, Jerome</option>
+                        <option value="Fernández, Pablo">Fernández, Pablo</option>
+                        <option value="Fontecedro, Giuseppe">Fontecedro, Giuseppe</option>
+                        <option value="Gaitan, Juan Diego">Gaitan, Juan Diego</option>
+                        <option value="Garcia Verdejo, Antonio">Garcia Verdejo, Antonio</option>
+                        <option value="Garcia Vincent">Garcia Vincent</option>
+                        <option value="Gaspar Jimenez">Gaspar Jimenez</option>
+                        <option value="Gatti, Stefano">Gatti, Stefano</option>
+                        <option value="Gavrilovic, Dejan">Gavrilovic, Dejan</option>
+                        <option value="Giavarinni, Claudio">Giavarinni, Claudio</option>
+                        <option value="Ginestet, A.">Ginestet, A.</option>
+                        <option value="Giovannelli">Giovannelli</option>
+                        <option value="Gómez, Francisco">Gómez, Francisco</option>
+                        <option value="Gonzales, Xavi">Gonzales, Xavi</option>
+                        <option value="Gutierrez, Alberto">Gutierrez, Alberto</option>
+                        <option value="Hamon, Thierry">Hamon, Thierry</option>
+                        <option value="Iazzetta, Mauro">Iazzetta, Mauro</option>
+                        <option value="Imizcoz, Daniel">Imizcoz, Daniel</option>
+                        <option value="Inacio, Ricardo">Inacio, Ricardo</option>
+                        <option value="Jáñez, José Antonio">Jáñez, José Antonio</option>
+                        <option value="Kartalija, Stanislav">Kartalija, Stanislav</option>
+                        <option value="Laffon, J. M.">Laffon, J. M.</option>
+                        <option value="Latreille">Latreille</option>
+                        <option value="Lemos, Rui">Lemos, Rui</option>
+                        <option value="Lisarde Sabater, Vicente">Lisarde Sabater, Vicente</option>
+                        <option value="Locatelli, Roberto">Locatelli, Roberto</option>
+                        <option value="Lombardi, Rudy">Lombardi, Rudy</option>
+                        <option value="López, Juan">López, Juan</option>
+                        <option value="Lorca">Lorca</option>
+                        <option value="Maggiolo, Luigi">Maggiolo, Luigi</option>
+                        <option value="Massias, Patrick">Massias, Patrick</option>
+                        <option value="Mavridis, Thorodis">Mavridis, Thorodis</option>
+                        <option value="Maymard">Maymard</option>
+                        <option value="Medrano, Nacho">Medrano, Nacho</option>
+                        <option value="Merle Des Isles, Antony">Merle Des Isles, Antony</option>
+                        <option value="Mitic, Aleksandar">Mitic, Aleksandar</option>
+                        <option value="Mora Mota, Jose M.">Mora Mota, Jose M.</option>
+                        <option value="Moretti">Moretti</option>
+                        <option value="Moreno, Javier">Moreno, Javier</option>
+                        <option value="Nicoletti, Nicola">Nicoletti, Nicola</option>
+                        <option value="Nikolic, Zoran">Nikolic, Zoran</option>
+                        <option value="Nunziata, Andrea">Nunziata, Andrea</option>
+                        <option value="Pachis">Pachis</option>
+                        <option value="Palomo, Juan Miguel">Palomo, Juan Miguel</option>
+                        <option value="Pezzota, Ernesto">Pezzota, Ernesto</option>
+                        <option value="Pezzotta, Giuseppe">Pezzotta, Giuseppe</option>
+                        <option value="Pianaro, Graziano">Pianaro, Graziano</option>
+                        <option value="Pioppi, Giovanni">Pioppi, Giovanni</option>
+                        <option value="Richelli, Matteo">Richelli, Matteo</option>
+                        <option value="Roche, Nicolas">Roche, Nicolas</option>
+                        <option value="Sánchez Ropero, Francisco">Sánchez Ropero, Francisco</option>
+                        <option value="Sanz, José Luís">Sanz, José Luís</option>
+                        <option value="Scarpecci, Simone">Scarpecci, Simone</option>
+                        <option value="Scudiero, Paolo">Scudiero, Paolo</option>
+                        <option value="Simeons, Richard">Simeons, Richard</option>
+                        <option value="Soddu, Lucca">Soddu, Lucca</option>
+                        <option value="Sohier, Patrick">Sohier, Patrick</option>
+                        <option value="Stankovic, Boban">Stankovic, Boban</option>
+                        <option value="Targuetti, Emannuel">Targuetti, Emannuel</option>
+                        <option value="Tenailleau">Tenailleau</option>
+                        <option value="Teulieres, Patrick">Teulieres, Patrick</option>
+                        <option value="Testa, Angelo">Testa, Angelo</option>
+                        <option value="Traina, Severino">Traina, Severino</option>
+                        <option value="Trullen, Héctor">Trullen, Héctor</option>
+                        <option value="Villamiel, César">Villamiel, César</option>
+                    </select>
                 </div>
 
                 <!-- Campo: Fecha de nacimiento -->
@@ -490,20 +581,3 @@
 </script>
 {{-- Validacion de input de Libro de Orígenes --}}
 
-{{-- Validacion de input de Nombre del conductor --}}
-<script>
-     document.getElementById('conductor').addEventListener('input', function(e) {
-        let value = e.target.value;
-        const validValue = value.replace(/[^a-zA-Z\s]/g, ''); // Eliminar caracteres no permitidos
-        if (value !== validValue) {
-            e.target.value = validValue; // Actualizar el valor del input
-        } else {
-            e.target.value = value; // Actualizar el valor del input
-        }
-        e.target.value = validValue.replace(/\b\w/g, function(char) {
-            return char.toUpperCase();
-        }).replace(/\B\w/g, function(char) {
-            return char.toLowerCase();
-        });
-    });
-</script>
