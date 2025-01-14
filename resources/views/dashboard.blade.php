@@ -214,7 +214,7 @@
                 <!-- Campo: Fecha de nacimiento -->
                 <div>
                     <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700">Fecha de
-                        nacimiento</label>
+                        nacimiento del Perro</label>
                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         required>
