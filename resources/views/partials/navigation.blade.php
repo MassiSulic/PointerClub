@@ -138,7 +138,7 @@
                         <li>
                             <a href="{{ route('Galeria') }}"
                                 class="{{ Route::is('Galeria') ? 'underline' : '' }} px-4 py-2 whitespace-nowrap hover:bg-opacity-80 hover:underline">
-                                Galeria
+                                Galería
                             </a>
                         </li>
                     </ul>

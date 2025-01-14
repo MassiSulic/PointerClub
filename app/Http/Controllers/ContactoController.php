@@ -33,7 +33,7 @@ class ContactoController extends Controller
 
         Mail::send('emails.contacto', $data, function ($message) use ($data) {
             $message->to('info@pointerclubespana.es')
-                ->subject('Nueva consulta desde el formulario de contacto');
+                ->subject('Quiero ser Socio del Pointer');
         });
 
         return back()->with('success', 'Consulta enviada con éxito.');

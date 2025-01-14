@@ -16,7 +16,7 @@
         
         <x-concursos1 
         :titulo="'CAMPEONATOS DE EUROPA POINTER'" 
-        :prueba="'¿CAMPEONATOS DE EUROPA POINTER GB- BC.'" 
+        :prueba="'CAMPEONATOS DE EUROPA POINTER GB- BC.'" 
         :disciplina="'GRAN BÚSQUEDA - BÚSQUEDA DE CAZA'" 
         :fecha="'11/12/13/14 FEBRERO 2025'" 
         :responsable="'Francisco Álvarez'" 

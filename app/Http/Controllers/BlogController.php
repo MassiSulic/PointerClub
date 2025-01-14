@@ -66,7 +66,7 @@ class BlogController extends Controller
         return [
             (object)[
                 'title' => 'CAMPEONATOS DE EUROPA POINTER GB/BC',
-                'excerpt' => 'Descargá los programas completos',
+                'excerpt' => 'Descarga los programas completos',
                 'slug' => 'campeonatos',
                 'image' => asset('Blog/IMG_0404.jpg')
             ],

@@ -7,6 +7,7 @@ use App\Http\Controllers\PruebaController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\SociosController;
 
 
 // Ruta para la vista Actualidad / Blog
@@ -71,7 +72,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-
+    // Rutas para enviar correos electrónicos desde contacto y socios
     Route::post('/contacto', [ContactoController::class, 'enviarConsulta'])->name('contacto.enviar');
+    Route::post('/socios', [SociosController::class, 'enviarSolicitud'])->name('socios.enviar');
 
 require __DIR__ . '/auth.php';

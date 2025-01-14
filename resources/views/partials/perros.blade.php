@@ -10,9 +10,9 @@
         <thead>
             <tr class="bg-gray-100">
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nombre del Perro</th>
+                <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nacimiento</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Propietario</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Conductor</th>
-                <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nacimiento</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Raza</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Sexo</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Microchip</th>
@@ -26,9 +26,9 @@
             @foreach($perros as $perro)
                 <tr>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->nombre_perro }}</td>
+                    <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->fecha_nacimiento }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->propietario }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->conductor }}</td>
-                    <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->fecha_nacimiento }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->raza }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->sexo }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->microchip }}</td>
@@ -77,7 +77,7 @@
     <input type="hidden" name="inscripciones" id="inscripcionesInput">
 </form>
 <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
-    <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-4/5 flex flex-col">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-3xl h-600px flex flex-col transform -translate-y-1/2">
         <div class="flex justify-end">
             <button id="closeModalXBtn" class="text-gray-500 hover:text-gray-700 text-4xl">&times;</button>
         </div>

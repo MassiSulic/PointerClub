@@ -108,7 +108,7 @@
 <!-- Modal para Editar Inscripción -->
 <div id="inscripcion-modal"
     class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative mt-[-350px]">
         <!-- Título del Modal -->
         <h2 id="inscripcion-modal-title" class="text-2xl font-bold text-gray-800 mb-4">Editar Inscripción</h2>
 
@@ -166,13 +166,9 @@
 </div>
 
 
-
-
-
-
 <!-- Modal para Crear/Editar Perros -->
 <div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative">
+    <div class="bg-white rounded-lg shadow-lg p-6 relative flex flex-col mt-[-350px]">
         <!-- Título del Modal -->
         <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">Añadir Perro</h2>
 
@@ -188,7 +184,7 @@
             <input type="hidden" id="perro-id" name="perro_id">
 
             <!-- Grid para organizar los campos -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto">
                 <!-- Campo: Nombre del perro -->
                 <div>
                     <label for="nombre_perro" class="block text-sm font-medium text-gray-700">Nombre del perro</label>
@@ -210,108 +206,15 @@
                 <div>
                     <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del
                         conductor</label>
-                    <select id="conductor" name="conductor"
+                        <input type="text" id="conductor" name="conductor"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         required>
-                        <option value="">Seleccione un conductor</option>
-                        @foreach ([
-        'Albamonte, Sandro',
-        'Aringhieri, Samuele',
-        'Avril, Davide',
-        'Bardon, Pascal',
-        'Boissonnade',
-        'Boitheauville, Adrien',
-        'Borrella, Raúl',
-        'Brun',
-        'Burlat, Pascal',
-        'Cassiaut, Pierre',
-        'Cherubini, Fabio',
-        'Coulon, Floriant',
-        'Faissat, Jerome',
-        'Gaitan, Juan Diego',
-        'Garcia Vincent',
-        'Gaspar Jimenez',
-        'Gatti, Stefano',
-        'Giovannelli',
-        'Gómez, Francisco',
-        'Gutierrez, Alberto',
-        'Iazzetta, Mauro',
-        'Inacio, Ricardo',
-        'Jáñez, José Antonio',
-        'Laffon, J. M.',
-        'Latreille',
-        'Lisarde Sabater, Vicente',
-        'Locatelli, Roberto',
-        'Lorca',
-        'Maymard',
-        'Medrano, Nacho',
-        'Merle Des Isles, Antony',
-        'Mitic, Aleksandar',
-        'Mora Mota, Jose M.',
-        'Nicoletti, Nicola',
-        'Nikolic, Zoran',
-        'Pezzotta, Giuseppe',
-        'Pianaro, Graziano',
-        'Sanz, José Luís',
-        'Scarpecci, Simone',
-        'Soddu, Lucca',
-        'Sohier, Patrick',
-        'Stankovic, Boban',
-        'Tenailleau',
-        'Teulieres, Patrick',
-        'Trullen, Héctor',
-        'Balado, Jesus',
-        'Bischi, Leonardo',
-        'Blanchet',
-        'Bounaude',
-        'Bourgeois, Emmanuel',
-        'Bruni, Davide',
-        'Burresi, Leonardo',
-        'Condado, Yann',
-        'Dave, Camille',
-        'Esser',
-        'Fernández, Pablo',
-        'Fontecedro, Giuseppe',
-        'Garcia Verdejo, Antonio',
-        'Gavrilovic, Dejan',
-        'Giavarinni, Claudio',
-        'Ginestet, A.',
-        'Gonzales, Xavi',
-        'Hamon, Thierry',
-        'Imizcoz, Daniel',
-        'Kartalija, Stanislav',
-        'Lemos, Rui',
-        'Lombardi, Rudy',
-        'López, Juan',
-        'Maggiolo, Luigi',
-        'Massias, Patrick',
-        'Mavridis, Thorodis',
-        'Moreno, Javier',
-        'Moretti',
-        'Nunziata, Andrea',
-        'Pachis',
-        'Palomo, Juan Miguel',
-        'Pezzota, Ernesto',
-        'Pioppi, Giovanni',
-        'Richelli, Matteo',
-        'Roche, Nicolas',
-        'Sánchez Ropero, Francisco',
-        'Scudiero, Paolo',
-        'Simeons, Richard',
-        'Targuetti, Emannuel',
-        'Testa, Angelo',
-        'Traina, Severino',
-        'Villamiel, César',
-    ] as $conductor)
-                            <option value="{{ $conductor }}">{{ $conductor }}</option>
-                        @endforeach
-                    </select>
                 </div>
 
                 <!-- Campo: Fecha de nacimiento -->
                 <div>
                     <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700">Fecha de
-                        nacimiento</label>
+                        nacimiento del Perro</label>
                     <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                         required>
@@ -395,9 +298,6 @@
         </form>
     </div>
 </div>
-
-
-
 
 
 <script>
@@ -595,3 +495,22 @@
     });
 </script>
 {{-- Validacion de input de Libro de Orígenes --}}
+
+
+{{-- Validacion de input de Nombre del conductor --}}
+<script>
+     document.getElementById('conductor').addEventListener('input', function(e) {
+        let value = e.target.value;
+        const validValue = value.replace(/[^a-zA-Z\s]/g, ''); // Eliminar caracteres no permitidos
+        if (value !== validValue) {
+            e.target.value = validValue; // Actualizar el valor del input
+        } else {
+            e.target.value = value; // Actualizar el valor del input
+        }
+        e.target.value = validValue.replace(/\b\w/g, function(char) {
+            return char.toUpperCase();
+        }).replace(/\B\w/g, function(char) {
+            return char.toLowerCase();
+        });
+    });
+</script>
