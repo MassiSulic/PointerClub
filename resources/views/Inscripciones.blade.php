@@ -1,6 +1,5 @@
 <x-layout>
-    <br><br><br><br>
-    <div class="mt-20 flex justify-center flex-col">
+    <div class="mt-48 flex justify-center flex-col">
         <div class="flex justify-center items-center mb-4">
             <h1 class="text-2xl font-bold text-AzulPrimario">Inscribe a tu perro</h1>
         </div>
@@ -123,7 +122,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex justify-around p-4 bg-gray-100">
+        <div class="flex flex-wrap gap-4 justify-around p-4 bg-gray-100">
             <button id="addInscripcionBtn" class="bg-blue-500 text-white py-2 px-4 rounded">Hacer otra inscripción</button>
             <button id="terminarInscripcionBtn" class="bg-green-500 text-white py-2 px-4 rounded">Terminar inscripción</button>
             <button id="closeModalBtn" class="bg-red-500 text-white py-2 px-4 rounded">Cancelar las inscripciones</button>

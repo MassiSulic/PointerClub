@@ -167,14 +167,14 @@
 
 
 <!-- Modal para Crear/Editar Perros -->
-<div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg p-6 relative flex flex-col mt-[-350px]">
+<div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-start lg:pt-20 md:pt-16 justify-center z-50">
+    <div class="bg-white lg:rounded-lg md:rounded-lg shadow-lg p-6 flex flex-col relative">
         <!-- Título del Modal -->
         <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">Añadir Perro</h2>
 
         <!-- Botón de cerrar -->
         <button id="modal-close-btn"
-            class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400 text-4xl">
+            class=" text-MarronSecundario hover:text-AzulPrimario text-4xl absolute top-0 right-0 w-8">
             &times;
         </button>
 
@@ -299,7 +299,7 @@
     </div>
 </div>
 
-
+{{-- Scripts --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Abrir el modal para añadir un nuevo perro
@@ -389,8 +389,6 @@
     });
 </script>
 
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Abrir el modal para editar una inscripción existente
@@ -445,7 +443,6 @@
     });
 </script>
 
-
 {{--  Validacion de input Cartilla de Trabajo --}}
 <script>
     document.getElementById('cartilla_de_trabajo').addEventListener('input', function(e) {
@@ -465,8 +462,6 @@
 </script>
 {{--  Validacion de input Cartilla de Trabajo --}}
 
-
-
 {{-- Validacion de input de Microchip --}}
 <script>
     document.getElementById('microchip').addEventListener('input', function(e) {
@@ -475,7 +470,6 @@
     });
 </script>
 {{-- Validacion de input de Microchip --}}
-
 
 {{-- Validacion de input de Libro de Orígenes --}}
 <script>
@@ -495,7 +489,6 @@
     });
 </script>
 {{-- Validacion de input de Libro de Orígenes --}}
-
 
 {{-- Validacion de input de Nombre del conductor --}}
 <script>
