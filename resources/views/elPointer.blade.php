@@ -17,7 +17,7 @@
                     <div class=" px-4 mt-2">
                         <x-faq-item question="REGLAMENTOS DE TRABAJO. "
                             answer="<embed src='{{ asset('storage\Reglamento_Perros_Muestra-Retrievers-1.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
-                        <x-faq-item question="REGLAMENTO DE LA COPA EUROPA DE CAZA PRÁCTICA"
+                        <x-faq-item question="REGLAMENTO DE LA COPA DE ESPAÑA CAZA PRÁCTICA"
                             answer="<embed src='{{ asset('storage\REGLAMENTO_COPA_ESPANA_CAZA_PRACTICA_INTERCLUBES.pdf') }}' type='application/pdf' width='100%' height='600px'>" />
                         <x-faq-item question="REGLAMENTO DE JUECES DE PRUEBAS Y EXPOSICIONES"
                             answer="<embed src='{{ asset('storage\REGLAMENTO_JUECES_MAYO_2024.pdf') }}' type='application/pdf' width='100%' height='600px'>" />

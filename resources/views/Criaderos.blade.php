@@ -1,5 +1,5 @@
 @php
-    $headers = ['ASIJO', 'TITULAR', 'PROVINCIA', 'TEL.'];
+    $headers = ['AFIJO', 'TITULAR', 'PROVINCIA', 'TEL.'];
     $rows = [
         ['DEL Estilo Y PASIÓN', 'Adrián Pérez Camacho', 'Valencia', '661944890'],
         ['DE CASTRONUEVO', 'Alfredo Fernández Zamora', 'Valladolid', '692208112'],

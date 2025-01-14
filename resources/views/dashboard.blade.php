@@ -108,7 +108,7 @@
 <!-- Modal para Editar Inscripción -->
 <div id="inscripcion-modal"
     class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative mt-[-350px]">
         <!-- Título del Modal -->
         <h2 id="inscripcion-modal-title" class="text-2xl font-bold text-gray-800 mb-4">Editar Inscripción</h2>
 
@@ -168,7 +168,7 @@
 
 <!-- Modal para Crear/Editar Perros -->
 <div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 max-h-700px p-6 relative flex flex-col">
+    <div class="bg-white rounded-lg shadow-lg p-6 relative flex flex-col mt-[-350px]">
         <!-- Título del Modal -->
         <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">Añadir Perro</h2>
 

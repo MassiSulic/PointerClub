@@ -2,7 +2,7 @@
     <br><br><br><br>
     <div class="mt-20 flex justify-center flex-col">
         <div class="flex justify-center items-center mb-4">
-            <h1 class="text-2xl font-bold text-AzulPrimario">Inscribí a tu perro</h1>
+            <h1 class="text-2xl font-bold text-AzulPrimario">Inscribe a tu perro</h1>
         </div>
         <div class="items-center w-11/12 mx-auto flex justify-between py-12">
             <span class="font-bold text-xl text-AzulPrimario">Concursos disponibles</span>
