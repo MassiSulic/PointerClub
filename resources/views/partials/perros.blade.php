@@ -10,9 +10,9 @@
         <thead>
             <tr class="bg-gray-100">
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nombre del Perro</th>
+                <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nacimiento</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Propietario</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Conductor</th>
-                <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Nacimiento</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Raza</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Sexo</th>
                 <th class="border border-gray-300 px-1.5 py-2 text-center text-sm font-medium text-gray-700">Microchip</th>
@@ -26,9 +26,9 @@
             @foreach($perros as $perro)
                 <tr>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->nombre_perro }}</td>
+                    <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->fecha_nacimiento }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->propietario }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->conductor }}</td>
-                    <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->fecha_nacimiento }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->raza }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->sexo }}</td>
                     <td class="border border-gray-300 px-1.5 py-2 text-sm text-gray-800 text-center">{{ $perro->microchip }}</td>
