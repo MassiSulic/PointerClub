@@ -51,6 +51,15 @@ class RedsysController extends Controller
             return back()->with('error', 'No se encontraron datos de inscripciones.');
         }
 
+        // Normalizar los valores de 'valor' en las inscripciones
+        $inscripcionesData = array_map(function ($inscripcion) {
+            $inscripcion['valor'] = isset($inscripcion['valor']) ? (float)$inscripcion['valor'] : 0;
+            return $inscripcion;
+        }, $inscripcionesData);
+
+        // Log después de normalizar los datos
+        Log::debug('Método success - Datos normalizados de inscripciones:', $inscripcionesData);
+
         Mail::to($user->email)->send(new PurchaseSuccessfulMail($user->name, $description, $amount, $order, $inscripcionesData));
         $adminEmail = 'info@pointerclubespana.es';
         Mail::to($adminEmail)->send(new AdminNotificationMail($user->name, $description, $amount, $order, $inscripcionesData));
@@ -67,7 +76,7 @@ class RedsysController extends Controller
     {
         try {
             // Log de datos iniciales recibidos
-            Log::debug('Datos recibidos desde confirmar.blade.php:', $request->all());
+             Log::debug('Método process - Datos recibidos desde confirmar.blade.php:', $request->all());
     
             // Configuración de Redsys
             $key = config('redsys.key');
@@ -106,7 +115,7 @@ class RedsysController extends Controller
                     'perro' => $nombrePerro,
                     'prueba' => $nombrePrueba,
                     'fecha' => $fecha,
-                    'valor' => $item['valor'] ?? 'Valor no especificado',
+                    'valor' => isset($item['valor']) ? (float)$item['valor'] : 0, // Convertir a float
                 ];
     
                 // Generar descripción agrupando fechas similares
@@ -129,7 +138,8 @@ class RedsysController extends Controller
     
             // Eliminar caracteres de salto de línea
             $description = str_replace(["\n", "\r"], '', $description);
-            Log::debug('Descripción generada para Redsys (limpia):', ['description' => $description]);
+            // Log después de procesar las inscripciones
+             Log::debug('Método process - Inscripciones procesadas:', $inscripcionesData);
     
             // Guardar inscripciones en la sesión
             session(['inscripcionesData' => $inscripcionesData]);
