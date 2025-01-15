@@ -112,7 +112,7 @@
                 <div id="perrosCheckboxes" class="mt-2">
                     @foreach($perros as $perro)
                     <div class="flex items-center">
-                        <input id="perro_{{ $perro->id }}" name="perros[]" type="checkbox" value="{{ $perro->id }}" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                        <input id="perro_{{ $perro->id }}" data-nombre="{{ $perro->nombre_perro }}" name="perros[]" type="checkbox" value="{{ $perro->id }}" data-socio-valido="{{ $perro->socio_valido }}" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
                         <label for="perro_{{ $perro->id }}" class="ml-2 block text-sm text-gray-900">
                             {{ $perro->nombre_perro }} 
                         </label>
@@ -151,26 +151,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const numerosSociosValidos = [
-                '0002', '0006', '0007', '0008', '0009', '0010', '0011', '0012', '0015', '0016', '0017', '0018',
-                '0019', '0020', '0021', '0022', '0023', '0024', '0025', '0026', '0028', '0031', '0032', '0033',
-                '0034', '0035', '0037', '0038', '0039', '0040', '0041', '0042', '0043', '0044', '0045', '0046',
-                '0047', '0048', '0049', '0050', '0051', '0052', '0053', '0054', '0055', '0056', '0057', '0058',
-                '0059', '0060', '0061', '0062', '0063', '0065', '0066', '0069', '0070', '0076', '0077', '0078',
-                '0079', '0080', '0082', '0083', '0084', '0085', '0086', '0088', '0089', '0090', '0091', '0093',
-                '0094', '0096', '0098', '0099', '0100', '0101', '0102', '0103', '0104', '0105', '0107', '0108',
-                '0109', '0110', '0111', '0112', '0114', '0115', '0116', '0117', '0118', '0119', '0120', '0121',
-                '0122', '0123', '0124', '0125', '0126', '0127', '0128', '0130', '0131', '0132', '0133', '0134',
-                '0136', '0137', '0138', '0139', '0140', '0141', '0145', '0148', '0149', '0150', '0151', '0152',
-                '0153', '0154', '0155', '0156', '0157', '0158', '0160', '0161', '0162', '0163', '0164', '0165',
-                '0166', '0167', '0168', '0169', '0170', '0171', '0172', '0173', '0174', '0175', '0176', '0177',
-                '0178', '0180', '0182', '0184', '0186', '0187', '0188', '0190', '0191', '0192', '0195', '0196',
-                '0197', '0198', '0199', '0200', '0202', '0203', '0205', '0206', '0208', '0209', '0210', '0211',
-                '0212', '0214', '0216', '0218', '0219', '0220', '0221', '0222', '0223', '0224', '0225', '0226',
-                '0227', '0228', '0229', '0230', '0231', '0232', '0233', '0234', '0235', '0236', '0237', '0238',
-                '0239', '0240', '0241', '0242', '0243', '0244', '0245', '0246', '0247', '0248', '0249', '0250',
-                '0251', '0252', '0253', '0254', '0255', '0256', '0257', '0258', '0259', '0260', '0261'
-            ];
+                           
+
             const inscribirBtn = document.getElementById('inscribirBtn');
             const modal = document.getElementById('modal');
             const closeModalBtn = document.getElementById('closeModalBtn');
@@ -178,7 +160,6 @@
             const addInscripcionBtn = document.getElementById('addInscripcionBtn');
             const terminarInscripcionBtn = document.getElementById('terminarInscripcionBtn');
             const totalPrecioSpan = document.getElementById('totalPrecio');
-            const precioSpan = document.getElementById('precio'); // Nuevo elemento para mostrar el precio
 
             let inscripcionIndex = 0; // Índice único para cada inscripción
             let totalPrecio = 0; // Total del precio
@@ -187,7 +168,8 @@
             function cargarFechas(pruebaSelect, fechasContainer, index) {
                 const selectedOption = pruebaSelect.options[pruebaSelect.selectedIndex];
                 const fechas = selectedOption.getAttribute('data-fechas') ? selectedOption.getAttribute(
-                    'data-fechas').split('|') : [];
+                    'data-fechas'
+                ).split('|') : [];
 
                 // Limpiar fechas anteriores
                 fechasContainer.innerHTML = '';
@@ -217,16 +199,21 @@
                 totalPrecio = 0;
                 document.querySelectorAll('.inscripcion').forEach(inscripcion => {
                     const fechasSeleccionadas = inscripcion.querySelectorAll(
-                        'input[name^="fechas_"]:checked').length;
+                        'input[name^="fechas_"]:checked'
+                    ).length;
                     const perrosSeleccionados = inscripcion.querySelectorAll(
-                        'input[name="perros[]"]:checked').length;
-                    const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
-                    const esSocioValido = numeroSocio && numerosSociosValidos.includes(numeroSocio);
-                    const precio = esSocioValido ? 40 : 45; // precio
-                    totalPrecio += fechasSeleccionadas * perrosSeleccionados * precio;
+                        'input[name="perros[]"]:checked'
+                    );
 
-                    // Actualizar el precio dinámico al lado del nombre del perro
-                    inscripcion.querySelectorAll('input[name="perros[]"]:checked').forEach(perro => {
+                    perrosSeleccionados.forEach(perro => {
+                        // Obtener si el perro es socio válido desde el atributo `data-socio-valido`
+                        const esSocioValido = perro.getAttribute('data-socio-valido') === '1'; // Nuevo cálculo basado en BD
+
+                        // Calcular el precio basado en socio_valido
+                        const precio = esSocioValido ? 40 : 45; // precio madre desde inscripciones.blade.php
+                        totalPrecio += fechasSeleccionadas * precio;
+
+                        // Actualizar el precio dinámico al lado del nombre del perro
                         const precioSpan = document.getElementById(`precio_${perro.value}`);
                         if (precioSpan) {
                             precioSpan.textContent = `${precio} euros`;
@@ -235,6 +222,7 @@
                 });
                 totalPrecioSpan.textContent = `Total: ${totalPrecio} euros`;
             }
+
 
             // Evento para abrir el modal
             inscribirBtn.addEventListener('click', function() {
@@ -358,27 +346,35 @@
         document.querySelector('.inscripcion').setAttribute('data-index', inscripcionIndex);
 
         // Evento para terminar la inscripción y enviar los datos
-        terminarInscripcionBtn.addEventListener('click', function() {
+        terminarInscripcionBtn.addEventListener('click', function () {
             const inscripciones = [];
-            const numeroSocio = @json(Auth::check() ? Auth::user()->numero_socio : null);
-            const esSocioValido = numeroSocio && numerosSociosValidos.includes(
-            numeroSocio); // Definir esSocioValido aquí
             document.querySelectorAll('.inscripcion').forEach(inscripcion => {
                 const prueba = inscripcion.querySelector('#prueba option:checked').textContent;
-                const fechas = Array.from(inscripcion.querySelectorAll(
-                    'input[name^="fechas_"]:checked')).map(input => input.value);
-                const perros = Array.from(inscripcion.querySelectorAll(
-                    'input[name="perros[]"]:checked')).map(input => input.nextElementSibling
-                    .textContent.trim());
-                const precio = esSocioValido ? 40 : 45; // precio
+                const fechas = Array.from(inscripcion.querySelectorAll('input[name^="fechas_"]:checked'))
+                    .map(input => input.value);
+
+                // Procesar los perros seleccionados
+                const perros = Array.from(inscripcion.querySelectorAll('input[name="perros[]"]:checked'))
+                .map(input => {
+                    const socioValido = input.dataset.socioValido === "1"; // Verificar si es socio
+                    const precio = socioValido ? 40 : 45; // Precio madre desde inscripciones.blade.php
+                    const nombre = input.dataset.nombre; // Obtener el nombre del perro
+                    return {
+                        nombre: nombre, // Incluye el nombre del perro
+                        precio: precio
+                    };
+                });
+
+
+                // Construir inscripciones con las fechas y los perros seleccionados
                 fechas.forEach(fecha => {
                     perros.forEach(perro => {
                         inscripciones.push({
-                            prueba,
-                            fecha,
-                            perro,
-                            valor: precio
-                        });
+                        prueba,
+                        fecha,
+                        perro: perro.nombre, // Ahora incluye el nombre
+                        precio: perro.precio
+                    });
                     });
                 });
             });
@@ -388,6 +384,7 @@
             document.getElementById('inscripcionesInput').value = JSON.stringify(inscripciones);
             document.getElementById('confirmarInscripcionForm').submit();
         });
+
         });
 
         // Abre modal para añadir perro en caso que no tenga perros añadidos

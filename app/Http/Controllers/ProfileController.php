@@ -44,7 +44,6 @@ class ProfileController extends Controller
     {
         $validated = $request->validate([
             'identificacion' => 'required|string|max:12',
-            'numero_socio' => 'nullable|string|max:10',
             'direccion' => 'required|string|max:255',
             'municipio' => 'required|string|max:100',
             'region' => 'required|string|max:100',

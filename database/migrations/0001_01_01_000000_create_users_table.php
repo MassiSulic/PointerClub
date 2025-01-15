@@ -16,7 +16,6 @@ return new class extends Migration
 
             // Nuevas columnas de la tabla real
             $table->string('identificacion', 12)->index(); // varchar(12)
-            $table->string('numero_socio', 10)->nullable(); // varchar(10) NULL
             $table->string('direccion', 50); // varchar(50)
             $table->string('municipio', 50); // varchar(50)
             $table->string('region', 20); // varchar(20)

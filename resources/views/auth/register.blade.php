@@ -23,14 +23,7 @@
                 <x-text-input id="identificacion" class="block mt-1 w-full" type="text" name="identificacion" :value="old('identificacion')" required />
                 <x-input-error :messages="$errors->get('identificacion')" class="mt-2" />
             </div>
-    
-            <!-- Número de Socio -->
-            <div class="mt-4">
-                <x-input-label for="numero_socio" :value="__('Número de Socio')" />
-                <x-text-input id="numero_socio" class="block mt-1 w-full" type="text" name="numero_socio" :value="old('numero_socio')" />
-                <x-input-error :messages="$errors->get('numero_socio')" class="mt-2" />
-            </div>
-    
+      
             <!-- Dirección -->
             <div class="mt-4">
                 <x-input-label for="direccion" :value="__('Dirección')" />

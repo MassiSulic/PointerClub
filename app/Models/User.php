@@ -26,7 +26,6 @@ class User extends Authenticatable implements MustVerifyEmail
  
          // Atributos personalizados
          'identificacion',
-         'numero_socio',
          'direccion',
          'municipio',
          'region',
