@@ -118,7 +118,7 @@ class RedsysController extends Controller
                     'perro' => $nombrePerro,
                     'prueba' => $nombrePrueba,
                     'fecha' => $fecha,
-                    'valor' => isset($item['valor']) ? (float)$item['valor'] : 0, // Convertir a float
+                    'valor' => isset($item['precio']) ? (float)$item['precio'] : 0, // Convertir a float
                 ];
 
                 // Generar descripción agrupando fechas similares
@@ -195,5 +195,4 @@ class RedsysController extends Controller
         // Retornar la vista con el formulario
         return view('redsys.form', compact('form'));
     }
-
 }
