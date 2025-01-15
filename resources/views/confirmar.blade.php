@@ -70,7 +70,7 @@
         <p>¡La inscripción se realizó correctamente!</p>
         <div class="mt-4 flex justify-end space-x-2">
             <a href="{{ route('dashboard') }}#inscripciones" class="bg-blue-500 text-white py-2 px-4 rounded">Ver inscripciones</a>
-            <button id="closeModal" class="bg-blue-500 text-white py-2 px-4 rounded">Aceptar</button>
+            {{-- <button id="closeModal" class="bg-blue-500 text-white py-2 px-4 rounded">Aceptar</button> --}}
         </div>
     </div>
 </div>

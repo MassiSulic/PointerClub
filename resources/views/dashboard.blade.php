@@ -101,6 +101,7 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>
 @include('partials.footer')
 
@@ -411,6 +412,18 @@
     </div>
 </div>
 
+
+<!-- Popup -->
+<div id="popup" class="fixed inset-0 flex items-start justify-center bg-gray-900 bg-opacity-75 z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center" style="margin-top: 250px;">
+        <p class="text-lg mb-4">Si te haces socio del PCE antes del cierre de las inscripciones,<br> podrás beneficiarte de un descuento de 5 €/inscripción.</p>
+        <div class="flex justify-center space-x-4">
+            <a href="{{ route('Socios') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Hacerme Socio</a>
+            <button id="close-popup" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Cerrar</button>
+        </div>
+    </div>
+</div>
+
 {{-- Scripts --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -657,3 +670,52 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 </script>
+
+{{-- es para el popup de hacerte socio, que se muestre una vez --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const popupId = 'popup'; // ID del popup
+        const closeBtnId = 'close-popup'; // ID del botón de cierre
+        const socioBtnId = 'hacerte-socio'; // ID del botón de "Hacerte socio"
+        const popupKey = 'popupNeverShow'; // Clave para localStorage
+
+        // Verificar si el popup ya ha sido deshabilitado permanentemente
+        if (!localStorage.getItem(popupKey)) {
+            // Mostrar el popup si no está marcado como deshabilitado
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.remove('hidden'); // Mostrar popup
+            }
+
+            // Función para ocultar y deshabilitar permanentemente el popup
+            const disablePopup = () => {
+                const popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.classList.add('hidden'); // Ocultar popup
+                }
+                // Marcar el popup como deshabilitado en localStorage
+                localStorage.setItem(popupKey, 'true');
+            };
+
+            // Cerrar el popup al hacer clic en el botón de cierre
+            const closeBtn = document.getElementById(closeBtnId);
+            if (closeBtn) {
+                closeBtn.addEventListener('click', disablePopup);
+            }
+
+            // Deshabilitar el popup al hacer clic en el botón "Hacerte socio"
+            const socioBtn = document.getElementById(socioBtnId);
+            if (socioBtn) {
+                socioBtn.addEventListener('click', disablePopup);
+            }
+        } else {
+            // Ocultar el popup directamente si está marcado como "nunca mostrar"
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.add('hidden');
+            }
+        }
+    });
+</script>
+
+
