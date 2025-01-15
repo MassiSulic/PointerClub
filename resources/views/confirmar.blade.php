@@ -48,17 +48,17 @@
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar después</button>
             </form>
             {{-- COMENTADO HASTA SOLUCIONAR EL PAGO CON REDSYS --}}
-            {{-- <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
+            <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
                 @csrf
                 @if(isset($inscripciones[0]))
                     <input type="hidden" name="nombre_prueba" value="{{ $inscripciones[0]['prueba'] }}">
                 @else
                     <input type="hidden" name="nombre_prueba" value="">
                 @endif
-                <input type="hidden" name="total" value="{{ $total }}">
+                <input type="hidden" name="total" value="{{ array_sum(array_column($inscripciones, 'precio')) }}">
                 <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
-            </form>             --}}
+            </form>            
         </div>
     </div>
 </x-layout>
