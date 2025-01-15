@@ -45,7 +45,7 @@
             <form id="pagarDespuesForm" action="{{ route('pagar-despues') }}" method="POST" class="mr-2">
                 @csrf
                 <input type="hidden" name="inscripciones" value="{{ json_encode($inscripciones) }}">
-                <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar después</button>
+                <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar con Transferencia o en la Prueba</button>
             </form>
             {{-- COMENTADO HASTA SOLUCIONAR EL PAGO CON REDSYS --}}
             <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
