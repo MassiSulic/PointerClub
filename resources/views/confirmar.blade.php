@@ -76,7 +76,6 @@
 </div>
 <!-- Modal de Inscripcion Correcta -->
 
-{{-- Script para mensaje de inscripcion correcta --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         @if(session('showPopup'))
@@ -88,7 +87,6 @@
         });
     });
 </script>
-{{-- Script para mensaje de inscripcion correcta --}}
 
 <script>
     document.getElementById('redsysForm').addEventListener('submit', function(event) {
@@ -101,14 +99,14 @@
             // Sanitizar nombre_prueba: eliminar saltos de línea y espacios innecesarios
             nombrePrueba = nombrePrueba.replace(/\n/g, ' ').trim();
 
-            // Sanitizar detalle: limpiar saltos de línea y espacios extra en cada campo
+            // Sanitizar y procesar el detalle
             let detalleArray = JSON.parse(detalle);
             detalleArray = detalleArray.map(item => {
                 return {
-                    prueba: item.prueba.replace(/\n/g, ' ').trim(),
-                    fecha: item.fecha.trim(),
-                    perro: item.perro.trim(),
-                    valor: item.valor && !isNaN(item.valor) ? parseFloat(item.valor) : 0 // Validar y asignar valor
+                    prueba: item.prueba ? item.prueba.replace(/\n/g, ' ').trim() : 'Prueba no especificada',
+                    fecha: item.fecha ? item.fecha.trim() : 'Fecha no especificada',
+                    perro: item.perro ? item.perro.trim() : 'Perro no especificado',
+                    valor: item.precio && !isNaN(item.precio) ? parseFloat(item.precio) : 0 // Validar y asignar valor
                 };
             });
 
@@ -120,14 +118,14 @@
                 }
             });
 
-            // Volver a convertir detalle a JSON después de la sanitización
+            // Convertir detalle a JSON después de la sanitización
             detalle = JSON.stringify(detalleArray);
 
             // Asignar los valores sanitizados nuevamente a los inputs del formulario
             document.querySelector('input[name="nombre_prueba"]').value = nombrePrueba;
             document.querySelector('input[name="detalle"]').value = detalle;
 
-            // Validar total
+            // Validar el total
             if (!total || isNaN(total) || parseFloat(total) <= 0) {
                 console.error('Error: Total inválido:', total);
                 throw new Error('El total es inválido o está vacío.');
