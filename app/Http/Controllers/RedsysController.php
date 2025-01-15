@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseSuccessfulMail;
 use App\Mail\AdminNotificationMail;
+use App\Models\PruebaInscripta;
 
 class RedsysController extends Controller
 {
@@ -76,6 +77,18 @@ class RedsysController extends Controller
         if ($totalCalculated <= 0) {
             Log::error('El total calculado de las inscripciones es inválido:', ['totalCalculated' => $totalCalculated]);
             return back()->with('error', 'El total calculado de las inscripciones es inválido.');
+        }
+
+        // Guardar las inscripciones en la base de datos
+        foreach ($inscripcionesData as $inscripcion) {
+            PruebaInscripta::create([
+                'user_id' => Auth::id(),
+                'prueba' => $inscripcion['prueba'],
+                'fecha' => $inscripcion['fecha'],
+                'perro' => $inscripcion['perro'],
+                'valor' => $inscripcion['valor'],
+                'pago' => 1, // Indica que el pago ha sido realizado
+            ]);
         }
 
         // Enviar correos
