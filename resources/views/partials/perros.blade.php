@@ -207,7 +207,7 @@
                         const esSocioValido = perro.getAttribute('data-socio-valido') === '1'; // Nuevo cálculo basado en BD
 
                         // Calcular el precio basado en socio_valido
-                        const precio = esSocioValido ? 1 : 45; // precio madre desde inscripciones.blade.php
+                        const precio = esSocioValido ? 40 : 45; // precio madre desde inscripciones.blade.php
                         totalPrecio += fechasSeleccionadas * precio;
 
                         // Actualizar el precio dinámico al lado del nombre del perro
@@ -356,7 +356,7 @@
                 const perros = Array.from(inscripcion.querySelectorAll('input[name="perros[]"]:checked'))
                 .map(input => {
                     const socioValido = input.dataset.socioValido === "1"; // Verificar si es socio
-                    const precio = socioValido ? 1 : 45; // Precio madre desde inscripciones.blade.php
+                    const precio = socioValido ? 40 : 45; // Precio madre desde inscripciones.blade.php
                     const nombre = input.dataset.nombre; // Obtener el nombre del perro
                     return {
                         nombre: nombre, // Incluye el nombre del perro
