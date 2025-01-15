@@ -90,8 +90,6 @@
 </script>
 {{-- Script para mensaje de inscripcion correcta --}}
 
-{{-- Sanitizar los datos enviados --}}
-{{-- Script para sanitizar y validar los datos enviados --}}
 <script>
     document.getElementById('redsysForm').addEventListener('submit', function(event) {
         try {
@@ -159,6 +157,7 @@
         // event.preventDefault();
     });
 </script>
+
 
 
 
