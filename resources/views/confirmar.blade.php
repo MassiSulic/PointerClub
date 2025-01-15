@@ -48,7 +48,7 @@
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #776A54;">Pagar después</button>
             </form>
             {{-- COMENTADO HASTA SOLUCIONAR EL PAGO CON REDSYS --}}
-            {{-- <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
+            <form id="redsysForm" action="{{ route('redsys.process') }}" method="POST">
                 @csrf
                 @if(isset($inscripciones[0]))
                     <input type="hidden" name="nombre_prueba" value="{{ $inscripciones[0]['prueba'] }}">
@@ -58,7 +58,7 @@
                 <input type="hidden" name="total" value="{{ array_sum(array_column($inscripciones, 'precio')) }}">
                 <input type="hidden" name="detalle" value="{{ json_encode($inscripciones) }}">
                 <button type="submit" class="text-white py-2 px-4 rounded" style="background-color: #28a745;">Pagar ahora</button>
-            </form>             --}}
+            </form>            
         </div>
     </div>
 </x-layout>
@@ -91,60 +91,75 @@
 {{-- Script para mensaje de inscripcion correcta --}}
 
 {{-- Sanitizar los datos enviados --}}
+{{-- Script para sanitizar y validar los datos enviados --}}
 <script>
     document.getElementById('redsysForm').addEventListener('submit', function(event) {
-        let nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
-        let total = document.querySelector('input[name="total"]').value;
-        let detalle = document.querySelector('input[name="detalle"]').value;
+        try {
+            // Obtener los valores de los inputs
+            let nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
+            let total = document.querySelector('input[name="total"]').value;
+            let detalle = document.querySelector('input[name="detalle"]').value;
 
-        // Sanitizar nombre_prueba: eliminar saltos de línea y espacios innecesarios
-        nombrePrueba = nombrePrueba.replace(/\n/g, ' ').trim();
+            // Sanitizar nombre_prueba: eliminar saltos de línea y espacios innecesarios
+            nombrePrueba = nombrePrueba.replace(/\n/g, ' ').trim();
 
-        // Sanitizar detalle: limpiar todos los saltos de línea y espacios extra en cada campo
-        let detalleArray = JSON.parse(detalle);
-        detalleArray = detalleArray.map(item => {
-            return {
-                prueba: item.prueba.replace(/\n/g, ' ').trim(),
-                fecha: item.fecha.trim(),
-                perro: item.perro.trim(),
-                valor: item.valor
-            };
-        });
+            // Sanitizar detalle: limpiar saltos de línea y espacios extra en cada campo
+            let detalleArray = JSON.parse(detalle);
+            detalleArray = detalleArray.map(item => {
+                return {
+                    prueba: item.prueba.replace(/\n/g, ' ').trim(),
+                    fecha: item.fecha.trim(),
+                    perro: item.perro.trim(),
+                    valor: item.valor && !isNaN(item.valor) ? parseFloat(item.valor) : 0 // Validar y asignar valor
+                };
+            });
 
-        // Volver a convertir detalle a JSON después de la sanitización
-        detalle = JSON.stringify(detalleArray);
+            // Validar cada elemento del detalleArray
+            detalleArray.forEach(item => {
+                if (!item.prueba || !item.fecha || !item.perro || item.valor <= 0) {
+                    console.error('Error: Datos incompletos o inválidos en detalle:', item);
+                    throw new Error('Faltan datos o valores inválidos en las inscripciones.');
+                }
+            });
 
-        // Asignar los valores sanitizados nuevamente a los inputs del formulario
-        document.querySelector('input[name="nombre_prueba"]').value = nombrePrueba;
-        document.querySelector('input[name="detalle"]').value = detalle;
+            // Volver a convertir detalle a JSON después de la sanitización
+            detalle = JSON.stringify(detalleArray);
 
-        // Si algún valor está vacío, prevenimos el envío temporalmente
-        if (!nombrePrueba || !total || !detalle) {
-            event.preventDefault();
-            alert('Faltan datos en el formulario. Verifica los campos.');
+            // Asignar los valores sanitizados nuevamente a los inputs del formulario
+            document.querySelector('input[name="nombre_prueba"]').value = nombrePrueba;
+            document.querySelector('input[name="detalle"]').value = detalle;
+
+            // Validar total
+            if (!total || isNaN(total) || parseFloat(total) <= 0) {
+                console.error('Error: Total inválido:', total);
+                throw new Error('El total es inválido o está vacío.');
+            }
+
+        } catch (error) {
+            console.error('Error al procesar el formulario:', error);
+            event.preventDefault(); // Evitar el envío si hay errores
+            alert('Ocurrió un error al procesar los datos. Verifica la consola para más detalles.');
         }
     });
 </script>
 
-{{-- Sanitizar los datos enviados --}}
-
-
-
-<!-- verificacion de datos enviados -->
+{{-- Verificación de datos enviados --}}
 <script>
-document.getElementById('redsysForm').addEventListener('submit', function(event) {
-    const nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
-    const total = document.querySelector('input[name="total"]').value;
-    const detalle = document.querySelector('input[name="detalle"]').value;
+    document.getElementById('redsysForm').addEventListener('submit', function(event) {
+        const nombrePrueba = document.querySelector('input[name="nombre_prueba"]').value;
+        const total = document.querySelector('input[name="total"]').value;
+        const detalle = document.querySelector('input[name="detalle"]').value;
 
-    console.log('nombre_prueba:', nombrePrueba);
-    console.log('total:', total);
-    console.log('detalle:', detalle);
+        console.log('Datos enviados al servidor:');
+        console.log('Nombre de la prueba:', nombrePrueba);
+        console.log('Total:', total);
+        console.log('Detalle:', detalle);
 
-    // Si algo no está correcto, evita que el formulario se envíe (solo para depuración)
-    // event.preventDefault();
-});
+        // Descomentar para detener el envío del formulario durante depuración
+        // event.preventDefault();
+    });
 </script>
+
 
 
 
