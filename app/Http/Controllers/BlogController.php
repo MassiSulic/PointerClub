@@ -74,7 +74,7 @@ class BlogController extends Controller
                 'title' => 'SEMANA DE ANDALUCIA  2025',
                 'excerpt' => '¡No te pierdas nada de información!',
                 'slug' => 'semana',
-                'image' => asset('Blog/Semana2.png')
+                'image' => asset('Blog/SemanaProgramaGrande.jpeg')
             ],
             (object)[
                 'title' => 'ALOJAMIENTOS PARA LA SEMANA DE ANDALUCÍA',
