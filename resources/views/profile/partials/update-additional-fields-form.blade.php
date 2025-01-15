@@ -1,6 +1,6 @@
 <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
     <h3 class="text-lg font-medium text-gray-900">
-        {{ __('Datos del propietario') }}
+        {{ __('Datos del Usuario') }}
     </h3>
 
     <form method="POST" action="{{ route('profile.update-additional-fields') }}" class="mt-6 space-y-6">
@@ -14,13 +14,7 @@
             <x-input-error :messages="$errors->get('identificacion')" class="mt-2" />
         </div>
 
-        <!-- Número de Socio -->
-        <div>
-            <x-input-label for="numero_socio" :value="__('Número de socio')" />
-            <x-text-input id="numero_socio" class="block mt-1 w-full" type="text" name="numero_socio" :value="old('numero_socio', auth()->user()->numero_socio)" />
-            <x-input-error :messages="$errors->get('numero_socio')" class="mt-2" />
-        </div>
-
+        
         <!-- Dirección -->
         <div>
             <x-input-label for="direccion" :value="__('Dirección')" />

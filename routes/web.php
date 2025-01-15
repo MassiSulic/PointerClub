@@ -75,5 +75,6 @@ Route::middleware(['auth'])->group(function () {
     // Rutas para enviar correos electrónicos desde contacto y socios
     Route::post('/contacto', [ContactoController::class, 'enviarConsulta'])->name('contacto.enviar');
     Route::post('/socios', [SociosController::class, 'enviarSolicitud'])->name('socios.enviar');
-
+    Route::post('/validar-socio', [PerroController::class, 'validarSocio'])->name('validar-socio');
+    
 require __DIR__ . '/auth.php';

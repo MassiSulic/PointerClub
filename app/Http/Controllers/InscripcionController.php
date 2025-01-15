@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PurchaseSuccessfulMail;
 use App\Mail\PurchasePendingMail;
 use App\Mail\AdminNotificationPendingMail; 
+use Illuminate\Support\Facades\Log;
 
 class InscripcionController extends Controller
 {
@@ -23,6 +24,8 @@ class InscripcionController extends Controller
         }
 
         $total = array_sum(array_column($inscripciones, 'valor'));
+        Log::info("Total calculado: $total");
+
         return view('confirmar', compact('inscripciones', 'total'));
     }
 
@@ -31,21 +34,44 @@ class InscripcionController extends Controller
         $inscripciones = json_decode($request->input('inscripciones'), true);
 
         // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
-        foreach ($inscripciones as &$inscripcion) {
+        // Procesar cada inscripción y asignar campos correctamente
+        $inscripciones = array_map(function ($inscripcion) {
+            // Limpiar el nombre de la prueba, eliminando las fechas solo para la descripción en Redsys
             $inscripcion['prueba'] = preg_replace('/ - \d{2}\/\d{2}\/\d{2}/', '', $inscripcion['prueba']);
-        }
+
+            // Mapear precio a valor
+            if (isset($inscripcion['precio'])) {
+                $inscripcion['valor'] = $inscripcion['precio'];
+            } else {
+                $inscripcion['valor'] = 0; // Valor por defecto
+            }
+
+            Log::info("Procesando inscripción después de mapear: " . json_encode($inscripcion));
+            return $inscripcion;
+        }, $inscripciones);
 
         // Guardar cada inscripción en la base de datos
         foreach ($inscripciones as $inscripcion) {
             PruebaInscripta::create([
                 'user_id' => Auth::id(),
                 'prueba' => $inscripcion['prueba'],
-                'fecha' => $inscripcion['fecha'], // Aquí guardamos la fecha elegida por el usuario
+                'fecha' => $inscripcion['fecha'],
                 'perro' => $inscripcion['perro'],
-                'valor' => $inscripcion['valor'],
+                'valor' => $inscripcion['valor'], // Campo valor validado
                 'pago' => 0,
             ]);
         }
+
+        
+        // Validar y completar los datos de inscripciones
+        $inscripciones = array_map(function ($inscripcion) {
+            return array_merge($inscripcion, [
+                'valor' => $inscripcion['valor'] ?? 0, // Asegurar que siempre haya un valor
+                'perro' => $inscripcion['perro'] ?? 'No especificado', // Validar nombre del perro
+                'prueba' => $inscripcion['prueba'] ?? 'Prueba no especificada', // Validar prueba
+                'fecha' => $inscripcion['fecha'] ?? 'Fecha no especificada', // Validar fecha
+            ]);
+        }, $inscripciones);
 
         $total = array_sum(array_column($inscripciones, 'valor'));
         $user = Auth::user();
