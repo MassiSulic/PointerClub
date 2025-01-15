@@ -34,10 +34,6 @@
                     <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                 </div>
                 <div class="">
-                    <img src="{{ asset('image/Resultados/Recurso 18@150x-100.jpg') }}" alt="Foto 2" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
-                </div>
-                <div class="">
                     <img src="{{ asset('image/Resultados/Recurso 1@150x-100.jpg') }}" alt="Foto 3" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-opacity duration-300"></div>
                 </div>
