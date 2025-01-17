@@ -80,7 +80,7 @@
         @endphp
         @foreach ($inscripcionesData as $inscripcion)
             @php
-                $totalAmount += $inscripcion['valor']; // Sumar el valor de cada inscripción
+                $totalAmount += (float) $inscripcion['valor']; // Convertir a número flotante
             @endphp
             <li class="inscripcion">
                 <strong>Perro:</strong> {{ $inscripcion['perro'] }} <br>

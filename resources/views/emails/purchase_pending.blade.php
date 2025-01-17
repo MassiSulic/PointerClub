@@ -99,7 +99,22 @@
         <p><strong>Número de Pedido:</strong> {{ $order }}</p>
     </div>
 
-    <p style="color: red; font-weight: bold; text-align: center;">Recuerde abonar la inscripción el día de la competencia.</p>
+    <p style="color: red; font-weight: bold; text-align: center;">Recuerde abonar la inscripción el día de la competencia o vía transferencia bancaria.</p>
+    
+    <div class="bg-gray-100 p-4 rounded-lg shadow-md mt-4 text-center font-bold">
+        <p class="text-gray-700">
+            Se podrá también realizar el pago de las inscripciones mediante transferencia bancaria a la cuenta bancaria del Pointer Club Español que sigue:
+        </p>
+        <p class="text-gray-700 mt-2">
+            BIC/SWIFT - CLPEES2MXXX, IBAN - ES39 3035 0014 6601 4010 0158 (LABORAL KUTXA)
+        </p>
+        <p class="text-gray-700 mt-2">
+            Los pagos por transferencia bancaria deben comunicarse al Pointer Club Español mediante el envío del correspondiente justificante bancario al email de Secretaria (<a href="mailto:secretariapointerclub@gmail.com" class="text-blue-500 underline">secretariapointerclub@gmail.com</a>).
+        </p>
+        <p class="text-gray-700 mt-2">
+            El pago se verá reflejado en su cuenta de <a href="https://pointerclubespana.es/" class="text-blue-500 underline">pointerclubespana.es</a> en 48 hs.
+        </p>
+    </div>
 
     <div class="footer">
         <p>Si tiene alguna pregunta, no dude en <a href="mailto:info@pointerclubespana.es">contactarnos</a>.</p>

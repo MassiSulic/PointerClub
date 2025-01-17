@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class PurchaseSuccessfulMail extends Mailable
 {
@@ -37,6 +38,15 @@ class PurchaseSuccessfulMail extends Mailable
         $this->amount = $amount;
         $this->order = $order;
         $this->inscripcionesData = $inscripcionesData; // Asignamos las inscripciones
+
+        // Log para verificar los datos recibidos
+        Log::debug('PurchaseSuccessfulMail - Datos recibidos:', [
+            'userName' => $userName,
+            'description' => $description,
+            'amount' => $amount,
+            'order' => $order,
+            'inscripcionesData' => $inscripcionesData,
+        ]);
     }
 
     /**
