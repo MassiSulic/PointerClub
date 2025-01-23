@@ -65,6 +65,12 @@ class BlogController extends Controller
     {
         return [
             (object)[
+                'title' => 'Normas 2025',
+                'excerpt' => 'Campeonato Europeo Pointer de Gran Busca y de Búsqueda de Caza',
+                'slug' => 'normas',
+                'image' => asset('Blog/IMG_0385.jpg')
+            ],
+            (object)[
                 'title' => 'CAMPEONATOS DE EUROPA POINTER GB/BC',
                 'excerpt' => 'Descarga los programas completos',
                 'slug' => 'campeonatos',

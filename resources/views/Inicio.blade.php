@@ -84,17 +84,22 @@
         </div>
 
         <div class="bg-BlancoTerciario">
-            <div class=" py-24 flex flex-row justify-center gap-4 flex-wrap">
-                @foreach ($blogs as $blog)
+            <div class="py-24 px-12 flex flex-row gap-4 flex-wrap max-w-screen-2xl mx-auto">
+                @foreach ($blogs as $index => $blog)
+                    @if ($index >= 4)
+                        @break
+                    @endif
                     <!-- Componente de tarjeta de blog -->
                     <x-blog-card :title="$blog->title" :excerpt="$blog->excerpt" :contentUrl="route('blog.show', $blog->slug)" :image="$blog->image"
                         onclick="openModal('{{ route('blog.show', $blog->slug) }}', '{{ $blog->title }}')" />
                 @endforeach
             </div>
-
+        
             <!-- Usamos el componente modal -->
             <x-blog-modal />
         </div>
+        
+        
 
         <div class=" bg-BlancoTerciario" id="proximo-concurso"></div>
 
