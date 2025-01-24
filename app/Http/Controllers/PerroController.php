@@ -229,6 +229,13 @@ class PerroController extends Controller
         ['numero' => '0259', 'nombre' => 'Carro Gómez, Ismael'],
         ['numero' => '0260', 'nombre' => 'Balado Casal, Jesús'],
         ['numero' => '0261', 'nombre' => 'Curto González, Enrique'],
+        ['numero' => '0262', 'nombre' => 'Álvarez Díez, Manuel'],
+        ['numero' => '0263', 'nombre' => 'Trullen Del Campo, Héctor'],
+        ['numero' => '0264', 'nombre' => 'Bousquet, Jérôme'],
+        ['numero' => '0265', 'nombre' => 'Cambón Bertoa, Esteban'],
+        ['numero' => '0266', 'nombre' => 'Bertrand, Juan Claude'],
+        ['numero' => '0267', 'nombre' => 'Mazerolles, Giles'],
+        ['numero' => '0268', 'nombre' => 'Berradi Al-Arrami, Amin'],
     ];
     
 
