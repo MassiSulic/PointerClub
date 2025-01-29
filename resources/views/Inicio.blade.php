@@ -62,8 +62,8 @@
             </div>
         </div>
 
-        <div class="bg-AzulPrimario flex flex-col justify-between md:flex-row h-auto ">
-            <div class="md:w-1/2 flex flex-col justify-center items-start p-6 text-BlancoTerciario text-left">
+        <div class="bg-AzulPrimario flex flex-col justify-between md:flex-row h-auto pb-8 md:pb-0">
+            <div class="md:w-1/2 flex flex-col justify-center lg:items-start items-center p-6 text-BlancoTerciario lg:text-left text-center">
                 <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                     CAMPEONATOS DE EUROPA POINTER GB/BC
                 </h1>

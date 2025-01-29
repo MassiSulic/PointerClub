@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="bg-[#E8E6D9] px-80 my-16 p-8">
+    <div class="bg-[#E8E6D9] lg:px-80 my-16 p-8">
         <h1 class="text-left text-2xl px-4 py-1 border-b-4 border-MarronSecundario ">¿Quieres <strong>ser socio</strong> del club?</h1>
 
         <p class="pt-2">
