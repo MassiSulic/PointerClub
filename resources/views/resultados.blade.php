@@ -35,6 +35,10 @@
                     @endif
                 </div>
             @endforeach
+            <!-- Agregar los enlaces de paginación -->
+            <div class="mt-4">
+                {{ $resultados->links() }}
+            </div>
         </div>
     </div>
 </x-layout>
