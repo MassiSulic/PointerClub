@@ -42,7 +42,7 @@
             </li>
             <li><a href="{{ route('Concursos') }}" class="block" class=" hover:underline ">Concursos</a></li>
             <li><a href="{{ route('Inscripciones') }}" class="block" class=" hover:underline ">Inscripciones</a></li>
-            <li><a href="{{ route('Resultados') }}" class="block" class=" hover:underline ">Resultados</a></li>
+            <li><a href="{{ route('resultados') }}" class="block" class=" hover:underline ">Resultados</a></li>
             <li><a href="{{ route('Socios') }}" class="block" class=" hover:underline ">Socios</a></li>
             <li><a href="{{ route('Actualidad') }}" class="block" class=" hover:underline ">Actualidad</a></li>
             <li><a href="{{ route('Contacto') }}" class="block" class=" hover:underline ">Contacto</a></li>
@@ -78,9 +78,15 @@
             <a href="https://www.facebook.com/pointerclubspain/" target="_blank">
                 <img src="{{ asset('svg/navbar/Facebook.svg') }}" alt="Facebook" class="w-6">
             </a>
-            <a href="{{ route('login') }}">
-                <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class="w-6">
-            </a>
+            @auth
+                <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}">
+                    <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class="w-6">
+                </a>
+            @else
+                <a href="{{ route('login') }}">
+                    <img src="{{ asset('svg/navbar/Usuario.svg') }}" alt="Usuario" class="w-6">
+                </a>
+            @endauth
             {{-- <a href="">
                 <img src="{{ asset('svg/navbar/Buscar.svg') }}" alt="Buscar" class="w-6">
             </a> --}}
@@ -156,8 +162,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('Resultados') }}"
-                        class="{{ Route::is('Resultados') ? 'underline' : '' }} hover:underline">
+                    <a href="{{ route('resultados') }}"
+                        class="{{ Route::is('resultados') ? 'underline' : '' }} hover:underline">
                         Resultados
                     </a>
                 </li>
@@ -181,8 +187,8 @@
                 </li>
                 @auth
                     <li>
-                        <a href="{{ route('dashboard') }}"
-                            class="{{ Route::is('dashboard') ? 'underline' : '' }} block bg-white text-gray-800 hover:text-white font-semibold py-0.5 px-2 rounded border"
+                        <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }}"
+                            class="{{ Route::is('dashboard') || Route::is('admin.dashboard') ? 'underline' : '' }} block bg-white text-gray-800 hover:text-white font-semibold py-0.5 px-2 rounded border"
                             style="border-color: #032D39; background-color: #8E6E53;">
                             Mi Cuenta
                         </a>

@@ -10,6 +10,7 @@
         "erusev/parsedown": "^1.7",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "maatwebsite/excel": "3.1.62",
         "ssheduardo/redsys-laravel": "~1.4.0"
     },
     "require-dev": {

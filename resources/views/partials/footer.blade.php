@@ -12,7 +12,7 @@
                 </div>
                 <div class=" flex flex-col w-full">
                     <a href="{{ route('Inscripciones') }}" class="hover:underline">Inscripciones</a>
-                    <a href="{{ route('Resultados') }}" class="hover:underline">Resultados</a>
+                    <a href="{{ route('resultados') }}" class="hover:underline">Resultados</a>
                 </div>
                 <div class=" flex flex-col w-full">
                     <a href="{{ route('Socios') }}" class="hover:underline">Socios</a>
@@ -73,7 +73,7 @@
                     <a href="{{ route('Inscripciones') }}" class="hover:underline">Inscripciones</a>
                 </div>
                 <div class="text-center">
-                    <a href="{{ route('Resultados') }}" class="hover:underline">Resultados</a>
+                    <a href="{{ route('resultados') }}" class="hover:underline">Resultados</a>
                     <br>
                     <a href="{{ route('Socios') }}" class="hover:underline">Socios</a>
                 </div>

@@ -2,14 +2,19 @@
     <!-- Primary Navigation Menu -->
     <div class="mx-auto">
         <div class="flex justify-center md:gap-48 lg:gap-96 h-16">
-            <div class="flex">
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Mi Cuenta') }}
+            <div class="flex space-x-4">
+                            
+                @if(Auth::user()->role === 'admin')
+                    <!-- Botones solo para admin -->
+                    <x-nav-link class="text-white" :href="route('admin.inscripciones')" :active="request()->routeIs('admin.inscripciones')">
+                        {{ __('Inscripciones') }}
                     </x-nav-link>
-                </div>
+                    <x-nav-link class="text-white" :href="route('admin.resultados.index')" :active="request()->routeIs('admin.resultados.*')">
+                        {{ __('Resultados') }}
+                    </x-nav-link>
+                @endif
             </div>
+            
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -30,6 +35,11 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Perfil') }}
+                            </x-dropdown-link>
+                                                
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

@@ -23,4 +23,13 @@ class PruebaInscripta extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function perroModel()
+{
+    // belongsTo(Model, 'foreign_key', 'owner_key')
+    // foreign_key = el campo en prueba_inscriptas (perro) 
+    // owner_key   = el campo en perros (nombre_perro)
+    return $this->belongsTo(Perro::class, 'perro', 'nombre_perro');
+}
+
 }

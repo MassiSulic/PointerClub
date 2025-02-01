@@ -8,7 +8,10 @@ use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\RedsysController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\SociosController;
-
+use App\Http\Controllers\AdminInscripcionesController;
+use App\Http\Controllers\InscripcionesExportController;
+use App\Http\Controllers\AdminResultadosController;
+use App\Http\Controllers\ResultadosPublicosController;
 
 // Ruta para la vista Actualidad / Blog
 use App\Http\Controllers\BlogController;
@@ -22,7 +25,8 @@ Route::get('/', [BlogController::class, 'listForHome'])->name('Inicio');
 Route::view('elPointer', 'elPointer')->name('elPointer');
 Route::view('Concursos', 'Concursos')->name('Concursos');
 Route::get('Inscripciones', [PruebaController::class, 'index'])->name('Inscripciones');
-Route::view('Resultados', 'Resultados')->name('Resultados');
+//Route::view('Resultados', 'Resultados')->name('Resultados');
+Route::get('/resultados', [ResultadosPublicosController::class, 'index'])->name('resultados');
 Route::view('Socios', 'Socios')->name('Socios');
 Route::view('Contacto', 'Contacto')->name('Contacto');
 Route::view('Privacidad', 'Privacidad')->name('Privacidad');
@@ -39,6 +43,8 @@ Route::view('Galeria', 'Galeria')->name('Galeria');
 // Se comenta esta linea debajo para omitir verificación de email en local
 // Route::middleware(['auth', 'verified'])->group(function () {
 //Se remplaza por esta linea para omitir verificación de email en local    
+
+// Rutas para usuarios comunes
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PerroController::class, 'index'])->name('dashboard');
 
@@ -56,6 +62,46 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/pagar-despues', [InscripcionController::class, 'pagarDespues'])->name('pagar-despues');
     Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 });
+
+
+// Rutas para los usuarios Admin
+Route::middleware(['auth', 'isAdmin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+    
+    // Dashboard
+    Route::get('/dashboard', [ProfileController::class, 'adminDashboard'])
+        ->name('dashboard');
+    
+    // Inscripciones
+    Route::get('/inscripciones', [AdminInscripcionesController::class, 'index'])
+        ->name('inscripciones');
+    Route::put('/inscripciones/{inscripcion}', [AdminInscripcionesController::class, 'update'])
+        ->name('inscripciones.update');
+    Route::delete('/inscripciones/{inscripcion}', [AdminInscripcionesController::class, 'destroy'])
+        ->name('inscripciones.destroy');
+
+    // Gestión de usuarios
+    Route::get('/usuarios', [ProfileController::class, 'listUsers'])
+        ->name('usuarios');
+
+    // Gestión de socios
+    Route::get('/socios', [SociosController::class, 'adminIndex'])
+        ->name('socios');
+    Route::post('/socios', [SociosController::class, 'store'])
+        ->name('socios.store');
+
+    // Exportar inscripciones
+    // => Nombre final: admin.export.inscripciones
+    Route::get('/exportar-inscripciones', [InscripcionesExportController::class, 'export'])
+        ->name('export.inscripciones');
+
+    // Rutas para Resultados (resource)
+    // => Nombres: admin.resultados.index, admin.resultados.create, etc.
+    Route::resource('resultados', AdminResultadosController::class);
+});
+
 
 
     // Rutas para Redsys
