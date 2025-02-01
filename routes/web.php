@@ -70,9 +70,12 @@ Route::middleware(['auth', 'isAdmin'])
     ->name('admin.')
     ->group(function () {
     
-    // Dashboard
-    Route::get('/dashboard', [ProfileController::class, 'adminDashboard'])
-        ->name('dashboard');
+    
+    // Dashboard - Redirige automáticamente a Inscripciones
+    Route::get('/dashboard', function () {
+        return redirect()->route('admin.inscripciones');
+    })->name('admin.dashboard');
+
     
     // Inscripciones
     Route::get('/inscripciones', [AdminInscripcionesController::class, 'index'])
