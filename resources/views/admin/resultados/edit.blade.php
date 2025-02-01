@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@include('layouts.navigation')
+
 @section('content')
     <div class="flex justify-center items-start min-h-screen pt-8">
         <div class="bg-gray-100 p-8 rounded-lg shadow-lg w-full max-w-2xl">
