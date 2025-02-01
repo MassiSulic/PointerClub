@@ -42,7 +42,8 @@ class AdminInscripcionesController extends Controller
                     'perros.fecha_nacimiento', 'perros.libro_de_origenes', 'perros.microchip', 
                     'perros.cartilla_de_trabajo', 'perros.conductor', 'perros.propietario', 'perros.pais')
             ->orderBy($sort, $direction)
-            ->paginate(20);
+            ->latest('created_at') // Asegura que si no hay otro ordenamiento, se ordene por fecha de creación DESC
+            ->paginate(10);
 
         // Agregar parámetros de ordenación a la paginación
         $inscripciones->appends(['sort' => $sort, 'direction' => $direction]);
