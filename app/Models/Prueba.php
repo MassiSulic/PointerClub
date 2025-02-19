@@ -20,6 +20,8 @@ class Prueba extends Model
         'nombre_juez_1',
         'nombre_juez_2',
         'nombre_juez_3',
+        'precio_socio',
+        'precio_no_socio',
     ];
 
     /**

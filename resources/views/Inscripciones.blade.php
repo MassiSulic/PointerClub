@@ -80,19 +80,21 @@
             <div class="inscripcion">
                 <label for="prueba" class="block text-sm font-medium text-gray-700">Prueba</label>
                 <select id="prueba" name="prueba" 
-                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none
-                 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
-                 <option value="">Selecciona una prueba</option>
+                    class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none
+                    focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" required>
+                    <option value="">Selecciona una prueba</option>
                     @foreach($pruebas as $prueba)
                         @php
-                            $fechas = explode('|', $prueba->fecha); // Convertir la cadena de fechas en un array
+                            $fechas = explode('|', $prueba->fecha);
                         @endphp
-                        <option value="{{ $prueba->id }}" data-fechas="{{ $prueba->fecha }}">
+                        <option value="{{ $prueba->id }}"
+                            data-fechas="{{ $prueba->fecha }}"
+                            data-precio-socio="{{ $prueba->precio_socio }}"
+                            data-precio-no-socio="{{ $prueba->precio_no_socio }}">
                             {{ $prueba->nombre_prueba }} - {{ $prueba->disciplina }} - {{ implode(' - ', $fechas) }}
                         </option>
                     @endforeach
                 </select>
-
                 <label for="fecha" class="block text-sm font-medium text-gray-700 mt-4">Fecha</label>
                 <div id="fechas" class="mt-1">
                     @foreach($pruebas as $prueba)
@@ -204,15 +206,22 @@
                     const perrosSeleccionados = inscripcion.querySelectorAll(
                         'input[name="perros[]"]:checked'
                     );
-
+                    
+                    // Obtener el select de prueba y la opción seleccionada
+                    const pruebaSelect = inscripcion.querySelector('#prueba');
+                    const selectedOption = pruebaSelect.options[pruebaSelect.selectedIndex];
+                    // Leer los precios desde los atributos data del option
+                    const precioSocio = parseFloat(selectedOption.getAttribute('data-precio-socio')) || 0;
+                    const precioNoSocio = parseFloat(selectedOption.getAttribute('data-precio-no-socio')) || 0;
+                    
                     perrosSeleccionados.forEach(perro => {
                         // Obtener si el perro es socio válido desde el atributo `data-socio-valido`
                         const esSocioValido = perro.getAttribute('data-socio-valido') === '1'; // Nuevo cálculo basado en BD
-
-                        // Calcular el precio basado en socio_valido
-                        const precio = esSocioValido ? 40 : 45; // precio madre desde inscripciones.blade.php
+                        
+                        // Calcular el precio basado en socio_valido usando los valores dinámicos
+                        const precio = esSocioValido ? precioSocio : precioNoSocio;
                         totalPrecio += fechasSeleccionadas * precio;
-
+                        
                         // Actualizar el precio dinámico al lado del nombre del perro
                         const precioSpan = document.getElementById(`precio_${perro.value}`);
                         if (precioSpan) {
@@ -222,6 +231,7 @@
                 });
                 totalPrecioSpan.textContent = `Total: ${totalPrecio} euros`;
             }
+
 
 
             // Evento para abrir el modal
@@ -353,11 +363,16 @@
                 const fechas = Array.from(inscripcion.querySelectorAll('input[name^="fechas_"]:checked'))
                     .map(input => input.value);
 
+                    const pruebaSelect = inscripcion.querySelector('#prueba');
+                    const selectedOption = pruebaSelect.options[pruebaSelect.selectedIndex];
+                    const precioSocio = parseFloat(selectedOption.getAttribute('data-precio-socio')) || 0;
+                    const precioNoSocio = parseFloat(selectedOption.getAttribute('data-precio-no-socio')) || 0;
+
                 // Procesar los perros seleccionados
                 const perros = Array.from(inscripcion.querySelectorAll('input[name="perros[]"]:checked'))
                 .map(input => {
                     const socioValido = input.dataset.socioValido === "1"; // Verificar si es socio
-                    const precio = socioValido ? 40 : 45; // Precio madre desde inscripciones.blade.php
+                    const precio = socioValido ? precioSocio : precioNoSocio; // Precio madre desde inscripciones.blade.php
                     const nombre = input.dataset.nombre; // Obtener el nombre del perro
                     return {
                         nombre: nombre, // Incluye el nombre del perro
