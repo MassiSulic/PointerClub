@@ -13,15 +13,17 @@
         <tbody>
             <tr>
                 @foreach(range(1, 12) as $month)
-                    <td class="border border-[#23383E] p-2">
+                    <td class="border border-[#23383E] p-2 align-top"> <!-- Alineación superior -->
                         @if(isset($events[$month]) && count($events[$month]) > 0)
-                            @foreach($events[$month] as $event)
-                                <div class="bg-[#23383E] text-white p-2 rounded w-full mb-1">
-                                    <span class="font-bold">{{ \Carbon\Carbon::parse($event['date'])->format('d/m') }}</span> - {{ $event['name'] }}
-                                </div>
-                            @endforeach
+                            <div class="flex flex-col items-start space-y-1"> <!-- Contenedor alineado arriba -->
+                                @foreach($events[$month] as $event)
+                                    <div class="bg-[#23383E] text-white p-2 rounded w-full">
+                                        <span class="font-bold">{{ \Carbon\Carbon::parse($event['date'])->format('d/m') }}</span> - {{ $event['name'] }}
+                                    </div>
+                                @endforeach
+                            </div>
                         @else
-                            <div class="w-14"></div>
+                            <div class="w-14 h-6"></div> <!-- Espaciado mínimo -->
                         @endif
                     </td>
                 @endforeach

@@ -156,7 +156,12 @@
                             'name' => 'CONCURSOS: Campeonato de Europa GB Pointer (2ª jornada, Paterna de Ribera)',
                         ],
                     ],
+                    3 => [
+                        ['date' => '2025-03-01', 'name' => 'BÚSQUEDA DE CAZA Y JÓVENES PROMESAS (Andalucía - Extremadura)'],
+                        ['date' => '2025-03-02', 'name' => 'BÚSQUEDA DE CAZA Y JÓVENES PROMESAS (Andalucía - Extremadura)'],
+                    ],
                 ]" />
+
 
 
 
