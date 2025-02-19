@@ -1,14 +1,14 @@
 <x-layout>
     <div class=" mt-48">
 
-        <x-concursos1 
+        <x-concursos1
         :titulo="'Búsqueda de caza y Jóvenes promesas.'" 
-        :prueba="''" 
+        :prueba="'ВС / BC bateria amateur Jóvenes promesas / PAN'" 
         :disciplina="'BÚSQUEDA DE CAZA'" 
         :fecha="'1 y 2 de Marzo 2025'" 
-        :responsable="'Juan Miguel Palomo'" 
+        :responsable="'Juan Miguel'" 
         :telefono="'+34 625 59 54 91'" 
-        :delegacion="''" 
+        :delegacion="'secretariapointerclub@gmail.com'" 
         :jueces="''" 
         :observaciones="''" 
         :url="''"
