@@ -362,7 +362,9 @@
         terminarInscripcionBtn.addEventListener('click', function () {
             const inscripciones = [];
             document.querySelectorAll('.inscripcion').forEach(inscripcion => {
-                const prueba = inscripcion.querySelector('#prueba option:checked').textContent;
+                const pruebaFull = inscripcion.querySelector('#prueba option:checked').textContent;
+                const partes = pruebaFull.split(' - ');
+                const prueba = partes[0] + ' - ' + partes[1];
                 const fechas = Array.from(inscripcion.querySelectorAll('input[name^="fechas_"]:checked'))
                     .map(input => input.value);
 
