@@ -25,7 +25,7 @@
                         <span class="text-lg font-semibold text-black">Responsable:</span>
                         <span class="w-full border-b-2 border-b-black border-transparent bg-transparent pl-2">{{ $responsable }}</span>
                     </li>
-                    <li class="flex flex-row items-end w-1/3">
+                    <li class="flex flex-row items-end w-2/3">
                         <span class="text-lg font-semibold text-black">Tel:</span>
                         <span class="w-full border-b-2 border-b-black border-transparent bg-transparent pl-2">{{ $telefono }}</span>
                     </li>

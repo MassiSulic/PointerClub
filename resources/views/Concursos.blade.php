@@ -1,6 +1,19 @@
 <x-layout>
     <div class=" mt-48">
 
+        <x-concursos1 
+        :titulo="'Búsqueda de caza y Jóvenes promesas.'" 
+        :prueba="''" 
+        :disciplina="'BÚSQUEDA DE CAZA'" 
+        :fecha="'1 y 2 de Marzo 2025'" 
+        :responsable="'Juan Miguel Palomo'" 
+        :telefono="'+34 625 59 54 91'" 
+        :delegacion="''" 
+        :jueces="''" 
+        :observaciones="''" 
+        :url="''"
+        />
+
         <x-concursos2 
         :titulo="'SEMANA DE ANDALUCIA'" 
         :prueba="'COPA ESPAÑA GB - BC / GB - BC BRITÁNICOS EN ABIERTO / EURODERBY'" 
