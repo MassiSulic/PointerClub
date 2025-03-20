@@ -1,6 +1,20 @@
 <x-layout>
     <div class=" mt-48">
 
+        
+        <x-concursos2
+        :titulo="'Jóvenes promesas. Delegación de Extremadura y delegación de Andalucía.'" 
+        :prueba="'Jóvenes promesas. Delegación de Extremadura y delegación de Andalucía.'" 
+        :disciplina="'Jóvenes promesas'" 
+        :fecha="'22 de Marzo 2025'" 
+        :responsable="'Rafael'" 
+        :telefono="'+34 699 93 92 41'" 
+        :delegacion="'secretariapointerclub@gmail.com'" 
+        :jueces="''" 
+        :observaciones="''" 
+        :url="''"
+        />
+        
         <x-concursos1
         :titulo="'Búsqueda de caza y Jóvenes promesas.'" 
         :prueba="'ВС / BC bateria amateur Jóvenes promesas / PAN'" 

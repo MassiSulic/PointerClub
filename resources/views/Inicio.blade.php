@@ -115,7 +115,7 @@
                     <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1>
                     <a href="https://pointerclubespana.es/Concursos">
-                        <img src="image/home/ProximoConcurso/2.svg" alt="">
+                        <img src="image/home/ProximoConcurso/Concurso 22 de marzo.jpeg" alt="">
                     </a>
                 </div>
             </div>
