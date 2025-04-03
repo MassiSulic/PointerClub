@@ -107,15 +107,15 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 bg-MarronSecundario">
                 <!-- Imagen del perro -->
                 <div class="bg-cover bg-top h-full"
-                    style="background-image: url({{ asset('image/home/Concurso-promo-22-de-marzo.jpeg') }}); min-height: 300px;">
+                    style="background-image: url({{ asset('image/home/Concurso-promo-12-13-abril.jpg') }}); min-height: 300px;">
                 </div>
 
                 <!-- Contenido del evento -->
                 <div class="">
-                    <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
-                        Próximo CONCURSO.</h1>
+                    {{-- <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
+                        Próximo CONCURSO.</h1> --}}
                     <a href="https://pointerclubespana.es/Concursos">
-                        <img src="image/home/ProximoConcurso/Concurso 22 de marzo.jpeg" alt="">
+                        <img src="image/home/ProximoConcurso/Concurso 12 y 13 de abril.jpg" alt="">
                     </a>
                 </div>
             </div>

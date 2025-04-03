@@ -2,6 +2,19 @@
     <div class=" mt-48">
 
         
+        <x-concursos1
+        :titulo="'Prueba de Gran Busca y Busqueda de Caza en Iglesias (Burgos)'" 
+        :prueba="'Prueba de Gran Busca y Busqueda de Caza en Iglesias (Burgos)'" 
+        :disciplina="'BÚSQUEDA DE CAZA, GRAN BUSCA'"
+        :fecha="'12/04/2025 hasta 13/04/2025'" 
+        :responsable="'Jon Etxeandia'" 
+        :telefono="'+34 650 03 68 37'" 
+        :delegacion="'pointerclubespana@gmail.com'" 
+        :jueces="'Jose Luis Anakabe, Ives Tastet, Lorenzo Urra, Ismael Carro, Tomas Goenaga'" 
+        :observaciones="''" 
+        :url="'/Inscripciones'"
+        />
+        
         <x-concursos2
         :titulo="'Jóvenes promesas. Delegación de Extremadura y delegación de Andalucía.'" 
         :prueba="'Jóvenes promesas. Delegación de Extremadura y delegación de Andalucía.'" 

@@ -47,7 +47,7 @@
         </div>
         <div class="flex justify-end items-center gap-8 mt-2">
             <!-- Enlace dinámico -->
-            <a href="{{ $url }}" target="_blank" class="w-30 px-2 py-1 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-black border-2 border-black transition-all duration-300 text-center">
+            <a href="{{ $url }}" class="w-30 px-2 py-1 bg-[#C7CBC6] text-black font-semibold hover:bg-[#616261] hover:text-black border-2 border-black transition-all duration-300 text-center">
                 INSCRIPCIÓN
             </a>
         </div>
