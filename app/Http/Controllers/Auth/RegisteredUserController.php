@@ -31,20 +31,33 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'identificacion' => ['required', 'string', 'max:12', 'unique:users'],
+            'direccion' => ['required', 'string', 'max:50'],
+            'region' => ['required', 'string', 'max:20'],
+            'pais' => ['required', 'string', 'max:20'],
+            'telefono' => ['required', 'string', 'max:20'],
+        ], [
+            'email.unique' => 'El correo electrónico ya ha sido registrado.',
+            'identificacion.unique' => 'El número de identificación ya ha sido registrado.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'identificacion' => $request->identificacion,
+            'direccion' => $request->direccion,
+            'region' => $request->region,
+            'pais' => $request->pais,
+            'telefono' => $request->telefono,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('dashboard');
     }
 }

@@ -1,17 +1,721 @@
+@include('partials.navigation')
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12 w-full">
+        <div class="max-w-7xl mx-auto sm:px-1 lg:px-1 w-full">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                <div class="p-6 text-gray-900 w-full">
+                    <h3 class="text-lg font-bold mb-4">Gestión de Perros</h3>
+
+                    <!-- Botón para añadir un perro -->
+                    <button id="add-perro-btn"
+                        class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-6">
+                        Añadir Perro +
+                    </button>
+
+
+
+                    <!-- Incluir la vista perros -->
+                    @include('partials.perros')
+
+                    <!-- Paginación -->
+                    {{ $perros->links() }}
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="py-6 w-full">
+        <div class="max-w-7xl mx-auto sm:px-1 lg:px-1 w-full">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
+                <div class="p-6 text-gray-900">
+                    <h3 class="text-lg font-bold mb-4" id="inscripciones">Mis Inscripciones</h3>
+
+                    {{-- <button id="add-inscripcion-btn" 
+                    class="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium text-sm rounded-lg shadow-md transition ease-in-out duration-150 mb-2">
+                    Nueva Inscripción +
+                    </button> --}}
+
+                    <table class="table-auto w-full border-collapse border border-gray-300">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Concurso - Disciplina</th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Fecha del Concurso</th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Perro</th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Valor</th>
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Estado</th>    
+                                <th
+                                    class="border border-gray-300 px-4 py-2 text-center text-sm font-medium text-gray-700">
+                                    Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @foreach ($inscripciones as $inscripcion)
+                                @php
+                                    $partesPrueba = explode(' - ', $inscripcion->prueba);
+                                    $pruebaSinFecha = $partesPrueba[0] . ' - ' . $partesPrueba[1];
+                                @endphp
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">
+                                        {{ $pruebaSinFecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">
+                                        {{ $inscripcion->fecha }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">
+                                        {{ $inscripcion->perro }}</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-gray-800 text-center">
+                                        {{ $inscripcion->valor }} euros</td>
+                                    <td class="border border-gray-300 px-4 py-2 text-sm text-center">
+                                        @if ($inscripcion->pago == 0)
+                                            <span class="text-red-500">Pendiente de pago</span>
+                                        @else
+                                            <span class="text-green-500">Pagado</span>
+                                        @endif
+                                    </td>    
+                                    <td
+                                        class="border border-gray-300 px-4 py-2 text-sm text-gray-800 space-x-2 text-center">
+                                        <form action="{{ route('inscripciones.destroy', $inscripcion->id) }}"
+                                            method="POST" class="inline-block"
+                                            onsubmit="return confirm('¿Seguro de Eliminar esta Inscripción?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600">Eliminar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    {{ $inscripciones->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>
+@include('partials.footer')
+
+
+<!-- Modal para Editar Inscripción -->
+<div id="inscripcion-modal"
+    class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-3/4 p-6 relative mt-[-350px]">
+        <!-- Título del Modal -->
+        <h2 id="inscripcion-modal-title" class="text-2xl font-bold text-gray-800 mb-4">Editar Inscripción</h2>
+
+        <!-- Botón de cerrar -->
+        <button id="inscripcion-modal-close-btn"
+            class="absolute top-3 right-3 text-gray-500 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-400">
+            &times;
+        </button>
+
+        <!-- Formulario -->
+        <form id="inscripcion-form" method="POST" action="" class="space-y-4">
+            @csrf
+            @method('PUT')
+            <input type="hidden" id="inscripcion-id" name="inscripcion_id">
+
+            <!-- Campos del formulario -->
+            <div>
+                <label for="inscripcion-prueba" class="block text-sm font-medium text-gray-700">Prueba</label>
+                <input type="text" id="inscripcion-prueba" name="prueba"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+            <div>
+                <label for="inscripcion-fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
+                <input type="date" id="inscripcion-fecha" name="fecha"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+            <div>
+                <label for="inscripcion-perro" class="block text-sm font-medium text-gray-700">Perro</label>
+                <input type="text" id="inscripcion-perro" name="perro"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+            <div>
+                <label for="inscripcion-valor" class="block text-sm font-medium text-gray-700">Valor</label>
+                <input type="number" id="inscripcion-valor" name="valor"
+                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    required>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex justify-end space-x-2 mt-4">
+                <button type="button" id="inscripcion-modal-cancel-btn"
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Cancelar
+                </button>
+                <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Modal para Crear/Editar Perros -->
+<div id="perro-modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 hidden flex items-start lg:pt-20 md:pt-16 justify-center z-50">
+    <div class="bg-white lg:rounded-lg md:rounded-lg shadow-lg p-6 flex flex-col relative">
+        <!-- Título del Modal -->
+        <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-4">Añadir Perro</h2>
+
+        <!-- Botón de cerrar -->
+        <button id="modal-close-btn"
+            class=" text-MarronSecundario hover:text-AzulPrimario text-4xl absolute top-0 right-0 w-8">
+            &times;
+        </button>
+
+        <!-- Formulario -->
+        <form id="perro-form" method="POST" action="{{ route('perros.store') }}" class="space-y-4">
+            @csrf
+            <input type="hidden" id="perro-id" name="perro_id">
+
+            <!-- Sección: Datos del Propietario -->
+            <div>
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Datos del Propietario</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Campo: Nombre del propietario -->
+                    <div>
+                        <label for="propietario" class="block text-sm font-medium text-gray-700">Apellidos y Nombres del Propietario</label>
+                        <input type="text" id="propietario" name="propietario"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required placeholder="Apellidos, Nombres">
+                            <small>Ejemplo: Sánchez Ropero, Francisco</small>    
+                    </div>
+
+                    <!-- Campo: Número de socio del Propietario -->
+                    <div>
+                        <label for="numero_socio" class="block text-sm font-medium text-gray-700">Número de Socio del Propietario</label>
+                        <input type="text" id="numero_socio" name="numero_socio"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            maxlength="10" placeholder="0000" oninput="validateNumeroSocio(this)">
+                            <p id="socio_message" class="mt-2 text-sm" style="display: none;"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Datos del Conductor -->
+            <div>
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Datos del Conductor</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Campo: Nombre del conductor -->
+                    <div>
+                        <label for="conductor" class="block text-sm font-medium text-gray-700">Nombre del Conductor</label>
+                        <select id="conductor" name="conductor"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                            <!-- Opciones del select -->
+                            <option value="">Seleccione un conductor</option>
+                            <option value="Nombre no aparece en la lista">El nombre no aparece en la lista</option>
+                            <option value="Propietario">Propietario</option>
+                            <option value="Albamonte, Sandro">Albamonte, Sandro</option>
+                            <option value="Aringhieri, Samuele">Aringhieri, Samuele</option>
+                            <option value="Avril, Davide">Avril, Davide</option>
+                            <option value="Balado, Jesus">Balado, Jesus</option>
+                            <option value="Bardon, Pascal">Bardon, Pascal</option>
+                            <option value="Bischi, Leonardo">Bischi, Leonardo</option>
+                            <option value="Blanchet">Blanchet</option>
+                            <option value="Boissonnade">Boissonnade</option>
+                            <option value="Boitheauville, Adrien">Boitheauville, Adrien</option>
+                            <option value="Borrella, Raúl">Borrella, Raúl</option>
+                            <option value="Bounaude">Bounaude</option>
+                            <option value="Bourgeois, Emmanuel">Bourgeois, Emmanuel</option>
+                            <option value="Brun">Brun</option>
+                            <option value="Bruni, Davide">Bruni, Davide</option>
+                            <option value="Burlat, Pascal">Burlat, Pascal</option>
+                            <option value="Burresi, Leonardo">Burresi, Leonardo</option>
+                            <option value="Cassiaut, Pierre">Cassiaut, Pierre</option>
+                            <option value="Cherubini, Fabio">Cherubini, Fabio</option>
+                            <option value="Condado, Yann">Condado, Yann</option>
+                            <option value="Coulon, Floriant">Coulon, Floriant</option>
+                            <option value="Dave, Camille">Dave, Camille</option>
+                            <option value="Esser">Esser</option>
+                            <option value="Faissat, Jerome">Faissat, Jerome</option>
+                            <option value="Fernández, Pablo">Fernández, Pablo</option>
+                            <option value="Fontecedro, Giuseppe">Fontecedro, Giuseppe</option>
+                            <option value="Gaitan, Juan Diego">Gaitan, Juan Diego</option>
+                            <option value="Garcia Verdejo, Antonio">Garcia Verdejo, Antonio</option>
+                            <option value="Garcia Vincent">Garcia Vincent</option>
+                            <option value="Gaspar Jimenez">Gaspar Jimenez</option>
+                            <option value="Gatti, Stefano">Gatti, Stefano</option>
+                            <option value="Gavrilovic, Dejan">Gavrilovic, Dejan</option>
+                            <option value="Giavarinni, Claudio">Giavarinni, Claudio</option>
+                            <option value="Ginestet, A.">Ginestet, A.</option>
+                            <option value="Giovannelli">Giovannelli</option>
+                            <option value="Gómez, Francisco">Gómez, Francisco</option>
+                            <option value="Gonzales, Xavi">Gonzales, Xavi</option>
+                            <option value="Gutierrez, Alberto">Gutierrez, Alberto</option>
+                            <option value="Hamon, Thierry">Hamon, Thierry</option>
+                            <option value="Iazzetta, Mauro">Iazzetta, Mauro</option>
+                            <option value="Imizcoz, Daniel">Imizcoz, Daniel</option>
+                            <option value="Inacio, Ricardo">Inacio, Ricardo</option>
+                            <option value="Jáñez, José Antonio">Jáñez, José Antonio</option>
+                            <option value="Kartalija, Stanislav">Kartalija, Stanislav</option>
+                            <option value="Laffon, J. M.">Laffon, J. M.</option>
+                            <option value="Latreille">Latreille</option>
+                            <option value="Lemos, Rui">Lemos, Rui</option>
+                            <option value="Lisarde Sabater, Vicente">Lisarde Sabater, Vicente</option>
+                            <option value="Locatelli, Roberto">Locatelli, Roberto</option>
+                            <option value="Lombardi, Rudy">Lombardi, Rudy</option>
+                            <option value="López, Juan">López, Juan</option>
+                            <option value="Lorca">Lorca</option>
+                            <option value="Maggiolo, Luigi">Maggiolo, Luigi</option>
+                            <option value="Massias, Patrick">Massias, Patrick</option>
+                            <option value="Mavridis, Thorodis">Mavridis, Thorodis</option>
+                            <option value="Maymard">Maymard</option>
+                            <option value="Medrano, Nacho">Medrano, Nacho</option>
+                            <option value="Merle Des Isles, Antony">Merle Des Isles, Antony</option>
+                            <option value="Mitic, Aleksandar">Mitic, Aleksandar</option>
+                            <option value="Mora Mota, Jose M.">Mora Mota, Jose M.</option>
+                            <option value="Moretti">Moretti</option>
+                            <option value="Moreno, Javier">Moreno, Javier</option>
+                            <option value="Nicoletti, Nicola">Nicoletti, Nicola</option>
+                            <option value="Nikolic, Zoran">Nikolic, Zoran</option>
+                            <option value="Nunziata, Andrea">Nunziata, Andrea</option>
+                            <option value="Pachis">Pachis</option>
+                            <option value="Palomo, Juan Miguel">Palomo, Juan Miguel</option>
+                            <option value="Pezzota, Ernesto">Pezzota, Ernesto</option>
+                            <option value="Pezzotta, Giuseppe">Pezzotta, Giuseppe</option>
+                            <option value="Pianaro, Graziano">Pianaro, Graziano</option>
+                            <option value="Pioppi, Giovanni">Pioppi, Giovanni</option>
+                            <option value="Richelli, Matteo">Richelli, Matteo</option>
+                            <option value="Roche, Nicolas">Roche, Nicolas</option>
+                            <option value="Sánchez Ropero, Francisco">Sánchez Ropero, Francisco</option>
+                            <option value="Sanz, José Luís">Sanz, José Luís</option>
+                            <option value="Scarpecci, Simone">Scarpecci, Simone</option>
+                            <option value="Scudiero, Paolo">Scudiero, Paolo</option>
+                            <option value="Simeons, Richard">Simeons, Richard</option>
+                            <option value="Soddu, Lucca">Soddu, Lucca</option>
+                            <option value="Sohier, Patrick">Sohier, Patrick</option>
+                            <option value="Stankovic, Boban">Stankovic, Boban</option>
+                            <option value="Targuetti, Emannuel">Targuetti, Emannuel</option>
+                            <option value="Tenailleau">Tenailleau</option>
+                            <option value="Teulieres, Patrick">Teulieres, Patrick</option>
+                            <option value="Testa, Angelo">Testa, Angelo</option>
+                            <option value="Traina, Severino">Traina, Severino</option>
+                            <option value="Trullen, Héctor">Trullen, Héctor</option>
+                            <option value="Villamiel, César">Villamiel, César</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Datos del Perro -->
+            <div>
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Datos del Perro</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Campo: Nombre del perro -->
+                    <div>
+                        <label for="nombre_perro" class="block text-sm font-medium text-gray-700">Nombre del Perro</label>
+                        <input type="text" id="nombre_perro" name="nombre_perro"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+
+                    <!-- Campo: Fecha de nacimiento -->
+                    <div>
+                        <label for="fecha_nacimiento" class="block text-sm font-medium text-gray-700">Fecha de nacimiento del Perro</label>
+                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+
+                    <!-- Campo: Microchip -->
+                    <div>
+                        <label for="microchip" class="block text-sm font-medium text-gray-700">Microchip</label>
+                        <input type="text" id="microchip" name="microchip"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            maxlength="16" required>
+                        <small>Hasta 16 dígitos numéricos.</small>
+                    </div>
+
+                    <!-- Campo: Libro de Orígenes -->
+                    <div>
+                        <label for="libro_de_origenes" class="block text-sm font-medium text-gray-700">Libro de Orígenes</label>
+                        <input type="text" id="libro_de_origenes" name="libro_de_origenes"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            maxlength="16" required>
+                        <small>Máximo 16 caracteres, puede incluir números, letras y el símbolo "/".</small>
+                    </div>
+
+                    <!-- Campo: Cartilla de trabajo -->
+                    <div>
+                        <label for="cartilla_de_trabajo" class="block text-sm font-medium text-gray-700">Cartilla de Trabajo</label>
+                        <input type="text" id="cartilla_de_trabajo" name="cartilla_de_trabajo"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            maxlength="7">
+                        <small>Máximo 7 caracteres, puede incluir números, letras y el símbolo "/".</small>
+                    </div>
+
+                    <!-- Campo: Raza -->
+                    <div>
+                        <label for="raza" class="block text-sm font-medium text-gray-700">Raza</label>
+                        <select id="raza" name="raza"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                            <option value="">Seleccione la raza</option>
+                            <option value="Pointer">Pointer</option>
+                            <option value="Setter Inglés">Setter Inglés</option>
+                            <option value="Setter Gordon">Setter Gordon</option>
+                            <option value="Setter Irlandés">Setter Irlandés</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo: Sexo -->
+                    <div>
+                        <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+                        <select id="sexo" name="sexo"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                            <option value="">Seleccione el sexo</option>
+                            <option value="Macho">Macho</option>
+                            <option value="Hembra">Hembra</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo: País -->
+                    <div>
+                        <label for="pais" class="block text-sm font-medium text-gray-700">País</label>
+                        <input type="text" id="pais" name="pais"
+                            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex justify-end space-x-2 mt-4">
+                <button type="button" id="modal-cancel-btn"
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    Cancelar
+                </button>
+                <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- Popup -->
+<div id="popup" class="fixed inset-0 flex items-start justify-center bg-gray-900 bg-opacity-75 z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center" style="margin-top: 250px;">
+        <p class="text-lg mb-4">Si te haces socio del PCE antes del cierre de las inscripciones,<br> podrás beneficiarte de un descuento de 5 €/inscripción.</p>
+        <div class="flex justify-center space-x-4">
+            <a href="{{ route('Socios') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Hacerme Socio</a>
+            <button id="close-popup" class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+{{-- Scripts --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Abrir el modal para añadir un nuevo perro
+        document.getElementById('add-perro-btn').addEventListener('click', function() {
+            console.log('Botón "Añadir Perro" presionado');
+            const form = document.getElementById('perro-form');
+
+            // Limpiar el formulario y eliminar el campo _method si existe
+            form.reset();
+            const existingMethod = form.querySelector('input[name="_method"]');
+            if (existingMethod) existingMethod.remove(); // Eliminar el campo PUT dinámico
+
+            // Configurar la acción del formulario para "store"
+            form.action = "{{ route('perros.store') }}";
+
+            // Restablecer valores del modal
+            document.getElementById('perro-id').value = '';
+            document.getElementById('modal-title').innerText = 'Añadir Perro';
+            document.getElementById('nombre_perro').value = '';
+            document.getElementById('propietario').value = '';
+            document.getElementById('conductor').value = '';
+            document.getElementById('fecha_nacimiento').value = '';
+            document.getElementById('raza').value = '';
+            document.getElementById('sexo').value = '';
+            document.getElementById('microchip').value = '';
+            document.getElementById('libro_de_origenes').value = '';
+            document.getElementById('cartilla_de_trabajo').value = '';
+            document.getElementById('pais').value = '';
+            document.getElementById('numero_socio').value = '';
+
+            // Mostrar el modal
+            document.getElementById('perro-modal').classList.remove('hidden');
+        });
+
+
+        // Abrir el modal para editar un perro existente
+        document.querySelectorAll('.edit-perro-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+
+                // Limpiar el formulario y campo _method
+                const form = document.getElementById('perro-form');
+                form.reset(); // Limpiar los campos existentes
+                const existingMethod = form.querySelector('input[name="_method"]');
+                if (existingMethod) existingMethod.remove(); // Eliminar el campo si ya existe
+
+                fetch(`/perros/${id}/edit`)
+                    .then(response => response.json())
+                    .then(data => {
+                        form.action = `/perros/${id}`;
+                        form.insertAdjacentHTML('beforeend',
+                            '<input type="hidden" name="_method" value="PUT">');
+
+                        document.getElementById('perro-id').value = id;
+                        document.getElementById('nombre_perro').value = data.nombre_perro;
+                        document.getElementById('propietario').value = data.propietario;
+                        document.getElementById('conductor').value = data.conductor;
+                        document.getElementById('fecha_nacimiento').value = data.fecha_nacimiento;
+                        document.getElementById('raza').value = data.raza;
+                        document.getElementById('sexo').value = data.sexo;
+                        document.getElementById('microchip').value = data.microchip;
+                        document.getElementById('libro_de_origenes').value = data.libro_de_origenes;
+                        document.getElementById('cartilla_de_trabajo').value = data.cartilla_de_trabajo;
+                        document.getElementById('pais').value = data.pais;
+
+                        document.getElementById('modal-title').innerText = 'Editar Perro';
+                        document.getElementById('perro-modal').classList.remove('hidden');
+                        document.getElementById('numero_socio').value = data.numero_socio;
+                    })
+                    .catch(error => console.error('Error fetching perro data:', error));
+            });
+        });
+
+
+        // Cerrar el modal
+        document.getElementById('modal-cancel-btn').addEventListener('click', function() {
+            console.log('Botón "Cancelar" del modal presionado');
+            document.getElementById('perro-modal').classList.add('hidden');
+        });
+
+        // Botón de cerrar (extra)
+        document.getElementById('modal-close-btn').addEventListener('click', function() {
+            console.log('Botón "Cerrar" del modal presionado');
+            document.getElementById('perro-modal').classList.add('hidden');
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Abrir el modal para editar una inscripción existente
+        document.querySelectorAll('.edit-inscripcion-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+
+                // Limpiar el formulario y campo _method
+                const form = document.getElementById('inscripcion-form');
+                form.reset(); // Limpiar los campos existentes
+                const existingMethod = form.querySelector('input[name="_method"]');
+                if (existingMethod) existingMethod.remove(); // Eliminar el campo si ya existe
+
+                fetch(`/inscripciones/${id}/edit`)
+                    .then(response => response.json())
+                    .then(data => {
+                        form.action = `/inscripciones/${id}`;
+                        form.insertAdjacentHTML('beforeend',
+                            '<input type="hidden" name="_method" value="PUT">');
+
+                        document.getElementById('inscripcion-id').value = id;
+                        document.getElementById('inscripcion-prueba').value = data.prueba;
+                        document.getElementById('inscripcion-fecha').value = data.fecha;
+                        document.getElementById('inscripcion-perro').value = data.perro;
+                        document.getElementById('inscripcion-valor').value = data.valor;
+
+                        document.getElementById('inscripcion-modal-title').innerText =
+                            'Editar Inscripción';
+                        document.getElementById('inscripcion-modal').classList.remove(
+                            'hidden');
+                    })
+                    .catch(error => console.error('Error fetching inscripcion data:', error));
+            });
+        });
+
+        // Cerrar el modal
+        document.getElementById('inscripcion-modal-cancel-btn').addEventListener('click', function() {
+            document.getElementById('inscripcion-modal').classList.add('hidden');
+        });
+
+        // Botón de cerrar (extra)
+        document.getElementById('inscripcion-modal-close-btn').addEventListener('click', function() {
+            document.getElementById('inscripcion-modal').classList.add('hidden');
+        });
+    });
+</script>
+
+{{-- redirijir a la página de inscripciones --}}
+<script>
+    document.getElementById('add-inscripcion-btn').addEventListener('click', function() {
+        window.location.href = "{{ route('Inscripciones') }}";
+    });
+</script>
+
+{{--  Validacion de input Cartilla de Trabajo --}}
+<script>
+    document.getElementById('cartilla_de_trabajo').addEventListener('input', function(e) {
+        let value = e.target.value.toUpperCase(); // Convertir a mayúsculas
+        const validValue = value.replace(/[^A-Z0-9/]/g, ''); // Eliminar caracteres no permitidos
+        if (value !== validValue) {
+            e.target.value = validValue; // Actualizar el valor del input
+        } else {
+            e.target.value = value; // Actualizar el valor del input
+        }
+        if (validValue.length > 7) {
+            e.target.setCustomValidity('Máximo 7 caracteres, puede incluir números, letras y el símbolo "/".');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+</script>
+{{--  Validacion de input Cartilla de Trabajo --}}
+
+{{-- Validacion de input de Microchip --}}
+<script>
+    document.getElementById('microchip').addEventListener('input', function(e) {
+        const value = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+        e.target.value = value.slice(0, 16); // Limitar a 16 caracteres
+    });
+</script>
+{{-- Validacion de input de Microchip --}}
+
+{{-- Validacion de input de Libro de Orígenes --}}
+<script>
+    document.getElementById('libro_de_origenes').addEventListener('input', function(e) {
+        let value = e.target.value.toUpperCase(); // Convertir a mayúsculas
+        const validValue = value.replace(/[^A-Z0-9/]/g, ''); // Eliminar caracteres no permitidos
+        if (value !== validValue) {
+            e.target.value = validValue; // Actualizar el valor del input
+        } else {
+            e.target.value = value; // Actualizar el valor del input
+        }
+        if (validValue.length > 16) {
+            e.target.setCustomValidity('Máximo 16 caracteres, puede incluir números, letras y el símbolo "/".');
+        } else {
+            e.target.setCustomValidity('');
+        }
+    });
+</script>
+{{-- Validacion de input de Libro de Orígenes --}}
+
+
+{{-- Validacion de input de Número de Socio --}}
+<script>
+    function validateNumeroSocio(input) {
+        // Eliminar cualquier carácter que no sea un número
+        input.value = input.value.replace(/[^0-9]/g, '');
+
+        // Limitar la longitud a 4 caracteres
+        if (input.value.length > 4) {
+            input.value = input.value.slice(0, 4);
+        }
+    }
+</script>
+{{-- Validacion de input de Número de Socio --}}
+
+{{-- Valida mensaje de socio o no socio --}}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const numeroSocioInput = document.getElementById('numero_socio');
+    const propietarioInput = document.querySelector('input[name="propietario"]'); // Campo del propietario
+    const socioMessage = document.getElementById('socio_message');
+
+    numeroSocioInput.addEventListener('input', validarSocio);
+    propietarioInput.addEventListener('input', validarSocio);
+
+    function validarSocio() {
+        const numeroSocio = numeroSocioInput.value.trim();
+        const propietario = propietarioInput ? propietarioInput.value.trim() : '';
+
+        if (numeroSocio === '' || propietario === '') {
+            socioMessage.style.display = 'none';
+            return;
+        }
+
+        // Enviar los datos al servidor
+        fetch('{{ route("validar-socio") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            },
+            body: JSON.stringify({ numero_socio: numeroSocio, propietario: propietario }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                socioMessage.textContent = data.mensaje;
+                socioMessage.style.color = data.es_valido ? 'green' : 'red';
+                socioMessage.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error en la validación:', error);
+                socioMessage.style.display = 'none';
+            });
+    }
+});
+</script>
+
+{{-- es para el popup de hacerte socio, que se muestre una vez --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const popupId = 'popup'; // ID del popup
+        const closeBtnId = 'close-popup'; // ID del botón de cierre
+        const socioBtnId = 'hacerte-socio'; // ID del botón de "Hacerte socio"
+        const popupKey = 'popupNeverShow'; // Clave para localStorage
+
+        // Verificar si el popup ya ha sido deshabilitado permanentemente
+        if (!localStorage.getItem(popupKey)) {
+            // Mostrar el popup si no está marcado como deshabilitado
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.remove('hidden'); // Mostrar popup
+            }
+
+            // Función para ocultar y deshabilitar permanentemente el popup
+            const disablePopup = () => {
+                const popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.classList.add('hidden'); // Ocultar popup
+                }
+                // Marcar el popup como deshabilitado en localStorage
+                localStorage.setItem(popupKey, 'true');
+            };
+
+            // Cerrar el popup al hacer clic en el botón de cierre
+            const closeBtn = document.getElementById(closeBtnId);
+            if (closeBtn) {
+                closeBtn.addEventListener('click', disablePopup);
+            }
+
+            // Deshabilitar el popup al hacer clic en el botón "Hacerte socio"
+            const socioBtn = document.getElementById(socioBtnId);
+            if (socioBtn) {
+                socioBtn.addEventListener('click', disablePopup);
+            }
+        } else {
+            // Ocultar el popup directamente si está marcado como "nunca mostrar"
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.add('hidden');
+            }
+        }
+    });
+</script>
+
+

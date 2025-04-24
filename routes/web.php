@@ -2,19 +2,125 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PerroController;
+use App\Http\Controllers\PruebaController;
+use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\RedsysController;
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\SociosController;
+use App\Http\Controllers\AdminInscripcionesController;
+use App\Http\Controllers\InscripcionesExportController;
+use App\Http\Controllers\AdminResultadosController;
+use App\Http\Controllers\ResultadosPublicosController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Ruta para la vista Actualidad / Blog
+use App\Http\Controllers\BlogController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('Actualidad', [BlogController::class, 'index'])->name('Actualidad');
+Route::get('blog/{slug}', [BlogController::class, 'showBlog'])->name('blog.show');
 
-Route::middleware('auth')->group(function () {
+
+// Definición de todas las vistas que responden al método GET + Rutas con nombre
+Route::get('/', [BlogController::class, 'listForHome'])->name('Inicio');
+Route::view('elPointer', 'elPointer')->name('elPointer');
+Route::view('Concursos', 'Concursos')->name('Concursos');
+Route::get('Inscripciones', [PruebaController::class, 'index'])->name('Inscripciones');
+//Route::view('Resultados', 'Resultados')->name('Resultados');
+Route::get('/resultados', [ResultadosPublicosController::class, 'index'])->name('resultados');
+Route::view('Socios', 'Socios')->name('Socios');
+Route::view('Contacto', 'Contacto')->name('Contacto');
+Route::view('Privacidad', 'Privacidad')->name('Privacidad');
+Route::view('Cookies', 'Cookies')->name('Cookies');
+Route::view('Envios', 'Envios')->name('Envios');
+Route::view('Legal', 'Legal')->name('Legal');
+
+// Rutas de los sub botones
+Route::view('JuntaDirectiva', 'JuntaDirectiva')->name('JuntaDirectiva');
+Route::view('Delegaciones', 'Delegaciones')->name('Delegaciones');
+Route::view('Criaderos', 'Criaderos')->name('Criaderos');
+Route::view('Galeria', 'Galeria')->name('Galeria');
+
+// Se comenta esta linea debajo para omitir verificación de email en local
+// Route::middleware(['auth', 'verified'])->group(function () {
+//Se remplaza por esta linea para omitir verificación de email en local    
+
+// Rutas para usuarios comunes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [PerroController::class, 'index'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/update-additional-fields', [ProfileController::class, 'updateAdditionalFields'])->name('profile.update-additional-fields');
+
+    // Rutas para el recurso 'perros'
+    Route::resource('perros', PerroController::class);
+
+    // Rutas para inscripciones
+    Route::post('/confirmar', [InscripcionController::class, 'confirmar'])->name('confirmar');
+    Route::get('/confirmar', [InscripcionController::class, 'confirmarGet'])->name('confirmarGet');
+    Route::post('/pagar-despues', [InscripcionController::class, 'pagarDespues'])->name('pagar-despues');
+    Route::delete('/inscripciones/{inscripcion}', [InscripcionController::class, 'destroy'])->name('inscripciones.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+// Rutas para los usuarios Admin
+Route::middleware(['auth', 'isAdmin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+    
+    // Dashboard
+    Route::get('/dashboard', [ProfileController::class, 'adminDashboard'])
+        ->name('dashboard');
+    
+    // Inscripciones
+    Route::get('/inscripciones', [AdminInscripcionesController::class, 'index'])
+        ->name('inscripciones');
+    Route::put('/inscripciones/{inscripcion}', [AdminInscripcionesController::class, 'update'])
+        ->name('inscripciones.update');
+    Route::delete('/inscripciones/{inscripcion}', [AdminInscripcionesController::class, 'destroy'])
+        ->name('inscripciones.destroy');
+
+    // Gestión de usuarios
+    Route::get('/usuarios', [ProfileController::class, 'listUsers'])
+        ->name('usuarios');
+
+    // Gestión de socios
+    Route::get('/socios', [SociosController::class, 'adminIndex'])
+        ->name('socios');
+    Route::post('/socios', [SociosController::class, 'store'])
+        ->name('socios.store');
+
+    // Exportar inscripciones
+    // => Nombre final: admin.export.inscripciones
+    Route::get('/exportar-inscripciones', [InscripcionesExportController::class, 'export'])
+        ->name('export.inscripciones');
+
+    // Rutas para Resultados (resource)
+    // => Nombres: admin.resultados.index, admin.resultados.create, etc.
+    Route::resource('resultados', AdminResultadosController::class);
+});
+
+
+
+    // Rutas para Redsys
+    Route::controller(RedsysController::class)
+    ->prefix('redsys')
+    ->group(function () {
+        Route::post('/notification', 'notification')->name('redsys.notification');
+        Route::get('/success', 'success')->name('redsys.success');
+        Route::get('/failure', 'failure')->name('redsys.failure');
+
+        // Ruta para procesar el pago y redirigir a Redsys
+        Route::post('/process', 'process')->name('redsys.process'); // Ruta POST para recibir los datos y procesarlos
+        Route::get('/form', 'showForm')->name('redsys.form'); // Ruta GET para mostrar el formulario de Redsys
+    });
+
+
+    // Rutas para enviar correos electrónicos desde contacto y socios
+    Route::post('/contacto', [ContactoController::class, 'enviarConsulta'])->name('contacto.enviar');
+    Route::post('/socios', [SociosController::class, 'enviarSolicitud'])->name('socios.enviar');
+    Route::post('/validar-socio', [PerroController::class, 'validarSocio'])->name('validar-socio');
+    
+require __DIR__ . '/auth.php';
