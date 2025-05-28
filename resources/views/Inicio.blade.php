@@ -3,12 +3,12 @@
         <!-- Sección Superior con Imagen y Texto -->
         <style>
             .bg-responsive {
-                background-image: url('{{ asset('image/home/cel-37.jpg') }}');
+                background-image: url('{{ asset(' image/home/cel-37.jpg') }}');
             }
 
             @media (min-width: 1024px) {
                 .bg-responsive {
-                    background-image: url('{{ asset('image/home/escritorio-2.jpg') }}');
+                    background-image: url('{{ asset(' image/home/escritorio-2.jpg') }}');
                 }
             }
         </style>
@@ -86,20 +86,20 @@
         <div class="bg-BlancoTerciario">
             <div class="py-24 px-12 flex flex-row gap-4 flex-wrap max-w-screen-2xl mx-auto">
                 @foreach ($blogs as $index => $blog)
-                    @if ($index >= 4)
-                        @break
-                    @endif
-                    <!-- Componente de tarjeta de blog -->
-                    <x-blog-card :title="$blog->title" :excerpt="$blog->excerpt" :contentUrl="route('blog.show', $blog->slug)" :image="$blog->image"
-                        onclick="openModal('{{ route('blog.show', $blog->slug) }}', '{{ $blog->title }}')" />
+                @if ($index >= 4)
+                @break
+                @endif
+                <!-- Componente de tarjeta de blog -->
+                <x-blog-card :title="$blog->title" :excerpt="$blog->excerpt" :contentUrl="route('blog.show', $blog->slug)" :image="$blog->image"
+                    onclick="openModal('{{ route('blog.show', $blog->slug) }}', '{{ $blog->title }}')" />
                 @endforeach
             </div>
-        
+
             <!-- Usamos el componente modal -->
             <x-blog-modal />
         </div>
-        
-        
+
+
 
         <div class=" bg-BlancoTerciario" id="proximo-concurso"></div>
 
@@ -132,45 +132,48 @@
             <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-96">
 
                 <x-calendario :events="[
-                    2 => [
-                        ['date' => '2025-02-02', 'name' => 'CONCURSOS: GB y BC (Copa de España, Carmona)'],
-                        ['date' => '2025-02-03', 'name' => 'CONCURSOS: GB y BC (Carmona)'],
-                        ['date' => '2025-02-04', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
-                        ['date' => '2025-02-05', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
-                        ['date' => '2025-02-06', 'name' => 'CONCURSOS: GB y BC (Paterna de Ribera)'],
-                        ['date' => '2025-02-07', 'name' => 'CONCURSOS: EURODERBY (Paterna de Ribera)'],
-                        [
-                            'date' => '2025-02-11',
-                            'name' => 'CONCURSOS: Campeonato de Europa BC Pointer (1ª jornada, Paterna de Ribera)',
-                        ],
-                        [
-                            'date' => '2025-02-12',
-                            'name' => 'CONCURSOS: Campeonato de Europa BC Pointer (2ª jornada, Paterna de Ribera)',
-                        ],
-                        [
-                            'date' => '2025-02-13',
-                            'name' => 'CONCURSOS: Campeonato de Europa GB Pointer (1ª jornada, Paterna de Ribera)',
-                        ],
-                        [
-                            'date' => '2025-02-14',
-                            'name' => 'CONCURSOS: Campeonato de Europa GB Pointer (2ª jornada, Paterna de Ribera)',
-                        ],
-                    ],
-                    3 => [
-                        ['date' => '2025-03-01', 'name' => 'BÚSQUEDA DE CAZA Y JÓVENES PROMESAS (Andalucía - Extremadura)'],
-                        ['date' => '2025-03-02', 'name' => 'BÚSQUEDA DE CAZA Y JÓVENES PROMESAS (Andalucía - Extremadura)'],
-                    ],
-                ]" />
+    7 => [
+        ['date' => '2025-07-26', 'name' => 'TRABAJO (PERROS DE MUESTRA) - MALLORCA - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-07-26', 'name' => 'TRABAJO (PERROS DE MUESTRA) - GALICIA - CAZA PRÁCTICA - CACT'],
+    ],
+    8 => [
+        ['date' => '2025-08-03', 'name' => 'TRABAJO (PERROS DE MUESTRA) - MALLORCA - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-08-03', 'name' => 'TRABAJO (PERROS DE MUESTRA) - GALICIA - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-08-09', 'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-08-10', 'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACT'],
+    ],
+    9 => [
+        ['date' => '2025-09-06', 'name' => 'TRABAJO (PERROS DE MUESTRA) - ARAGÓN - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-09-07', 'name' => 'TRABAJO (PERROS DE MUESTRA) - ARAGÓN - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-09-11', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT'],
+        ['date' => '2025-09-12', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT'],
+        ['date' => '2025-09-13', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT'],
+        ['date' => '2025-09-14', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT'],
+        ['date' => '2025-09-26', 'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT'],
+        ['date' => '2025-09-27', 'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT'],
+        ['date' => '2025-09-28', 'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT'],
+    ],
+    10 => [
+        ['date' => '2025-10-04', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LEVANTE - CAZA PRÁCTICA - CACIT'],
+        ['date' => '2025-10-05', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LEVANTE - CAZA PRÁCTICA - CACIT'],
+    ],
+    11 => [
+        ['date' => '2025-11-21', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT'],
+        ['date' => '2025-11-22', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT'],
+        ['date' => '2025-11-23', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT'],
+    ],
+    12 => [
+        ['date' => '2025-12-12', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
+        ['date' => '2025-12-13', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
+        ['date' => '2025-12-14', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
+    ],
+]" />
 
 
 
-
-            </div>
-
-
-            <div class=" flex flex-col items-center space-y-12 p-20 ">
-                <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" class="w-48" alt="">
-                {{-- <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
+                <div class=" flex flex-col items-center space-y-12 p-20 ">
+                    <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" class="w-48" alt="">
+                    {{-- <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
                     <img src="{{ asset('svg/home/icons-partners/pointerdeca.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointerdogtra.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointereskal.svg') }}" alt="">
