@@ -3,12 +3,12 @@
         <!-- Sección Superior con Imagen y Texto -->
         <style>
             .bg-responsive {
-                background-image: url('{{ asset('image/home/cel-37.jpg') }}');
+                background-image: url('{{ asset('image/home/cel-37.jpg ') }}');
             }
 
             @media (min-width: 1024px) {
                 .bg-responsive {
-                    background-image: url('{{ asset('image/home/escritorio-2.jpg') }}');
+                    background-image: url('{{ asset('image/home/escritorio-2.jpg ') }}');
                 }
             }
         </style>
