@@ -52,7 +52,6 @@ class RegisteredUserController extends Controller
             'region' => $request->region,
             'pais' => $request->pais,
             'telefono' => $request->telefono,
-            'municipio' => $request->municipio,
         ]);
 
         event(new Registered($user));

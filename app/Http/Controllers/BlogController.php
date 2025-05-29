@@ -65,6 +65,12 @@ class BlogController extends Controller
     {
         return [
             (object)[
+                'title' => 'ASAMBLEA GENERAL',
+                'excerpt' => 'Convocatoria el 14 de junio en Zaragoza. Consulta el orden del día.',
+                'slug' => 'asamblea-general',
+                'image' => asset('Blog/Concurso-promo-12-13-abril.jpg')
+            ],
+            (object)[
                 'title' => 'Normas 2025',
                 'excerpt' => 'Campeonato Europeo Pointer de Gran Busca y de Búsqueda de Caza',
                 'slug' => 'normas',
