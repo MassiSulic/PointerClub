@@ -128,8 +128,8 @@
             </div>
         </div>
 
-        <div class="bg-BlancoTerciario pt-12">
-            <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-96">
+        <div class="bg-BlancoTerciario py-12">
+            <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-[700px]">
 
                 <x-calendario :events="[
     7 => [
