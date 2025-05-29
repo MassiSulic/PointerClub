@@ -17,7 +17,7 @@
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
             <div class="text-BlancoTerciario z-10 lg:mr-36 lg:text-left mx-auto text-center h-screen flex flex-col">
                 <div class="flex-grow flex items-center">
-                    <h1 class="text-5xl">La naturaleza Prueba<br> se inclina<br> ante su arte.</h1>
+                    <h1 class="text-5xl">La naturaleza<br> se inclina<br> ante su arte.</h1>
                 </div>
                 <p class="text-sm mb-4">ph. Milena Oleszczuk</p>
             </div>
