@@ -3,20 +3,12 @@
         <!-- Sección Superior con Imagen y Texto -->
         <style>
             .bg-responsive {
-<<<<<<< HEAD
-                background-image: url('{{ asset('image/home/cel-37.jpg ') }}');
-=======
-                background-image: url('{{ asset(' image/home/cel-37.jpg') }}');
->>>>>>> fcb01cda83714882d2b9b726a806f528d3866deb
+                background-image: url('{{ asset('image/home/cel-37.jpg') }}');
             }
 
             @media (min-width: 1024px) {
                 .bg-responsive {
-<<<<<<< HEAD
-                    background-image: url('{{ asset('image/home/escritorio-2.jpg ') }}');
-=======
-                    background-image: url('{{ asset(' image/home/escritorio-2.jpg') }}');
->>>>>>> fcb01cda83714882d2b9b726a806f528d3866deb
+                    background-image: url('{{ asset('image/home/escritorio-2.jpg') }}');
                 }
             }
         </style>
@@ -25,7 +17,7 @@
             <div class="absolute inset-0 bg-black bg-opacity-30"></div>
             <div class="text-BlancoTerciario z-10 lg:mr-36 lg:text-left mx-auto text-center h-screen flex flex-col">
                 <div class="flex-grow flex items-center">
-                    <h1 class="text-5xl">La naturaleza<br> se inclina<br> ante su arte.</h1>
+                    <h1 class="text-5xl">La naturaleza Prueba<br> se inclina<br> ante su arte.</h1>
                 </div>
                 <p class="text-sm mb-4">ph. Milena Oleszczuk</p>
             </div>
