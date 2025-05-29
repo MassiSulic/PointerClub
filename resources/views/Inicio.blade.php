@@ -236,9 +236,9 @@
 
 
             </div>
-            <div class=" flex flex-col items-center space-y-12 p-20 ">
+            {{-- <div class=" flex flex-col items-center space-y-12 p-20 ">
                 <img src="{{ asset('svg/home/icons-partners/pointerarios.svg') }}" class="w-48" alt="">
-                {{-- <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
+                 <div class=" gap-12 w-48 grid grid-cols-1 md:grid-cols-4 md:w-2/3 place-items-center ">
                     <img src="{{ asset('svg/home/icons-partners/pointerdeca.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointerdogtra.svg') }}" alt="">
                     <img src="{{ asset('svg/home/icons-partners/pointereskal.svg') }}" alt="">
@@ -250,9 +250,9 @@
                     <img src="{{ asset('svg/home/icons-partners/pointerorvis.svg') }}" alt=""
                         class=" w-48 md:place-self-start ">
                 </div> --}}
-            </div>
-
-
         </div>
+
+
+    </div>
 
 </x-layout>
