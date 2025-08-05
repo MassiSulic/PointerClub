@@ -26,7 +26,9 @@ Route::view('elPointer', 'elPointer')->name('elPointer');
 Route::view('Concursos', 'Concursos')->name('Concursos');
 Route::get('Inscripciones', [PruebaController::class, 'index'])->name('Inscripciones');
 //Route::view('Resultados', 'Resultados')->name('Resultados');
-Route::get('/resultados', [ResultadosPublicosController::class, 'index'])->name('resultados');
+Route::get('/resultados', function () {
+    return redirect()->away('https://www.resultados.pointerclubespana.es');
+})->name('resultados');
 Route::view('Socios', 'Socios')->name('Socios');
 Route::view('Contacto', 'Contacto')->name('Contacto');
 Route::view('Privacidad', 'Privacidad')->name('Privacidad');
