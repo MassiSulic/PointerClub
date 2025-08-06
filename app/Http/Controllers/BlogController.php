@@ -65,6 +65,19 @@ class BlogController extends Controller
     {
         return [
             (object)[
+                'title' => 'CALENDARIO SEGUNDO SEMESTRE 2025',
+                'excerpt' => 'Calendario de pruebas para
+                            01/07/2025 - 31/12/2025',
+                'slug' => 'calendario',
+                'image' => asset('image/Dashboard/IMG_0410.jpg')
+            ],
+            (object)[
+                'title' => 'NORMAS',
+                'excerpt' => 'Normas para la confección en selección en los campeonatos de europa',
+                'slug' => 'reglamento',
+                'image' => asset('Blog/PerroNegro.jpg')
+            ],
+            (object)[
                 'title' => 'ASAMBLEA GENERAL',
                 'excerpt' => 'Convocatoria el 14 de junio en Zaragoza. Consulta el orden del día.',
                 'slug' => 'asamblea-general',

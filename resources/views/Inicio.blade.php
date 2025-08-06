@@ -116,123 +116,71 @@
                     {{-- <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1> --}}
                     <a href="https://pointerclubespana.es/Concursos">
-                        <img src="image/home/ProximoConcurso/ProximoConcurso25_04_25.jpg" alt="">
+                        <img src="image/home/PointerClubEspañol_Agosto25_face.jpg" alt="">
                     </a>
                 </div>
             </div>
 
             <!-- Patrocinadores -->
-            <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 lg:pl-20">
-                {{-- <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7"> --}}
-                <img src="{{ asset('svg/home/Mesa de trabajo 36.svg') }}" alt="icono-5" class="h-14">
-                {{-- <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14"> --}}
-            </div>
+            <!--  
+                <div class="flex justify-center items-center flex-wrap space-x-4 bg-AzulPrimario p-8 gap-24 lg:pl-20">
+                    {{-- <img src="{{ asset('svg/home/Mesa de trabajo 37.svg') }}" alt="icono-6" class="h-7"> --}}
+                    <img src="{{ asset('svg/home/Mesa de trabajo 36.svg') }}" alt="icono-5" class="h-14">
+                    {{-- <img src="{{ asset('svg/home/Mesa de trabajo 38.svg') }}" alt="icono-7" class="h-14"> --}}
+                </div>
+            -->
         </div>
 
         <div class="bg-BlancoTerciario py-12">
             <div class=" overflow-y-auto overflow-x-visible w-4/5 m-auto h-96">
 
                 <x-calendario :events="[
-                    7 => [
-                        [
-                            'date' => '2025-07-26',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - MALLORCA - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-07-26',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - GALICIA - CAZA PRÁCTICA - CACT',
-                        ],
-                    ],
-                    8 => [
-                        [
-                            'date' => '2025-08-03',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - MALLORCA - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-08-03',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - GALICIA - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-08-09',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-08-10',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACT',
-                        ],
-                    ],
-                    9 => [
-                        [
-                            'date' => '2025-09-06',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - ARAGÓN - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-09-07',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - ARAGÓN - CAZA PRÁCTICA - CACT',
-                        ],
-                        [
-                            'date' => '2025-09-11',
-                            'name' =>
-                                'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-12',
-                            'name' =>
-                                'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-13',
-                            'name' =>
-                                'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-14',
-                            'name' =>
-                                'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA EN MONTAÑA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-26',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-27',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-09-28',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - BURGOS - CAZA PRÁCTICA - CACIT',
-                        ],
-                    ],
-                    10 => [
-                        [
-                            'date' => '2025-10-04',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - LEVANTE - CAZA PRÁCTICA - CACIT',
-                        ],
-                        [
-                            'date' => '2025-10-05',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - LEVANTE - CAZA PRÁCTICA - CACIT',
-                        ],
-                    ],
-                    11 => [
-                        [
-                            'date' => '2025-11-21',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT',
-                        ],
-                        [
-                            'date' => '2025-11-22',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT',
-                        ],
-                        [
-                            'date' => '2025-11-23',
-                            'name' => 'TRABAJO (PERROS DE MUESTRA) - SORIA/BURGOS - CAZA PRÁCTICA BECADAS - CACIT',
-                        ],
-                    ],
-                    12 => [
-                        ['date' => '2025-12-12', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
-                        ['date' => '2025-12-13', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
-                        ['date' => '2025-12-14', 'name' => 'TRABAJO (PERROS DE MUESTRA) - TOLEDO - GB y BC - CACIT'],
-                    ],
-                ]" />
+    7 => [
+        ['date' => '2025-07-26', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SANTA MARGALIDA (MALLORCA) - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-07-27', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SANTA MARGALIDA (MALLORCA) - CAZA PRÁCTICA - CACT'],
+    ],
+    8 => [
+        ['date' => '2025-08-02', 'name' => 'TRABAJO (PERROS DE MUESTRA) - MURO (MALLORCA) - CAZA PRÁCTICA (*) - CACT'],
+        ['date' => '2025-08-03', 'name' => 'TRABAJO (PERROS DE MUESTRA) - MURO (MALLORCA) - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-08-09', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LA MAZORRA (BURGOS) - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-08-10', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LA MAZORRA (BURGOS) - CAZA PRÁCTICA - CACT'],
+    ],
+    9 => [
+        ['date' => '2025-09-06', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SANTA CRUZ DE RETAMAR (TOLEDO) - CAZA PRÁCTICA - CACIT'],
+        ['date' => '2025-09-07', 'name' => 'TRABAJO (PERROS DE MUESTRA) - SANTA CRUZ DE RETAMAR (TOLEDO) - CAZA PRÁCTICA - CACIT'],
+        ['date' => '2025-09-09', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA SOBRE PERDIZ DE MONTAÑA - CACIT'],
+        ['date' => '2025-09-10', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA SOBRE PERDIZ DE MONTAÑA - CACIT'],
+        ['date' => '2025-09-11', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA SOBRE PERDIZ DE MONTAÑA - CACIT'],
+        ['date' => '2025-09-12', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALL D\'ARAN (LLEIDA) - CAZA PRÁCTICA SOBRE PERDIZ DE MONTAÑA - CACIT'],
+        ['date' => '2025-09-27', 'name' => 'TRABAJO (PERROS DE MUESTRA) - XINZO DE LIMIA (OURENSE) - CAZA PRÁCTICA - CACT'],
+        ['date' => '2025-09-28', 'name' => 'TRABAJO (PERROS DE MUESTRA) - XINZO DE LIMIA (OURENSE) - CAZA PRÁCTICA - CACT'],
+    ],
+    10 => [
+        ['date' => '2025-10-04', 'name' => 'Copa de España - CAZA PRÁCTICA (RAZAS BRITÁNICAS) - TOLEDO'],
+        ['date' => '2025-10-05', 'name' => 'Copa de España - CAZA PRÁCTICA (RAZAS BRITÁNICAS) - TOLEDO'],
+        ['date' => '2025-10-11', 'name' => 'Campeonato de Europa - CAZA PRÁCTICA POINTER - POLONIA'],
+        ['date' => '2025-10-12', 'name' => 'Campeonato de Europa - CAZA PRÁCTICA POINTER - POLONIA'],
+    ],
+    11 => [
+        ['date' => '2025-11-28', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALONSADERO (SORIA) - CAZA PRÁCTICA SOBRE BECADAS - CACT'],
+        ['date' => '2025-11-29', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALONSADERO (SORIA) - CAZA PRÁCTICA SOBRE BECADAS - CACT'],
+        ['date' => '2025-11-30', 'name' => 'TRABAJO (PERROS DE MUESTRA) - VALONSADERO (SORIA) - CAZA PRÁCTICA SOBRE BECADAS - CACT'],
+    ],
+    12 => [
+        ['date' => '2025-12-06', 'name' => 'TRABAJO (PERROS DE MUESTRA) - EL ARAHAL (SEVILLA) - BÚSQUEDA DE CAZA (BC) - CACIT'],
+        ['date' => '2025-12-07', 'name' => 'TRABAJO (PERROS DE MUESTRA) - EL ARAHAL (SEVILLA) - BÚSQUEDA DE CAZA (BC) - CACIT'],
+        ['date' => '2025-12-08', 'name' => 'TRABAJO (PERROS DE MUESTRA) - EL ARAHAL (SEVILLA) - BÚSQUEDA DE CAZA (BC) - CACIT'],
+        ['date' => '2025-12-12', 'name' => 'TRABAJO (PERROS DE MUESTRA) - FUENSALIDA (TOLEDO) - GRAN BÚSQUEDA y BÚSQUEDA DE CAZA (*) - CACIT'],
+        ['date' => '2025-12-13', 'name' => 'TRABAJO (PERROS DE MUESTRA) - FUENSALIDA (TOLEDO) - GRAN BÚSQUEDA y BÚSQUEDA DE CAZA (*) - CACIT'],
+        ['date' => '2025-12-14', 'name' => 'TRABAJO (PERROS DE MUESTRA) - FUENSALIDA (TOLEDO) - GRAN BÚSQUEDA y BÚSQUEDA DE CAZA (*) - CACIT'],
+        ['date' => '2025-12-15', 'name' => 'TRABAJO (PERROS DE MUESTRA) - FUENSALIDA (TOLEDO) - GRAN BÚSQUEDA y BÚSQUEDA DE CAZA (*) - CACIT'],
+        ['date' => '2025-12-13', 'name' => 'Campeonato de Europa - CAZA PRÁCTICA SOBRE BECADA - TURQUÍA'],
+        ['date' => '2025-12-14', 'name' => 'Campeonato de Europa - CAZA PRÁCTICA SOBRE BECADA - TURQUÍA'],
+        ['date' => '2025-12-27', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LA RIOJA - CAZA PRÁCTICA SOBRE BECADAS - CACT'],
+        ['date' => '2025-12-28', 'name' => 'TRABAJO (PERROS DE MUESTRA) - LA RIOJA - CAZA PRÁCTICA SOBRE BECADAS - CACT'],
+    ],
+]" />
+
 
 
             </div>
