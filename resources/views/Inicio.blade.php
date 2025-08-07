@@ -66,20 +66,20 @@
             <div
                 class="md:w-1/2 flex flex-col justify-center lg:items-start items-center p-6 text-BlancoTerciario lg:text-left text-center">
                 <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
-                    CAMPEONATOS DE EUROPA POINTER GB/BC
+                    NORMAS DE SELECCIÓN<br> CAMPEONATO DE EUROPA 2025
                 </h1>
                 <p class="text-sm sm:text-base md:text-lg lg:text-xl mb-4">
-                    11, 12 13 y 14 de febrero del 2025.
+                    Normas para la confección del seleccionado en los campeonatos de Europa
                 </p>
                 <button
                     class="mt-4 px-4 py-2 bg-[#23383E] text-white hover:bg-[#616261] border-MarronSecundario border-2"
-                    onclick="openModal('{{ route('blog.show', 'campeonatos') }}', 'SEMANA DE ANDALUCIA 2025')">
+                    onclick="openModal('{{ route('blog.show', 'reglamento') }}', 'NORMAS DE SELECCIÓN CAMPEONATO DE EUROPA 2025')">
                     MÁS INFO
                 </button>
             </div>
             <div class="lg:w-1/2 md:w-1/2 h-[300px] md:h-[450px]">
                 <div class="h-full bg-contain bg-no-repeat bg-center"
-                    style="background-image: url({{ asset('image/home/CampeonatoEuropa.jpg') }});"></div>
+                    style="background-image: url({{ asset('image/home/ProximoConcurso/PerroConcurso25_04_25.jpg') }});"></div>
             </div>
 
         </div>
@@ -107,8 +107,8 @@
         <div class=" text-BlancoTerciario">
             <div class="grid grid-cols-1 lg:grid-cols-2 bg-MarronSecundario">
                 <!-- Imagen del perro -->
-                <div class="bg-cover bg-top h-full"
-                    style="background-image: url({{ asset('image/home/ProximoConcurso/PerroConcurso25_04_25.jpg') }}); min-height: 300px;">
+                <div class="bg-cover bg-top h-full">
+                    <img src="image/home/MILENA OLESZCZUK 18.jpg" alt="">
                 </div>
 
                 <!-- Contenido del evento -->
