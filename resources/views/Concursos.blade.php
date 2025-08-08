@@ -11,7 +11,7 @@
     :delegacion="'secretariapointerclub@gmail.com'" 
     :jueces="''" 
     :observaciones="'CONCENTRACIÓN: Bar La Bodega - 07:30 HS. Inscripción: 40€'" 
-    :url="''"
+    :url="'/Inscripciones'"
 />
 
         
