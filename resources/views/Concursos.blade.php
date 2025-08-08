@@ -1,6 +1,19 @@
 <x-layout>
     <div class=" mt-48">
 
+        <x-concursos2
+    :titulo="'Caza Práctica CACT. La Mazorra (Burgos).'" 
+    :prueba="'Caza Práctica CACT'" 
+    :disciplina="'Caza Práctica'" 
+    :fecha="'9 y 10 de Agosto de 2025'" 
+    :responsable="'JLuis Aretio'" 
+    :telefono="'+34 659 445 966'" 
+    :delegacion="'secretariapointerclub@gmail.com'" 
+    :jueces="''" 
+    :observaciones="'CONCENTRACIÓN: Bar La Bodega - 07:30 HS. Inscripción: 40€'" 
+    :url="''"
+/>
+
         
         <x-concursos1
         :titulo="'Prueba de Gran Busca y Busqueda de Caza en Iglesias (Burgos)'" 
