@@ -116,7 +116,7 @@
                     {{-- <h1 class="text-3xl font-bold lg:text-left text-center text-white bg-AzulPrimario p-8 lg:pl-20">
                         Próximo CONCURSO.</h1> --}}
                     <a href="https://pointerclubespana.es/Concursos">
-                        <img src="image/home/PointerClubEspañol_Agosto25_face.jpg" alt="">
+                        <img src="image/home/536272378_1201838165308021_6838774168386821587_n.jpg" alt="">
                     </a>
                 </div>
             </div>

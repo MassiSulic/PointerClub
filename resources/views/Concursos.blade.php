@@ -1,6 +1,19 @@
 <x-layout>
     <div class=" mt-48">
 
+    <x-concursos1
+        :titulo="'Caza Práctica en Toledo (Mención CACIT)'" 
+        :prueba="'Caza Práctica en Toledo (Mención CACIT)'" 
+        :disciplina="'CAZA PRÁCTICA'"
+        :fecha="'06/09/2025 hasta 07/09/2025'" 
+        :responsable="'Jon Etxendia'" 
+        :telefono="'+34 650 03 68 37'" 
+        :delegacion="'pointerclubespana@gmail.com'" 
+        :jueces="'Cesar Villamiel, Lorenzo Urra, Ismael Carro'" 
+        :observaciones="'Concentración: Las Esparteras (Valmojado) a las 07:00 h.'" 
+        :url="'/Inscripciones'"
+        />
+
         <x-concursos2
     :titulo="'Caza Práctica CACT. La Mazorra (Burgos).'" 
     :prueba="'Caza Práctica CACT'" 
@@ -14,7 +27,7 @@
     :url="'/Inscripciones'"
 />
 
-        
+
         <x-concursos1
         :titulo="'Prueba de Gran Busca y Busqueda de Caza en Iglesias (Burgos)'" 
         :prueba="'Prueba de Gran Busca y Busqueda de Caza en Iglesias (Burgos)'" 
